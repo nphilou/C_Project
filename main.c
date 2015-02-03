@@ -13,7 +13,7 @@ Fourmiliere * noire;
 
 
 }Monde;
-bonjour
+
 
 typedef struct {
  char couleur;
