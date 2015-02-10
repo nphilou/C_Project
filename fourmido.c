@@ -2,53 +2,104 @@
 #include <stdlib.h>
 #include <SDL/SDL.h>
 
+//DECLARATION STRUCTURES
+typedef struct {
+} Coordonees;
 
-typedef struct{
+typedef struct {
+} Reine;
+typedef struct {
+} Soldat;
+typedef struct {
+} Ouvriere;
+
+typedef struct {
+} Fourmi;
+typedef struct {
+} Monde;
+typedef struct {
+} Fourmiliere;
+typedef struct {
+} Plateau;
+
+//DECLARATION FONCTIONS (A FAIRE)
+
+//DEFINITION STRUCTURES
+typedef struct {
     int x;
     int y;
- } Coordonnee;
+} Coordonnees;
 
 typedef struct {
-    Fourmiliere* rouge;
-    Fourmiliere* noire;
-    Plateau* plateau;
-}Monde;
+    int tempsProd;
+} Reine;
 
 typedef struct {
-    int couleur;
-    Coordonnee * position;
-    int tmpProduc:
-    char type[10];
-    Fourmiliere* debut;
-    Fourmiliere* suiv;
-} Fourmiliere;
-
-
+    int tempsProd;
+} Soldat;
 
 typedef struct {
+    int tempsProd;
+} Ouvriere;
 
-
-}Plateau;
-
+typedef enum {
+    REINE;
+    SOLDAT;
+    OUVRIERE;
+} TypeFourmi;
 
 typedef struct {
     char couleur;
-    char type [3];
-    Coordonnee destination;
-    Coordonnee position;
-    int temps;
-    Fourmiliere * origine;
-    Fourmi * suiv;
+    TypeFourmi type;
+    Coordonnees destination;
+    Coordonnees position;
+    Fourmiliere *origine;
+    Fourmi *suiv;
 } Fourmi;
 
+typedef struct {
+    Fourmiliere *rouge;
+    Fourmiliere *noire;
+    Plateau *plateau;
+} Monde;
 
-int main(int argc, char *argv[])
-{
-    SDL_Init(SDL_INIT_VIDEO); // Démarrage de la SDL (ici : chargement du système vidéo)
+typedef struct fourmiliere {
+    int couleur;
+    Coordonnees *position;
+    int tmpProduc;
+    char type[10];
+    struct fourmiliere *origine;
+    struct fourmiliere *suiv;
+} Fourmiliere;
 
-    SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE);
+typedef struct {
 
-    SDL_Quit(); // Arrêt de la SDL (libération de la mémoire).
 
-    return 0;
+} Plateau;
+
+void pause() {
+    int continuer = 1;
+    SDL_Event event;
+
+    while (continuer) {
+        SDL_WaitEvent(&event);
+        switch (event.type) {
+            case SDL_QUIT:
+                continuer = 0;
+        }
+    }
+}
+
+int main(int argc, char *argv[]) {
+
+    SDL_Init(SDL_INIT_VIDEO); // Initialisation de la SDL
+
+    SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE); // Ouverture de la fenêtre
+    SDL_WM_SetCaption("Hohoho", NULL);
+
+    pause(); // Mise en pause du programme
+
+    SDL_Quit(); // Arrêt de la SDL
+
+    return EXIT_SUCCESS; // Fermeture du programme
 }
