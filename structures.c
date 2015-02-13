@@ -5,7 +5,7 @@
 typedef struct {
 } Case;
 
-typedef struct {
+/*typedef struct {
 } Reine;
 
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 
 typedef struct {
 
-} Ouvriere;
+} Ouvriere;*/
 
 typedef enum {
     REINE,
