@@ -1,9 +1,6 @@
-
 typedef struct Fourmiliere Fourmiliere;
 
 typedef struct Fourmi Fourmi;
-
-typedef struct Element Element;
 
 
 typedef struct {
@@ -14,7 +11,7 @@ typedef struct {
 
 typedef struct {
     int taille;
-    Case * cases[];
+    Case cases[255];
 } Plateau;
 
 typedef enum {
@@ -39,9 +36,9 @@ struct Fourmi {
     Couleur couleur;
     TypeFourmi type;
     Case* destination;
-    Case* position;
-    Fourmiliere *origine;
-    Fourmi *suiv;
+    Fourmi *origine;
+    Fourmi *precedant;
+    Fourmi *suivant;
 };
 
 struct Fourmiliere {
@@ -51,10 +48,4 @@ struct Fourmiliere {
     char type[10];
     Fourmiliere *origine;
     Fourmiliere *suiv;
-};
-
-struct Element {
-	Fourmi fourmi;
-	Element * element_precedant;
-	Element * element_suivant;
 };

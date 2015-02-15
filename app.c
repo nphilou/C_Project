@@ -2,25 +2,32 @@
 #include <stdlib.h>
 #include <math.h>
 #include "app.h"
-#include "structures.h"
 
-Element *initialisation(Couleur couleur, Plateau* plateau) {
-	//Element *element = calloc(1, sizeof(Element));
+Fourmi *initialisation(Couleur couleur, Plateau* plateau) {
+	Fourmi *fourmi = calloc(1, sizeof(Fourmi));
 	
 	//Test allocation memoire
-	if (element == NULL) {
+	if (fourmi == NULL) {
 		exit(EXIT_FAILURE);
 	}
 	
-	element->fourmi->couleur = couleur;
-	element->fourmi->type = FOURMILIERE;
-	if (couleur == ROUGE) element->fourmi->position = plateau->cases[1];
-	if (couleur == NOIR) element->fourmi->position = plateau->cases[plateau->taille-1];
-
-	element->element_precedant = NULL;
-	element->element_suivant = NULL;
+	fourmi->couleur = couleur;
+	fourmi->type = FOURMILIERE;
 	
-	return element;
+	
+	if (couleur == ROUGE){
+		plateau->cases[1].x = 9;
+		printf("yata");
+		//plateau->cases[1]->fourmi = fourmi;
+		printf("9 = %d", plateau->cases[1].x);
+	} 
+	printf("colorrrr= %d", fourmi->couleur);
+	//if (couleur == NOIR) plateau->cases[plateau->taille-1]->fourmi = fourmi;
+
+	fourmi->suivant = NULL;
+	fourmi->precedant = NULL;
+	
+	return fourmi;
 }
 
 int map(int numLigne, int numColonne, int taille) {
@@ -36,14 +43,22 @@ Monde* creationMonde(){
 	printf("Taille du plateau");
 	scanf("%d", &cotePlateau);
 
-	Plateau *plateau = calloc(cotePlateau * cotePlateau, sizeof(Case));
-	plateau->taille = cotePlateau * cotePlateau;
+	Plateau *plateau = calloc(pow(cotePlateau,2), sizeof(Case));
+	plateau->taille = pow(cotePlateau,2);
 	printf("plateau->taille = %d \n", plateau->taille);
 	myWorld->plateau = plateau;
 	
 	//Creation fourmilieres rouge et noire
-	myWorld->noire = initialisation(NOIR, plateau)->fourmi;
-	myWorld->rouge = initialisation(ROUGE, plateau)->fourmi;
+	//myWorld->noire = initialisation(NOIR, plateau);
+	myWorld->rouge = initialisation(ROUGE, plateau);
+	
 	
 	return myWorld;
 }
+
+/*int main(int argc, char *argv[]) {
+	printf("bon !");
+    Monde *myWorld = creationMonde();
+    
+    return 0;
+}*/
