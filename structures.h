@@ -3,6 +3,9 @@ typedef struct Fourmiliere Fourmiliere;
 
 typedef struct Fourmi Fourmi;
 
+typedef struct Element Element;
+
+
 typedef struct {
     Fourmi* fourmi;
     int x;
@@ -13,16 +16,6 @@ typedef struct {
     int taille;
     Case * cases[];
 } Plateau;
-
-/*typedef struct {
-} Reine;
-
-typedef struct {
-} Soldat;
-
-typedef struct {
-
-} Ouvriere;*/
 
 typedef enum {
     REINE,
@@ -36,22 +29,17 @@ typedef enum {
     NOIR,
 } Couleur;
 
-
-
-
-
 typedef struct {
-    Fourmiliere *rouge;
-    Fourmiliere *noire;
-    Case * plateau[5][5];
+    Fourmi *rouge;
+    Fourmi *noire;
+    Plateau* plateau;
 } Monde;
-
 
 struct Fourmi {
     Couleur couleur;
     TypeFourmi type;
-    Case destination;
-    Case position;
+    Case* destination;
+    Case* position;
     Fourmiliere *origine;
     Fourmi *suiv;
 };
@@ -63,4 +51,10 @@ struct Fourmiliere {
     char type[10];
     Fourmiliere *origine;
     Fourmiliere *suiv;
+};
+
+struct Element {
+	Fourmi fourmi;
+	Element * element_precedant;
+	Element * element_suivant;
 };
