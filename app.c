@@ -13,16 +13,10 @@ Fourmi *initialisation(Couleur couleur, Plateau* plateau) {
 	
 	fourmi->couleur = couleur;
 	fourmi->type = FOURMILIERE;
-	
-	
-	if (couleur == ROUGE){
-		plateau->cases[1].x = 9;
-		printf("yata");
-		//plateau->cases[1]->fourmi = fourmi;
-		printf("9 = %d", plateau->cases[1].x);
-	} 
+
+	if (couleur == ROUGE)plateau->cases[0].fourmi = fourmi;
 	printf("colorrrr= %d", fourmi->couleur);
-	//if (couleur == NOIR) plateau->cases[plateau->taille-1]->fourmi = fourmi;
+	if (couleur == NOIR) plateau->cases[plateau->taille-1].fourmi = fourmi;
 
 	fourmi->suivant = NULL;
 	fourmi->precedant = NULL;
