@@ -34,7 +34,8 @@ typedef struct {
 struct Fourmi {
     Couleur couleur;
     TypeFourmi type;
-    Case* destination;
+    int position;
+    int destination;
     Fourmi *origine;
     Fourmi *precedant;
     Fourmi *suivant;
@@ -42,7 +43,6 @@ struct Fourmi {
 
 struct Fourmiliere {
     int couleur;
-    Case *position;
     int tmpProduc;
     char type[10];
     Fourmiliere *origine;

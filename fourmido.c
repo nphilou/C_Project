@@ -32,7 +32,19 @@ int main(int argc, char *argv[]) {
     Monde *myWorld = creationMonde();
     //printf("couleur rouge normalement : %d", myWorld->plateau->cases[0]->fourmi->couleur);
     //printf("test couleur : %d", myWorld->plateau->cases[0]->fourmi->couleur);
-
+    
+    int x,y;
+    printf("x et y ?");
+    scanf("%d", &x);
+    scanf("%d", &y);
+    
+    creationFourmi (ROUGE, SOLDAT , myWorld, x, y); 
+    
+    printf("quelle deplacement"); 
+    scanf("%d", &x);
+    scanf("%d", &y)
+    DeplacementFourmi (myWorld, Fourmi * fourmi, x, y); 
+    
     affichePlateau(myWorld->plateau);
 
     return 0; // Fermeture du programme
