@@ -15,8 +15,7 @@ Fourmi *initialisation(Couleur couleur, Plateau* plateau) {
 	fourmi->type = FOURMILIERE;
 
 	if (couleur == ROUGE)plateau->cases[0].fourmi = fourmi;
-	printf("colorrrr= %d", fourmi->couleur);
-	if (couleur == NOIR) plateau->cases[plateau->taille-1].fourmi = fourmi;
+	if (couleur == NOIR) plateau->cases[plateau->nombrecases-1].fourmi = fourmi;
 
 	fourmi->suivant = NULL;
 	fourmi->precedant = NULL;
@@ -24,8 +23,8 @@ Fourmi *initialisation(Couleur couleur, Plateau* plateau) {
 	return fourmi;
 }
 
-int map(int numLigne, int numColonne, int taille) {
-    return taille * numColonne + numLigne;
+int map(int ordonnee, int abscisse, int cote) {
+    return cote * ordonnee + abscisse;
 }
 
 Monde* creationMonde(){
@@ -34,25 +33,58 @@ Monde* creationMonde(){
 	
 	//Creation plateau
 	int cotePlateau;
-	printf("Taille du plateau");
+	printf("Taille du plateau ? ");
 	scanf("%d", &cotePlateau);
 
+    //Test valeur saisie >1
+    if(cotePlateau<=1){
+        printf("Bah bravo MORRAY !\n");
+        exit(1);
+    }
+
 	Plateau *plateau = calloc(pow(cotePlateau,2), sizeof(Case));
-	plateau->taille = pow(cotePlateau,2);
-	printf("plateau->taille = %d \n", plateau->taille);
-	myWorld->plateau = plateau;
-	
+	plateau->nombrecases = pow(cotePlateau,2);
+    plateau->cote = cotePlateau;
+    printf("plateau->nombrecases = %d \n", plateau->nombrecases);
+
+    
+    myWorld->plateau = plateau;
+
 	//Creation fourmilieres rouge et noire
-	//myWorld->noire = initialisation(NOIR, plateau);
+	myWorld->noire = initialisation(NOIR, plateau);
 	myWorld->rouge = initialisation(ROUGE, plateau);
 	
 	
 	return myWorld;
 }
 
-/*int main(int argc, char *argv[]) {
-	printf("bon !");
-    Monde *myWorld = creationMonde();
-    
-    return 0;
-}*/
+void affichePlateau(Plateau* plateau){
+    int largeur, hauteur;
+    for(hauteur = 0; hauteur < plateau->cote; hauteur++) {
+        for (largeur = 0; largeur < plateau->cote; largeur++) {
+            //printf("mappage : %d", map(hauteur, largeur, plateau->cote));
+            if (plateau->cases[map(hauteur, largeur, plateau->cote)].fourmi == NULL) {
+                printf("   ");
+            } else {
+                switch (plateau->cases[map(hauteur, largeur, plateau->cote)].fourmi->type) {
+                    case FOURMILIERE:
+                        printf(" F ");
+                        break;
+                    case SOLDAT:
+                        printf(" S ");
+                        break;
+                    case OUVRIERE:
+                        printf(" O ");
+                        break;
+                    case REINE:
+                        printf(" R ");
+                        break;
+                    default:
+                        printf("   ");
+                }
+            }
+            printf(" | ");
+        }
+        printf("\n\n");
+    }
+}

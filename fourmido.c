@@ -1,7 +1,8 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
-#include <SDL/SDL.h>
+#include <SDL/SDL.h>*/
 #include "app.h"
+//#include "structures.h"
 
 /*void pause() {
     int continuer = 1;
@@ -31,6 +32,8 @@ int main(int argc, char *argv[]) {
     Monde *myWorld = creationMonde();
     //printf("couleur rouge normalement : %d", myWorld->plateau->cases[0]->fourmi->couleur);
     //printf("test couleur : %d", myWorld->plateau->cases[0]->fourmi->couleur);
-    
+
+    affichePlateau(myWorld->plateau);
+
     return 0; // Fermeture du programme
 }

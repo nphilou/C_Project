@@ -5,13 +5,12 @@ typedef struct Fourmi Fourmi;
 
 typedef struct {
     Fourmi* fourmi;
-    int x;
-    int y;
 } Case;
 
 typedef struct {
-    int taille;
-    Case cases[255];
+    int cote;
+    int nombrecases;
+    Case cases[256];
 } Plateau;
 
 typedef enum {
