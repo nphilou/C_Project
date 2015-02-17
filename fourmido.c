@@ -1,6 +1,6 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
-#include <SDL/SDL.h>*/
+//#include <SDL/SDL.h>
 #include "app.h"
 //#include "structures.h"
 
@@ -33,6 +33,12 @@ int main(int argc, char *argv[]) {
     //printf("couleur rouge normalement : %d", myWorld->plateau->cases[0]->fourmi->couleur);
     //printf("test couleur : %d", myWorld->plateau->cases[0]->fourmi->couleur);
     
+    
+    /*int tresorRouge[1];
+    tresorRouge [0] = 50;
+    int tresorNoire[1];
+    tresorRouge [0] = 50;*/
+    
     int x,y;
     printf("x et y ?");
     scanf("%d", &x);
@@ -40,10 +46,7 @@ int main(int argc, char *argv[]) {
     
     creationFourmi (ROUGE, SOLDAT , myWorld, x, y); 
     
-    printf("quelle deplacement"); 
-    scanf("%d", &x);
-    scanf("%d", &y)
-    DeplacementFourmi (myWorld, Fourmi * fourmi, x, y); 
+    printf("case x y : %d\n", estLibre(myWorld, x, y));
     
     affichePlateau(myWorld->plateau);
 
