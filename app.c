@@ -32,17 +32,22 @@ Fourmi *initialReine (Couleur couleur, Plateau * plateau, Fourmi * fourmiOrigine
 		exit(EXIT_FAILURE);
 	}
 	
-	fourmi-> couleur = couleur; 
-	fourmi-> type = REINE; 
-	
+	fourmi -> couleur = couleur; 
+	fourmi -> type = REINE;
 	fourmi -> origine = fourmiOrigine; 
-	fourmi -> suivant = NULL; 
 	fourmi -> precedant = fourmiOrigine; 
+	fourmi -> suivant = NULL; 
+	
 	fourmiOrigine -> suivant = fourmi; 
 	
-	if (couleur == ROUGE) plateau->cases[map(0,1,plateau->cote)].fourmi = fourmi;
-	if (couleur == NOIR) plateau->cases[map(plateau-> cote-1,plateau-> cote-2,plateau->cote)].fourmi = fourmi;
-
+	if (couleur == ROUGE){
+	    plateau -> cases[map(1, 0, plateau->cote)].fourmi = fourmi;
+	    fourmi -> position = map(1, 0, plateau->cote);
+	}
+	if (couleur == NOIR){
+	    plateau->cases[map(plateau-> cote-2, plateau-> cote-1, plateau->cote)].fourmi = fourmi;
+	    fourmi -> position = map(plateau-> cote-2, plateau-> cote-1, plateau->cote);
+	}
 	return fourmi;
 	
 }
@@ -61,9 +66,14 @@ Fourmi *initialOuvriere (Couleur couleur, Plateau * plateau, Fourmi * reine){
 	fourmi -> precedant = reine; 
 	fourmi -> suivant = NULL;
 
-    if (couleur == ROUGE) plateau->cases[map(1,0,plateau->cote)].fourmi = fourmi;
-	if (couleur == NOIR) plateau->cases[map(plateau->cote-2,plateau->cote-1,plateau->cote)].fourmi = fourmi;
-	
+    if (couleur == ROUGE){
+        plateau -> cases[map(0, 1, plateau->cote)].fourmi = fourmi;
+        fourmi -> position = map(0, 1, plateau->cote);
+    }
+	if (couleur == NOIR){
+	    plateau->cases[map(plateau->cote-1, plateau->cote-2, plateau->cote)].fourmi = fourmi;
+	    fourmi -> position = map(plateau->cote-1, plateau->cote-2, plateau->cote);
+	}
     return fourmi; 
 }
 
@@ -94,7 +104,7 @@ void  creationFourmi (Couleur couleur, TypeFourmi typefourmi, Monde* myWorld, in
     fourmi -> suivant = NULL; 
     
     if ( !estLibre(myWorld, indice)){
-         printf("case occupée try again"); 
+         printf("case occupée try again\n"); 
          return;
     } 
     
@@ -102,16 +112,16 @@ void  creationFourmi (Couleur couleur, TypeFourmi typefourmi, Monde* myWorld, in
     
 }
 
-void supprimeFourmi (Fourmi * fourmi, Monde * myWorld){
+/*void supprimeFourmi (Fourmi * fourmi, Monde * myWorld){
     
     Fourmi* tmp1 = calloc(1, sizeof(Fourmi)); 
     Fourmi* tmp2 = calloc(1, sizeof(Fourmi)); 
     
     if ( fourmi -> type != FOURMILIERE){
         tmp1 = fourmi; 
-        tmp1 -> precedent -> suivant = tmp1 -> suivant; 
-        tmp1 -> suivant -> precedant = tmp -> precedeant; 
-        free (fourmi2); 
+        tmp1 -> precedant -> suivant = tmp1 -> suivant; 
+        tmp1 -> suivant -> precedant = tmp1 -> precedant; 
+        free (fourmi); 
     }
     else { // si c fourmiliere 
         
@@ -138,7 +148,7 @@ void supprimeFourmi (Fourmi * fourmi, Monde * myWorld){
                     while (tmp2 -> suivant != NULL){
                         tmp2 = tmp2 -> suivant; 
                     }
-                    tmp1 -> precedent = tmp2; 
+                    tmp1 -> precedant = tmp2; 
                     tmp2 -> suivant= tmp1; 
                     tmp1 -> suivant = NULL; 
                 }
@@ -148,10 +158,18 @@ void supprimeFourmi (Fourmi * fourmi, Monde * myWorld){
     }
     myWorld -> plateau -> cases[ fourmi -> position].fourmi = NULL; 
     
+}*/
+
+int map(int abscisse, int ordonnee, int cote){
+    return cote * ordonnee + abscisse;
 }
 
-int map(int ordonnee, int abscisse, int cote){
-    return cote * ordonnee + abscisse;
+int chercheOrdonnee (Monde *myWorld, int indice){
+    return indice/ myWorld-> plateau-> cote; 
+}
+
+int chercheAbscisse (Monde *myWorld, int indice) {
+    return indice % myWorld -> plateau -> cote;     
 }
 
 Monde* creationMonde(){
@@ -159,9 +177,9 @@ Monde* creationMonde(){
 	Monde* myWorld = calloc(1, sizeof(Monde));
 	
 	//Creation plateau
-	int cotePlateau;
+	int cotePlateau = 5;
 	printf("Taille du plateau ? ");
-	scanf("%d", &cotePlateau);
+	//scanf("%d", &cotePlateau);
 
     //Test valeur saisie >1
     if(cotePlateau<=1){
@@ -195,21 +213,10 @@ Monde* creationMonde(){
 	return myWorld;
 }
 
-/*int estLibre(Monde* myWorld, int abscisse, int ordonnee){
-    int cote = myWorld->plateau->cote;
-    
-    if (abscisse < 0 || ordonnee < 0 || abscisse > cote-1 || ordonnee > cote-1 ) return -1;
-    
-    if (myWorld -> plateau -> cases[map(ordonnee, abscisse, cote)].fourmi != NULL) {
-        return 0; 
-    }
-    return 1;
-}*/
-
 int estLibre(Monde* myWorld, int indice){
-    int cote = myWorld->plateau->cote;
+    int nombrecases = myWorld->plateau->nombrecases;
     
-    if (indice < 0 || indice > cote-1) return -1;
+    if (indice < 0 || indice > nombrecases-1) return -1;
     
     if (myWorld -> plateau -> cases[indice].fourmi != NULL) {
         return 0; 
@@ -217,34 +224,95 @@ int estLibre(Monde* myWorld, int indice){
     return 1;
 }
 
-void deplacementFourmi (Monde * myWorld, Fourmi * fourmi, int abscisse, int ordonnee){
-    int cote = myWorld->plateau->cote;
-    int indice = map(ordonnee, abscisse, cote);
+/*
+void deplacementFourmi (Monde * myWorld, Fourmi * fourmi, int x, int y){
+
     
-    
-    int cheminParcouru [TMAX]; //met un #define plutot
-    int cheminPrec [TMAX];
-    
-    
-    //J'ai fini ma fonction en theorie, go dodo + +
-    
-    
+    int xF= chercheAbscisse(myWorld, fourmi -> position); 
+    int yF = chercheOrdonnee(myWorld, fourmi -> position); 
+    int cote = myWorld->plateau->cote, indice;
    
-    if (estLibre(myWorld, indice)==1) {
-        myWorld->plateau-> cases[indice].fourmi = fourmi;
-    }
-    //A SUIVRE... HAVE FUN
-    if (estLibre(myWorld, indice)==0){
-        printf (" la case est déja occupée par une fourmi, etes vous sur ?"); 
-        //A CONTINUER...
+    
+    if(xF!=x && yF!=y){
+        if (xF>x && yF<y){
+            indice = map(xF-1, yF+1, cote);
+            if (estLibre(myWorld,indice)){
+                   myWorld->plateau-> cases[indice].fourmi = fourmi;
+                   fourmi -> position= indice;
+                   return;
+            }
+        }
+        if (xF<x && yF>y){
+            indice = map(xF+1, yF-1, cote);
+            if (estLibre(myWorld,indice)){
+                myWorld->plateau-> cases[indice].fourmi = fourmi;
+                fourmi -> position= indice;
+                return;
+            }
+        }
+        if (xF<x && yF<y){
+            indice = map(xF+1, yF+1, cote);
+            if (estLibre(myWorld,indice)){
+                myWorld->plateau-> cases[indice].fourmi = fourmi;
+                fourmi -> position= indice;
+                return;
+            }
+            else {
+                printf("the location is not empty");
+            }
+        }
+        if (xF>x && yF>y){
+            indice = map(xF-1, yF-1, cote);
+            if (estLibre(myWorld,indice)){
+                myWorld->plateau-> cases[indice].fourmi = fourmi;
+                fourmi -> position= indice;
+                return;
+            }
+            else {
+                printf("the location is not empty");
+            }
+        }
     } 
-    if (estLibre(myWorld, indice)==0 /*et qu'on est juste à cote*/){
-        
+    else if( xF==x || yF==y){
+        if ( yF==y && xF!= x){
+            if (xF>x){
+                indice = map(xF-1, yF, cote);
+                if (estLibre(myWorld,indice)){
+                    myWorld->plateau-> cases[indice].fourmi = fourmi;
+                    fourmi -> position= indice;
+                    return;
+                }
+            }
+            else {
+                indice = map(xF+1, yF, cote);
+                if (estLibre(myWorld,indice)){
+                    myWorld->plateau-> cases[indice].fourmi = fourmi;
+                    fourmi -> position= indice;
+                    return;
+                }
+                
+            }
+        }
+        if ( yF!=y && xF==x){
+            if (yF<y){
+                indice = map(xF, yF+1, cote);
+                if (estLibre(myWorld,indice)){
+                    myWorld->plateau-> cases[indice].fourmi = fourmi;
+                    fourmi -> position= indice;
+                    return;
+                }
+            }
+            else {
+                indice = map(xF, yF-1, cote);
+                if (estLibre(myWorld,indice)){
+                    myWorld->plateau-> cases[indice].fourmi = fourmi;
+                    fourmi -> position= indice;
+                    return;
+                }
+            }
+        }
     }
-    if (estLibre(myWorld, indice)==-1) {
-        printf ("Bravo MORRAY, tu veux pas aller sur la Lune tant que tu y es ?"); 
-    }
-}
+}*/
 
 /*LATER
 void combatFourmi ( Fourmi * fourmiAttaquante , Fourmi * fourmi2,  Monde * myWorld){
@@ -294,55 +362,65 @@ int chercheLibre(int centre, Monde* myWorld){
     
     int cote = myWorld->plateau->cote; //raccourci
     int rayon = 1;
-    int haut, droite, bas, gauche;
+    int haut, droite, bas, gauche, ligne;
+    int ordonnee = chercheOrdonnee(myWorld, centre);
+    int abscisse = chercheAbscisse(myWorld, centre);
 
     //if plateau rempli
     
     //on s'eloigne du centre (rayon augmente)
-    for(rayon; rayon < cote; rayon++){
+    for(rayon = 1 ; rayon < cote; rayon++){
         
         //haut
-        for(haut = centre - rayon*cote + rayon; haut > centre + rayon*cote - rayon; haut--){
+        for(haut = centre - rayon*cote + rayon; haut >= centre - rayon*cote - rayon; haut--){
+            ligne = ordonnee-rayon;
+            if (haut < ligne*cote || haut >= (ligne+1)*cote || !ordonnee) continue;
             if(estLibre(myWorld, haut)) {
-                //test
-                creationFourmi(ROUGE, SOLDAT, myWorld, haut);
                 return haut;
             }
         }
         
         //gauche
-        for(gauche = centre - (rayon-1)*cote - rayon; gauche < centre + (rayon-1)*cote - rayon; gauche+ = cote){
+        for(gauche = centre - (rayon-1)*cote - rayon; gauche <= centre + (rayon-1)*cote - rayon; gauche += cote){
+            if (!abscisse) continue;
             if(estLibre(myWorld, gauche)) {
                 return gauche;
             }
         }
         
         //bas
-        for(bas = centre + rayon*cote - rayon; bas < centre + rayon*cote + rayon; bas++){
+        for(bas = centre + rayon*cote - rayon; bas <= centre + rayon*cote + rayon; bas++){
+            ligne = ordonnee+rayon;
+            if (bas < ligne*cote || bas >= (ligne+1)*cote || ordonnee==cote ) continue;
             if(estLibre(myWorld, bas)) {
                 return bas;
             }
         }
         
         //droite
-        for(droite = centre + (rayon-1)*cote + rayon; droite > centre - (rayon-1)*cote + rayon; droite- = cote){
+        for(droite = centre + rayon*cote + rayon; droite >= centre - (rayon-1)*cote + rayon; droite -= cote){
+            if (abscisse==cote-1) continue;
             if(estLibre(myWorld, droite)) {
                 return droite;
             }
         }
     }
+    return -1;
 }
-
 
 void affichePlateau(Plateau* plateau){
     int largeur, hauteur;
-    for(hauteur = 0; hauteur < plateau->cote; hauteur++) {
+    
+    for (largeur = 0; largeur < plateau->cote; largeur++) {
+        printf(" %d ", largeur);
+    }
+    for (hauteur = 0; hauteur < plateau->cote; hauteur++) {
         for (largeur = 0; largeur < plateau->cote; largeur++) {
-            //printf("mappage : %d", map(hauteur, largeur, plateau->cote));
-            if (plateau->cases[map(hauteur, largeur, plateau->cote)].fourmi == NULL) {
+            
+            if (plateau->cases[map(largeur, hauteur, plateau->cote)].fourmi == NULL) {
                 printf("   ");
             } else {
-                switch (plateau->cases[map(hauteur, largeur, plateau->cote)].fourmi->type) {
+                switch (plateau->cases[map(largeur, hauteur, plateau->cote)].fourmi->type) {
                     case FOURMILIERE:
                         printf(" F ");
                         break;
@@ -361,13 +439,101 @@ void affichePlateau(Plateau* plateau){
             }
             printf(" | ");
         }
-        printf("\n\n");
+        printf(" %d\n\n", hauteur);
     }
     
     
 }
 
 
+/*
+    SUICIDE = 0
+    DEPLACEMENT = 1
+    IMMOBILISATION = 2
+    TRANSFORMATIONFOURMILIERE = 3
+    PRODUCTION = 4
+    */
+void demandeInstruction(Monde* myWorld, Fourmi* joueur, ){
+    Fourmi* listeFourmiliere; 
+    Fourmi* listeFourmi; 
+    
+    
+    Instruction instruction;
+    TypeFourmi production;
+    int x, y;
+    
+    Couleur couleur = joueur.couleur;
+    listeFourmiliere = joueur;
+    
+    while(listeFourmiliere != NULL){
+        listeFourmi = listeFourmiliere;
+        while(listeFourmi != NULL){
+            //if pas d'instruction : immobilisation = tresor, transfo = tmptransfo--, production : tmpprod--
+            
+            if (listeFourmi.typefourmi == FOURMILIERE){
+                //dowhile != int
+                printf("Donnez une instruction pour la fourmiliere à la case %d, %d\n", chercheAbscisse(myWorld, listeFourmi), chercheOrdonnee(myWorld, listeFourmi));
+                printf("SUICIDE(0), PRODUCTION(4) : ")
+                scanf("%d", &instruction);
+                switch (instruction) {
+                    case SUICIDE:
+                        printf("SUICIDE FOURMILIERE !!!!");
+                        break;
+                    case PRODUCTION:
+                        printf("Que voulez vous produire ?\n");
+                        printf("REINE(0), SOLDAT(1), OUVRIERE(2)")
+                        scanf("%d", &instruction);
+                        switch (instruction) {
+                            case REINE:
+                                creationFourmi (couleur, REINE, myWorld, chercheLibre(listeFourmiliere.position, myWorld));
+                                //tmpprod !!!
+                                break;
+                            case SOLDAT:
+                                creationFourmi (couleur, SOLDAT, myWorld, chercheLibre(listeFourmiliere.position, myWorld));
+                                break;
+                            case OUVRIERE:
+                                creationFourmi (couleur, OUVRIERE, myWorld, chercheLibre(listeFourmiliere.position, myWorld));
+                                break;
+                        }
+                        break;
+                    default:
+                        printf("cas vide"); //renommer
+                }
+            }else if(listeFourmi.typefourmi == OUVRIERE){
+                //dowhile != int
+                printf("Donnez une instruction pour l'ouvriere à la case %d, %d\n", chercheAbscisse(myWorld, listeFourmi), chercheOrdonnee(myWorld, listeFourmi));
+                printf("SUICIDE(0), DEPLACEMENT(1), IMMOBILISATION(2) : ")
+                scanf("%d", &instruction);
+                switch (instruction) {
+                    case SUICIDE:
+                        printf("SUICIDE OUVRIERE !!!!");
+                        break;
+                    case DEPLACEMENT:
+                        printf("Que voulez vous produire ?\n");
+                        printf("REINE(0), SOLDAT(1), OUVRIERE(2)")
+                        scanf("%d", &instruction);
+                       
+                        break;
+                    default:
+                        printf("cas vide"); //renommer
+                }
+            }else if(listeFourmi.typefourmi == SOLDAT){
+            
+            else(listeFourmi.typefourmi == REINE){
+            
+            
+            }
+            
+            
+            
+            
+            
+            listeFourmi = listeFourmi -> suivant;
+        }
+        listeFourmiliere = listeFourmiliere -> fourmiliereSuiv;
+    }
+
+}
 /* 
 A FAIRE : 
 
@@ -376,6 +542,7 @@ A FAIRE :
 3. Ajouter la position (entier) dans les fonctions de creation de fourmis
 4. Prototypes app.h
 6. Free !!!
-7. abs/or => indice
+7. if def pour savoir qui commence
+
 
 */

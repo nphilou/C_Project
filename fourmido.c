@@ -39,16 +39,69 @@ int main(int argc, char *argv[]) {
     int tresorNoire[1];
     tresorRouge [0] = 50;*/
     
-    int x,y;
+    /*int x,y;
     printf("x et y ?");
     scanf("%d", &x);
-    scanf("%d", &y);
+    scanf("%d", &y);*/
     
-    creationFourmi (ROUGE, SOLDAT , myWorld, x, y); 
-    
-    printf("case x y : %d\n", estLibre(myWorld, x, y));
+    int indice= map(2,4, myWorld->plateau->cote);
+    creationFourmi (ROUGE, SOLDAT , myWorld, indice); 
     
     affichePlateau(myWorld->plateau);
-
+    
+    printf("case libre = %d\n", chercheLibre(indice, myWorld));
+    creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
+    affichePlateau(myWorld->plateau);
+    
+    printf("case libre = %d\n", chercheLibre(indice, myWorld));
+    creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
+    affichePlateau(myWorld->plateau);
+    
+    printf("case libre = %d\n", chercheLibre(indice, myWorld));
+    creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
+    affichePlateau(myWorld->plateau);
+    
+    
+    printf("case libre = %d\n", chercheLibre(indice, myWorld));
+    creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
+    affichePlateau(myWorld->plateau);
+    
+    printf("case libre(5) = %d\n", chercheLibre(indice, myWorld));
+    creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
+    affichePlateau(myWorld->plateau);
+    
+    printf("case libre(6) = %d\n", chercheLibre(indice, myWorld));
+    creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
+    affichePlateau(myWorld->plateau);
+    
+    
+    /*
+    //creation de fourmis en masse :D
+    int test=0;
+    //while (!test){
+        printf("x et y ?");
+        scanf("%d", &x);
+        scanf("%d", &y);
+        
+        if(x<0){
+            printf("Deja fini ?");
+            test++;
+        }
+        
+        //int indice= map(x, y, myWorld->plateau->cote);
+        creationFourmi (ROUGE, SOLDAT , myWorld, indice); 
+        
+        //printf("La case libre la plus proche a pour indice %d soit %d en abs et %d en ord\n", chercheLibre(indice, myWorld), chercheAbscisse(myWorld, chercheLibre(indice, myWorld)), chercheOrdonnee(myWorld, chercheLibre(indice, myWorld)));
+        creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
+        creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
+        creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
+        creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
+        creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
+        creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
+        creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
+        
+        affichePlateau(myWorld->plateau);
+    //}
+*/
     return 0; // Fermeture du programme
 }
