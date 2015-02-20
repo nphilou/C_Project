@@ -1,4 +1,4 @@
-typedef struct Fourmiliere Fourmiliere;
+//typedef struct Fourmiliere Fourmiliere;
 
 typedef struct Fourmi Fourmi;
 
@@ -21,11 +21,22 @@ typedef enum {
 } TypeFourmi;
 
 typedef enum {
+    PRODUCTION,
+    SUICIDE,
+    DEPLACEMENT,
+    IMMOBILISATION,
+    TRANSFORMATIONFOURMILIERE,
+    AUCUNE,
+} Instruction;
+
+typedef enum {
     ROUGE,
     NOIR,
 } Couleur;
 
 typedef struct {
+    int tresorRouge;
+    int tresorNoire;
     Fourmi *rouge;
     Fourmi *noire;
     Plateau* plateau;
@@ -39,8 +50,12 @@ struct Fourmi {
     Fourmi *origine;
     Fourmi *precedant;
     Fourmi *suivant;
+    int tempsProd;
+    Fourmi *fourmiliereSuiv;
+    Fourmi *fourmilierePrec;
+    Instruction instruction;
 };
-
+/*
 struct Fourmiliere {
     int couleur;
     int tmpProduc;
@@ -48,3 +63,4 @@ struct Fourmiliere {
     Fourmiliere *origine;
     Fourmiliere *suiv;
 };
+*/

@@ -11,7 +11,7 @@ void creationFourmi (Couleur couleur, TypeFourmi typefourmi, Monde* myWorld, int
 
 void supprimeFourmi (Fourmi * fourmi, Monde * myWorld); 
 
-void DeplacementFourmi (Monde * myWorld, Fourmi * fourmi, int abscisse, int ordonnee); 
+void deplacementFourmi (Monde * myWorld, Fourmi * fourmi, int x, int y);
 
 int estLibre(Monde* myWorld, int indice);
 

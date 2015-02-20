@@ -34,11 +34,6 @@ int main(int argc, char *argv[]) {
     //printf("test couleur : %d", myWorld->plateau->cases[0]->fourmi->couleur);
     
     
-    /*int tresorRouge[1];
-    tresorRouge [0] = 50;
-    int tresorNoire[1];
-    tresorRouge [0] = 50;*/
-    
     /*int x,y;
     printf("x et y ?");
     scanf("%d", &x);
@@ -53,27 +48,15 @@ int main(int argc, char *argv[]) {
     creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
     affichePlateau(myWorld->plateau);
     
-    printf("case libre = %d\n", chercheLibre(indice, myWorld));
-    creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
+    int x,y;
+    printf("quelle destination pour la fourmi\n coordonnée:");
+    scanf("%d", &x);
+    printf("ordonnée");
+    scanf("%d",&y);
+    while(myWorld-> plateau -> cases[1].fourmi->position != map(x,y, myWorld->plateau->cote)){
+    deplacementFourmi (myWorld, myWorld-> plateau -> cases[1].fourmi, 3,2);
     affichePlateau(myWorld->plateau);
-    
-    printf("case libre = %d\n", chercheLibre(indice, myWorld));
-    creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
-    affichePlateau(myWorld->plateau);
-    
-    
-    printf("case libre = %d\n", chercheLibre(indice, myWorld));
-    creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
-    affichePlateau(myWorld->plateau);
-    
-    printf("case libre(5) = %d\n", chercheLibre(indice, myWorld));
-    creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
-    affichePlateau(myWorld->plateau);
-    
-    printf("case libre(6) = %d\n", chercheLibre(indice, myWorld));
-    creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
-    affichePlateau(myWorld->plateau);
-    
+    }
     
     /*
     //creation de fourmis en masse :D

@@ -4,6 +4,7 @@
 #include <time.h>
 #include "app.h"
 #define TMAX 256
+#define TRESOR 50
 
 Fourmi *initialisation(Couleur couleur, Plateau* plateau) {
 	Fourmi *fourmi = calloc(1, sizeof(Fourmi));
@@ -21,6 +22,7 @@ Fourmi *initialisation(Couleur couleur, Plateau* plateau) {
 
 	fourmi->suivant = NULL;
 	fourmi->precedant = NULL;
+	fourmi -> tempsProd = 0;
 	
 	return fourmi;
 }
@@ -117,6 +119,8 @@ void  creationFourmi (Couleur couleur, TypeFourmi typefourmi, Monde* myWorld, in
     Fourmi* tmp1 = calloc(1, sizeof(Fourmi)); 
     Fourmi* tmp2 = calloc(1, sizeof(Fourmi)); 
     
+    
+    
     if ( fourmi -> type != FOURMILIERE){
         tmp1 = fourmi; 
         tmp1 -> precedant -> suivant = tmp1 -> suivant; 
@@ -208,7 +212,8 @@ Monde* creationMonde(){
 	myWorld->noire->suivant->suivant = initialOuvriere(NOIR, plateau, myWorld->noire->suivant);
 	myWorld->rouge->suivant-> suivant = initialOuvriere(ROUGE, plateau, myWorld->rouge->suivant);
 	
-	
+	myWorld->tresorNoire = TRESOR;
+	myWorld->tresorRouge = TRESOR;
 	
 	return myWorld;
 }
@@ -224,11 +229,11 @@ int estLibre(Monde* myWorld, int indice){
     return 1;
 }
 
-/*
+
 void deplacementFourmi (Monde * myWorld, Fourmi * fourmi, int x, int y){
 
     
-    int xF= chercheAbscisse(myWorld, fourmi -> position); 
+    int xF= chercheAbscisse(myWorld, fourmi ->position); 
     int yF = chercheOrdonnee(myWorld, fourmi -> position); 
     int cote = myWorld->plateau->cote, indice;
    
@@ -246,7 +251,7 @@ void deplacementFourmi (Monde * myWorld, Fourmi * fourmi, int x, int y){
             indice = map(xF+1, yF-1, cote);
             if (estLibre(myWorld,indice)){
                 myWorld->plateau-> cases[indice].fourmi = fourmi;
-                fourmi -> position= indice;
+                fourmi->position= indice;
                 return;
             }
         }
@@ -265,7 +270,7 @@ void deplacementFourmi (Monde * myWorld, Fourmi * fourmi, int x, int y){
             indice = map(xF-1, yF-1, cote);
             if (estLibre(myWorld,indice)){
                 myWorld->plateau-> cases[indice].fourmi = fourmi;
-                fourmi -> position= indice;
+                fourmi ->position= indice;
                 return;
             }
             else {
@@ -279,7 +284,7 @@ void deplacementFourmi (Monde * myWorld, Fourmi * fourmi, int x, int y){
                 indice = map(xF-1, yF, cote);
                 if (estLibre(myWorld,indice)){
                     myWorld->plateau-> cases[indice].fourmi = fourmi;
-                    fourmi -> position= indice;
+                    fourmi ->position= indice;
                     return;
                 }
             }
@@ -287,7 +292,7 @@ void deplacementFourmi (Monde * myWorld, Fourmi * fourmi, int x, int y){
                 indice = map(xF+1, yF, cote);
                 if (estLibre(myWorld,indice)){
                     myWorld->plateau-> cases[indice].fourmi = fourmi;
-                    fourmi -> position= indice;
+                    fourmi ->position= indice;
                     return;
                 }
                 
@@ -298,7 +303,7 @@ void deplacementFourmi (Monde * myWorld, Fourmi * fourmi, int x, int y){
                 indice = map(xF, yF+1, cote);
                 if (estLibre(myWorld,indice)){
                     myWorld->plateau-> cases[indice].fourmi = fourmi;
-                    fourmi -> position= indice;
+                    fourmi ->position= indice;
                     return;
                 }
             }
@@ -306,55 +311,64 @@ void deplacementFourmi (Monde * myWorld, Fourmi * fourmi, int x, int y){
                 indice = map(xF, yF-1, cote);
                 if (estLibre(myWorld,indice)){
                     myWorld->plateau-> cases[indice].fourmi = fourmi;
-                    fourmi -> position= indice;
+                    fourmi ->position= indice;
                     return;
                 }
             }
         }
+        return;
     }
-}*/
+}
+
 
 /*LATER
-void combatFourmi ( Fourmi * fourmiAttaquante , Fourmi * fourmi2,  Monde * myWorld){
+void combatFourmi ( Fourmi * fourmi , Fourmi* fourmi2, Monde * myWorld){
    
-   int scoreFourmiAttaquante = 0; 
-   int scoreFourmi2 =0; 
-   srand(time(NULL)); 
+   int scoreFourmi = 0; 
    
-   if (fourmiAttaquante -> type == SOLDAT && fourmi2->type != SOLDAT){
-      do {
-          scoreFourmiAttaquante = (rand()%101)*3; 
-          scoreFourmi2= rand()%101; 
-          
-        } while ((scoreFourmiAttaquante==50)&&(scoreFourmi2==50)); 
+   if (fourmi-> type == SOLDAT && fourmi2->type != SOLDAT){
+        srand(time(NULL)); 
+        scoreFourmi= rand()%101; 
+        if (scoreFourmi >= 25){
+            printf (" vous avez remporté le combat"); 
+            plateau -> cases[fourmi2.position].fourmi= fourmi; 
+            supprimeFourmi (fourmi2, myWorld); 
+        } else {
+            printf("vous avez perdu le combat");
+            supprimeFourmi (fourmi, myWorld); 
+            return;
+        }
    }
+   
+    if (fourmi->type != SOLDAT && fourmi2->type == SOLDAT){
+        srand(time(NULL)); 
+        scoreFourmi= rand()%101; 
+        if (scoreFourmi <= 25){
+            printf (" vous avez remporté le combat"); 
+            plateau -> cases[fourmi2.position].fourmi= fourmi; 
+            supprimeFourmi (fourmi2, myWorld); 
+        } else {
+            printf("vous avez perdu le combat");
+            supprimeFourmi (fourmi, myWorld); 
+            return;
+        }
+    }
     
-    if (fourmiAttaquante.type != SOLDAT && fourmi2.type == SOLDAT){
+    if (fourmi -> type != SOLDAT && fourmi2 sssssssssssss->type != SOLDAT){
+        srand(time(NULL)); 
+        scoreFourmi= rand()%101; 
         do {
-          scoreFourmi2 = (rand()%101)*3; 
-          scoreFourmiAttaquante= rand()%101; 
-        } while ((scoreFourmi2==50) && (scoreFourmiAttaquante==50); 
+            if (scoreFourmi > 50){
+                printf (" vous avez remporté le combat"); 
+                plateau -> cases[fourmi2.position].fourmi= fourmi; 
+                supprimeFourmi (fourmi2, myWorld); 
+            } else {
+                printf("vous avez perdu le combat");
+                supprimeFourmi (fourmi, myWorld); 
+                return;
+            }
+        } while (scoreFourmi==50);
     }
-    
-    if (fourmiAttaquante.type != SOLDAT && fourmi2.type != SOLDAT){
-        do {
-          scoreFourmi2 = rand()%101;
-          scoreFourmiAttaquante= rand()%101; 
-          
-        } while (scoreFourmi2==50); 
-    }
-    
-    
-    if (scoreFourmiAttaquante > scoreFourmi2){
-        printf (" la fourmi attaquante remporte le combat"); 
-        plateau -> cases[fourmi2.position].fourmi= fourmiAttaquante; 
-        supprimeFourmi (fourmi2, myWorld); 
-    } 
-    else {
-        printf("c'est la fourmiAttaquant a perdu le combat"); 
-        supprimeFourmi(fourmiAttaquante, myWorld); 
-    }
-          
 }
 */
 
@@ -413,7 +427,9 @@ void affichePlateau(Plateau* plateau){
     
     for (largeur = 0; largeur < plateau->cote; largeur++) {
         printf(" %d ", largeur);
+        printf("   ");
     }
+    printf("\n");
     for (hauteur = 0; hauteur < plateau->cote; hauteur++) {
         for (largeur = 0; largeur < plateau->cote; largeur++) {
             
@@ -441,8 +457,6 @@ void affichePlateau(Plateau* plateau){
         }
         printf(" %d\n\n", hauteur);
     }
-    
-    
 }
 
 
@@ -453,7 +467,70 @@ void affichePlateau(Plateau* plateau){
     TRANSFORMATIONFOURMILIERE = 3
     PRODUCTION = 4
     */
-void demandeInstruction(Monde* myWorld, Fourmi* joueur, ){
+    
+//Demander instruction pour la fourmiliere
+Instruction demandeInstructionFourmiliere(Monde *myWorld, Fourmi *listeFourmi){
+    Instruction instruction;
+    int instructiontemp;
+    
+    do{
+        printf("Donnez une instruction pour la fourmiliere à la case %d, %d\n", chercheAbscisse(myWorld, listeFourmi->position), chercheOrdonnee(myWorld, listeFourmi->position));
+        printf("SUICIDE(0), PRODUCTION(4) : ");
+        scanf("%d", &instructiontemp);
+        if(instructiontemp != 0 || instructiontemp != 4){
+            printf("Vous m'expliquez ? 0 ou 4, c'est pas si dur ?");
+        }
+    } while (instructiontemp != 0 || instructiontemp != 4);
+    instruction = (Instruction) instructiontemp;
+    return instruction;
+}
+
+
+/*
+SUICIDE,
+    DEPLACEMENT,
+    IMMOBILISATION,
+    TRANSFORMATIONFOURMILIERE,
+    PRODUCTION,
+    AUCUNE,
+*/
+//Demander instruction pour un agent
+/*
+switch (instruction) {
+        case SUICIDE:
+            printf("SUICIDE OUVRIERE !!!!");
+            break;
+        case DEPLACEMENT:
+            printf("Donnez une destination : abscisse ? \n");
+            scanf("%d", &x);
+            printf("ordonnee ? \n");
+            scanf("%d", &y);
+            deplacementFourmi (myWorld, listeFourmi, x, y);
+            break;
+        case IMMOBILISATION:
+            //cas a traiter avec tresor et tout..
+        default:
+            printf("cas vide"); //renommer
+    }
+    */
+Instruction demandeInstructionAgent(Monde *myWorld, Fourmi *listeFourmi){
+    Instruction instruction;
+    int instructiontemp;
+    
+    do{
+        printf("Donnez une instruction pour l'agent à la case %d, %d\n", chercheAbscisse(myWorld, listeFourmi), chercheOrdonnee(myWorld, listeFourmi));
+        printf("SUICIDE(0), DEPLACEMENT(1), IMMOBILISATION(2) : ");
+        scanf("%d", &instructiontemp);
+        if(instructiontemp < 0 || instructiontemp > 4){
+            printf("Vous m'expliquez ? 0 ou 4, c'est pas si dur ?");
+        }
+    }while(instructiontemp < 0 || instructiontemp > 4);
+    
+    instruction = (Instruction) instructiontemp;
+    return instruction;
+}
+    
+void demandeInstruction(Monde* myWorld, Fourmi* joueur){
     Fourmi* listeFourmiliere; 
     Fourmi* listeFourmi; 
     
@@ -462,78 +539,65 @@ void demandeInstruction(Monde* myWorld, Fourmi* joueur, ){
     TypeFourmi production;
     int x, y;
     
-    Couleur couleur = joueur.couleur;
+    Couleur couleur = joueur->couleur;
     listeFourmiliere = joueur;
+    
+    int productiontmp;
     
     while(listeFourmiliere != NULL){
         listeFourmi = listeFourmiliere;
         while(listeFourmi != NULL){
             //if pas d'instruction : immobilisation = tresor, transfo = tmptransfo--, production : tmpprod--
             
-            if (listeFourmi.typefourmi == FOURMILIERE){
-                //dowhile != int
-                printf("Donnez une instruction pour la fourmiliere à la case %d, %d\n", chercheAbscisse(myWorld, listeFourmi), chercheOrdonnee(myWorld, listeFourmi));
-                printf("SUICIDE(0), PRODUCTION(4) : ")
-                scanf("%d", &instruction);
+            if (listeFourmi->type == FOURMILIERE){
+                //Fourmiliere occupee
+                if (listeFourmi->tempsProd > 0){
+                    listeFourmi->tempsProd--;
+                    break;
+                }
+                
+                instruction = demandeInstructionFourmiliere(myWorld, listeFourmi);
+                
+                //Traitement instruction
                 switch (instruction) {
                     case SUICIDE:
                         printf("SUICIDE FOURMILIERE !!!!");
                         break;
                     case PRODUCTION:
                         printf("Que voulez vous produire ?\n");
-                        printf("REINE(0), SOLDAT(1), OUVRIERE(2)")
-                        scanf("%d", &instruction);
-                        switch (instruction) {
+                        printf("REINE(0), SOLDAT(1), OUVRIERE(2)"); 
+                        scanf("%d", &productiontmp);
+                        production = (TypeFourmi) productiontmp;
+                        switch (production) {
                             case REINE:
-                                creationFourmi (couleur, REINE, myWorld, chercheLibre(listeFourmiliere.position, myWorld));
+                                creationFourmi (couleur, REINE, myWorld, chercheLibre(listeFourmiliere->position, myWorld));
                                 //tmpprod !!!
                                 break;
                             case SOLDAT:
-                                creationFourmi (couleur, SOLDAT, myWorld, chercheLibre(listeFourmiliere.position, myWorld));
+                                creationFourmi (couleur, SOLDAT, myWorld, chercheLibre(listeFourmiliere->position, myWorld));
                                 break;
                             case OUVRIERE:
-                                creationFourmi (couleur, OUVRIERE, myWorld, chercheLibre(listeFourmiliere.position, myWorld));
+                                creationFourmi (couleur, OUVRIERE, myWorld, chercheLibre(listeFourmiliere->position, myWorld));
                                 break;
+                            default:
+                                printf("type de fourmi à produire invalide");
                         }
                         break;
                     default:
                         printf("cas vide"); //renommer
                 }
-            }else if(listeFourmi.typefourmi == OUVRIERE){
-                //dowhile != int
-                printf("Donnez une instruction pour l'ouvriere à la case %d, %d\n", chercheAbscisse(myWorld, listeFourmi), chercheOrdonnee(myWorld, listeFourmi));
-                printf("SUICIDE(0), DEPLACEMENT(1), IMMOBILISATION(2) : ")
-                scanf("%d", &instruction);
-                switch (instruction) {
-                    case SUICIDE:
-                        printf("SUICIDE OUVRIERE !!!!");
-                        break;
-                    case DEPLACEMENT:
-                        printf("Que voulez vous produire ?\n");
-                        printf("REINE(0), SOLDAT(1), OUVRIERE(2)")
-                        scanf("%d", &instruction);
-                       
-                        break;
-                    default:
-                        printf("cas vide"); //renommer
-                }
-            }else if(listeFourmi.typefourmi == SOLDAT){
-            
-            else(listeFourmi.typefourmi == REINE){
-            
-            
+            }else{
+                
             }
-            
-            
-            
-            
-            
             listeFourmi = listeFourmi -> suivant;
         }
         listeFourmiliere = listeFourmiliere -> fourmiliereSuiv;
     }
 
 }
+
+
+
 /* 
 A FAIRE : 
 
