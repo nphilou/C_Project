@@ -1,24 +1,21 @@
-#include "structures.h"
-
-//Place les 2 fourmilieres de depart
-Fourmi *initialisation(Couleur couleur, Plateau *plateau);
-
-Fourmi *initialReine(Couleur couleur, Plateau *plateau, Fourmi *fourmiOrigine);
-
-Fourmi *initialOuvriere(Couleur couleur, Plateau *plateau, Fourmi *reine);
-
-void creationFourmi(Couleur couleur, TypeFourmi typefourmi, Monde *myWorld, int indice);
+#include "init.h"
 
 void supprimeFourmi(Fourmi *fourmi, Monde *myWorld);
 
 void deplacementFourmi(Monde *myWorld, Fourmi *fourmi, int x, int y);
 
-int estLibre(Monde *myWorld, int indice);
+//void CombatFourmi(Fourmi *fourmiAttaquante, Fourmi *fourmi2, Monde *myworld);
 
-void CombatFourmi(Fourmi *fourmiAttaquante, Fourmi *fourmi2, Monde *myworld);
+Instruction demandeInstructionFourmiliere(Monde *myWorld, Fourmi *listeFourmi);
 
-Monde *creationMonde();
+Instruction demandeInstructionReine(Monde *myWorld, Fourmi *listeFourmi);
 
-int chercheLibre(int centre, Monde *myWorld);
+Instruction demandeInstructionSoldat(Monde *myWorld, Fourmi *listeFourmi);
 
-void affichePlateau(Plateau *plateau);
+Instruction demandeInstructionOuvriere(Monde *myWorld, Fourmi *listeFourmi);
+
+void demandeDestination(int *abscisse, int *ordonnee, Monde* monde);
+
+void traitementInstruction(Instruction instruction, Monde *myWorld, Fourmi *listeFourmi);
+
+void demandeInstruction(Monde *myWorld, Fourmi *joueur);

@@ -1,14 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-#include <time.h>
 #include "app.h"
-#include "plan.h"
 
 #define TMAX 256
-#define TRESOR 50
-
-
 
 /*void supprimeFourmi (Fourmi * fourmi, Monde * myWorld){
     
@@ -59,18 +53,6 @@
     myWorld -> plateau -> cases[ fourmi -> position].fourmi = NULL; 
     
 }*/
-
-
-int estLibre(Monde *myWorld, int indice) {
-    int nombrecases = myWorld->plateau->nombrecases;
-
-    if (indice < 0 || indice > nombrecases - 1) return -1;
-
-    if (myWorld->plateau->cases[indice].fourmi != NULL) {
-        return 0;
-    }
-    return 1;
-}
 
 void deplacementFourmi(Monde *myWorld, Fourmi *fourmi, int x, int y) {
 
@@ -213,101 +195,6 @@ void combatFourmi ( Fourmi * fourmi , Fourmi* fourmi2, Monde * myWorld){
 }
 */
 
-int chercheLibre(int centre, Monde *myWorld) {
-
-    int cote = myWorld->plateau->cote; //raccourci
-    int rayon;
-    int haut, droite, bas, gauche, ligne;
-    int ordonnee = chercheOrdonnee(myWorld, centre);
-    int abscisse = chercheAbscisse(myWorld, centre);
-
-    //if plateau rempli
-
-    //on s'eloigne du centre (rayon augmente)
-    for (rayon = 1; rayon < cote; rayon++) {
-
-        //haut
-        for (haut = centre - rayon * cote + rayon; haut >= centre - rayon * cote - rayon; haut--) {
-            ligne = ordonnee - rayon;
-            if (haut < ligne * cote || haut >= (ligne + 1) * cote || !ordonnee) continue;
-            if (estLibre(myWorld, haut)) {
-                return haut;
-            }
-        }
-
-        //gauche
-        for (gauche = centre - (rayon - 1) * cote - rayon; gauche <= centre + (rayon - 1) * cote - rayon; gauche += cote) {
-            if (!abscisse) continue;
-            if (estLibre(myWorld, gauche)) {
-                return gauche;
-            }
-        }
-
-        //bas
-        for (bas = centre + rayon * cote - rayon; bas <= centre + rayon * cote + rayon; bas++) {
-            ligne = ordonnee + rayon;
-            if (bas < ligne * cote || bas >= (ligne + 1) * cote || ordonnee == cote) continue;
-            if (estLibre(myWorld, bas)) {
-                return bas;
-            }
-        }
-
-        //droite
-        for (droite = centre + rayon * cote + rayon; droite >= centre - (rayon - 1) * cote + rayon; droite -= cote) {
-            if (abscisse == cote - 1) continue;
-            if (estLibre(myWorld, droite)) {
-                return droite;
-            }
-        }
-    }
-    return -1;
-}
-
-void affichePlateau(Plateau *plateau) {
-    int largeur, hauteur;
-
-    for (largeur = 0; largeur < plateau->cote; largeur++) {
-        printf(" %d ", largeur);
-        printf("   ");
-    }
-    printf("\n");
-    for (hauteur = 0; hauteur < plateau->cote; hauteur++) {
-        for (largeur = 0; largeur < plateau->cote; largeur++) {
-
-            if (plateau->cases[map(largeur, hauteur, plateau->cote)].fourmi == NULL) {
-                printf("   ");
-            } else {
-                switch (plateau->cases[map(largeur, hauteur, plateau->cote)].fourmi->type) {
-                    case FOURMILIERE:
-                        printf(" F ");
-                        break;
-                    case SOLDAT:
-                        printf(" S ");
-                        break;
-                    case OUVRIERE:
-                        printf(" O ");
-                        break;
-                    case REINE:
-                        printf(" R ");
-                        break;
-                    default:
-                        printf("   ");
-                }
-            }
-            printf(" | ");
-        }
-        printf(" %d\n\n", hauteur);
-    }
-}
-
-
-/*
-    SUICIDE = 0
-    DEPLACEMENT = 1
-    IMMOBILISATION = 2
-    TRANSFORMATIONFOURMILIERE = 3
-    PRODUCTION = 4
-    */
 
 Instruction demandeInstructionFourmiliere(Monde *myWorld, Fourmi *listeFourmi) {
     Instruction instruction;
@@ -377,17 +264,20 @@ Instruction demandeInstructionOuvriere(Monde *myWorld, Fourmi *listeFourmi) {
     return instruction;
 }
 
-void demandeDestination(int *abscisse, int *ordonnee) {
+void demandeDestination(int *abscisse, int *ordonnee, Monde* monde) {
+    int tmp;
     do {
         printf("Donnez une destination : abscisse ? \n");
-        scanf("%d", &abscisse);
+        scanf("%d", &tmp);
+        *abscisse = tmp;
         printf("ordonnee ? \n");
-        scanf("%d", &ordonnee);
+        scanf("%d", &tmp);
+        *ordonnee = tmp;
 
-    } while (abscisse);//A CONTINUER
+    } while (tmp>monde->plateau->cote);//A CONTINUER
 }
 
-void traitementInstruction(Instruction instruction, Monde *myWorld, Fourmi *listeFourmi) {
+/*void traitementInstruction(Instruction instruction, Monde *myWorld, Fourmi *listeFourmi) {
     int x, y;
     switch (instruction) {
         case SUICIDE:
@@ -404,8 +294,8 @@ void traitementInstruction(Instruction instruction, Monde *myWorld, Fourmi *list
             printf("cas vide"); //renommer
     }
 }
-
-void demandeInstruction(Monde *myWorld, Fourmi *joueur) {
+*/
+/*void demandeInstruction(Monde *myWorld, Fourmi *joueur) {
     Fourmi *listeFourmiliere;
     Fourmi *listeFourmi;
 
@@ -469,7 +359,7 @@ void demandeInstruction(Monde *myWorld, Fourmi *joueur) {
         listeFourmiliere = listeFourmiliere->fourmiliereSuiv;
     }
 
-}
+}*/
 
 
 
