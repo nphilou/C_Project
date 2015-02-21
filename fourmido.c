@@ -17,7 +17,7 @@
 
 int main(int argc, char *argv[]) {
 
-    /*SDL_Init(SDL_INIT_VIDEO); // Initialisation de la SDL
+    /* SDL_Init(SDL_INIT_VIDEO); // Initialisation de la SDL
 
     SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE); // Ouverture de la fenêtre
     SDL_WM_SetCaption("Hohoho", NULL);
@@ -26,36 +26,40 @@ int main(int argc, char *argv[]) {
 
     SDL_Quit(); // Arrêt de la SDL
     */
-    
+
     Monde *myWorld = creationMonde();
     //printf("couleur rouge normalement : %d", myWorld->plateau->cases[0]->fourmi->couleur);
     //printf("test couleur : %d", myWorld->plateau->cases[0]->fourmi->couleur);
-    
-    
+
+
     /*int x,y;
     printf("x et y ?");
     scanf("%d", &x);
     scanf("%d", &y);*/
-    
-    int indice= map(2,4, myWorld->plateau->cote);
-    creationFourmi (ROUGE, SOLDAT , myWorld, indice); 
-    
+
+    int indice = map(2, 2, myWorld->plateau->cote);
+    creationFourmi(ROUGE, SOLDAT, myWorld, indice);
+
     affichePlateau(myWorld->plateau);
-    
-    printf("case libre = %d\n", chercheLibre(indice, myWorld));
-    creationFourmi (ROUGE, REINE , myWorld, chercheLibre(indice, myWorld));
-    affichePlateau(myWorld->plateau);
-    
-    int x,y;
+
+    int a, b;
+    demandeDestination(&a, &b, myWorld);
+    printf("a = %d et b = %d ", a, b);
+
+    /*printf("case libre = %d\n", chercheLibre(indice, myWorld));
+    creationFourmi(ROUGE, REINE, myWorld, chercheLibre(indice, myWorld));
+    affichePlateau(myWorld->plateau);*/
+
+    /*int x, y;
     printf("quelle destination pour la fourmi\n coordonnée:");
     scanf("%d", &x);
     printf("ordonnée");
-    scanf("%d",&y);
-    while(myWorld-> plateau -> cases[1].fourmi->position != map(x,y, myWorld->plateau->cote)){
-    deplacementFourmi (myWorld, myWorld-> plateau -> cases[1].fourmi, 3,2);
-    affichePlateau(myWorld->plateau);
-    }
-    
+    scanf("%d", &y);
+    while (myWorld->plateau->cases[1].fourmi->position != map(x, y, myWorld->plateau->cote)) {
+        deplacementFourmi(myWorld, myWorld->plateau->cases[1].fourmi, 3, 2);
+        affichePlateau(myWorld->plateau);
+    }*/
+
     /*
     //creation de fourmis en masse :D
     int test=0;
@@ -84,5 +88,5 @@ int main(int argc, char *argv[]) {
         affichePlateau(myWorld->plateau);
     //}
 */
-    return 0; // Fermeture du programme
+    return 0;
 }

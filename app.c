@@ -264,17 +264,17 @@ Instruction demandeInstructionOuvriere(Monde *myWorld, Fourmi *listeFourmi) {
     return instruction;
 }
 
-void demandeDestination(int *abscisse, int *ordonnee, Monde* monde) {
-    int tmp;
+void demandeDestination(int *abscisse, int *ordonnee, Monde *monde) {
+    int tmp0, tmp1;
     do {
         printf("Donnez une destination : abscisse ? \n");
-        scanf("%d", &tmp);
-        *abscisse = tmp;
+        scanf("%d", &tmp0);
+        *abscisse = tmp0;
         printf("ordonnee ? \n");
-        scanf("%d", &tmp);
-        *ordonnee = tmp;
+        scanf("%d", &tmp1);
+        *ordonnee = tmp1;
 
-    } while (tmp>monde->plateau->cote);//A CONTINUER
+    } while (tmp0 > monde->plateau->cote || tmp1 > monde->plateau->cote);//A CONTINUER
 }
 
 /*void traitementInstruction(Instruction instruction, Monde *myWorld, Fourmi *listeFourmi) {
