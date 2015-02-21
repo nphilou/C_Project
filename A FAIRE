@@ -6,8 +6,12 @@ Legende :
 
 Lea TODO List : 
 - Deplacement (++)
+> Faire plusieurs fonctions (deplacementE, O, SE, NE...)
+
 - Sauvegarde (--)
 - Chargement (--)
+> Mettre les deux dans un fichier sauvegarde.c
+
 - Combats (++)
 
 Phil TODO List :
@@ -25,3 +29,5 @@ General TODO List :
 - if def pour savoir qui commence
 - Mettre plein de commentaires dans les entêtes
 
+**inclusions**
+structures < (configuration) < plateau < init < combat < deplacement < instruction < app < fourmido 

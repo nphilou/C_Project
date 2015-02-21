@@ -2,6 +2,19 @@
 #include <stdlib.h>
 #include "deplacement.h"
 
+void demandeDestination(int *abscisse, int *ordonnee, Monde *monde) {
+    int tmp0, tmp1;
+    do {
+        printf("Donnez une destination : abscisse ? \n");
+        scanf("%d", &tmp0);
+        *abscisse = tmp0;
+        printf("ordonnee ? \n");
+        scanf("%d", &tmp1);
+        *ordonnee = tmp1;
+
+    } while (map(tmp0, tmp1, monde->plateau->cote) < 0);//A CONTINUER
+}
+
 void deplacementFourmi(Monde *myWorld, Fourmi *fourmi, int x, int y) {
 
 
