@@ -41,11 +41,11 @@ int main(int argc, char *argv[]) {
     creationFourmi(ROUGE, SOLDAT, myWorld, indice);
 
     affichePlateau(myWorld->plateau);
-
+    /*
     int a, b;
     demandeDestination(&a, &b, myWorld);
     printf("a = %d et b = %d ", a, b);
-
+*/
     /*printf("case libre = %d\n", chercheLibre(indice, myWorld));
     creationFourmi(ROUGE, REINE, myWorld, chercheLibre(indice, myWorld));
     affichePlateau(myWorld->plateau);*/
