@@ -1,4 +1,3 @@
-#include "init.h"
 
 void supprimeFourmi(Fourmi *fourmi, Monde *myWorld);
 

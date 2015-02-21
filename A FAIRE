@@ -1,0 +1,27 @@
+**A FAIRE**
+
+Legende : 
+++ = Urgent
+-- = Moins urgent
+
+Lea TODO List : 
+- Deplacement (++)
+- Sauvegarde (--)
+- Chargement (--)
+- Combats (++)
+
+Phil TODO List :
+- Demander instructions 
+- Traitement instructions
+- Chargement cfg
+- SDL <3
+
+
+General TODO List : 
+
+- Renommer les variables.
+- Enlever les tests.
+- Free !!! (voir valgrind)
+- if def pour savoir qui commence
+- Mettre plein de commentaires dans les entêtes
+

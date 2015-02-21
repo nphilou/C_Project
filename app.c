@@ -4,7 +4,10 @@
 
 #define TMAX 256
 
-/*void supprimeFourmi (Fourmi * fourmi, Monde * myWorld){
+//SUPPRIME FOURMI, A FAIRE ET A METTRE DANS INIT
+/*
+
+void supprimeFourmi (Fourmi * fourmi, Monde * myWorld){
     
     Fourmi* tmp1 = calloc(1, sizeof(Fourmi)); 
     Fourmi* tmp2 = calloc(1, sizeof(Fourmi)); 
@@ -52,97 +55,11 @@
     }
     myWorld -> plateau -> cases[ fourmi -> position].fourmi = NULL; 
     
-}*/
-
-void deplacementFourmi(Monde *myWorld, Fourmi *fourmi, int x, int y) {
-
-
-    int xF = chercheAbscisse(myWorld, fourmi->position);
-    int yF = chercheOrdonnee(myWorld, fourmi->position);
-    int cote = myWorld->plateau->cote, indice;
-
-
-    if (xF != x && yF != y) {
-        if (xF > x && yF < y) {
-            indice = map(xF - 1, yF + 1, cote);
-            if (estLibre(myWorld, indice)) {
-                myWorld->plateau->cases[indice].fourmi = fourmi;
-                fourmi->position = indice;
-                return;
-            }
-        }
-        if (xF < x && yF > y) {
-            indice = map(xF + 1, yF - 1, cote);
-            if (estLibre(myWorld, indice)) {
-                myWorld->plateau->cases[indice].fourmi = fourmi;
-                fourmi->position = indice;
-                return;
-            }
-        }
-        if (xF < x && yF < y) {
-            indice = map(xF + 1, yF + 1, cote);
-            if (estLibre(myWorld, indice)) {
-                myWorld->plateau->cases[indice].fourmi = fourmi;
-                fourmi->position = indice;
-                return;
-            }
-            else {
-                printf("the location is not empty");
-            }
-        }
-        if (xF > x && yF > y) {
-            indice = map(xF - 1, yF - 1, cote);
-            if (estLibre(myWorld, indice)) {
-                myWorld->plateau->cases[indice].fourmi = fourmi;
-                fourmi->position = indice;
-                return;
-            }
-            else {
-                printf("the location is not empty");
-            }
-        }
-    }
-    else if (xF == x || yF == y) {
-        if (yF == y && xF != x) {
-            if (xF > x) {
-                indice = map(xF - 1, yF, cote);
-                if (estLibre(myWorld, indice)) {
-                    myWorld->plateau->cases[indice].fourmi = fourmi;
-                    fourmi->position = indice;
-                    return;
-                }
-            }
-            else {
-                indice = map(xF + 1, yF, cote);
-                if (estLibre(myWorld, indice)) {
-                    myWorld->plateau->cases[indice].fourmi = fourmi;
-                    fourmi->position = indice;
-                    return;
-                }
-
-            }
-        }
-        if (yF != y && xF == x) {
-            if (yF < y) {
-                indice = map(xF, yF + 1, cote);
-                if (estLibre(myWorld, indice)) {
-                    myWorld->plateau->cases[indice].fourmi = fourmi;
-                    fourmi->position = indice;
-                    return;
-                }
-            }
-            else {
-                indice = map(xF, yF - 1, cote);
-                if (estLibre(myWorld, indice)) {
-                    myWorld->plateau->cases[indice].fourmi = fourmi;
-                    fourmi->position = indice;
-                    return;
-                }
-            }
-        }
-        return;
-    }
 }
+
+*/
+
+
 
 /*LATER
 void combatFourmi ( Fourmi * fourmi , Fourmi* fourmi2, Monde * myWorld){
@@ -295,7 +212,7 @@ void demandeDestination(int *abscisse, int *ordonnee, Monde *monde) {
     }
 }
 */
-/*void demandeInstruction(Monde *myWorld, Fourmi *joueur) {
+void demandeInstruction(Monde *myWorld, Fourmi *joueur) {
     Fourmi *listeFourmiliere;
     Fourmi *listeFourmi;
 
@@ -359,19 +276,4 @@ void demandeDestination(int *abscisse, int *ordonnee, Monde *monde) {
         listeFourmiliere = listeFourmiliere->fourmiliereSuiv;
     }
 
-}*/
-
-
-
-/* 
-A FAIRE : 
-
-1. Renommer les variables.
-2. Enlever les tests.
-3. Ajouter la position (entier) dans les fonctions de creation de fourmis
-4. Prototypes app.h
-6. Free !!!
-7. if def pour savoir qui commence
-
-
-*/
+}
