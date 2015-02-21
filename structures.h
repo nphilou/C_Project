@@ -4,7 +4,7 @@ typedef struct Fourmi Fourmi;
 
 
 typedef struct {
-    Fourmi* fourmi;
+    Fourmi *fourmi;
 } Case;
 
 typedef struct {
@@ -25,7 +25,7 @@ typedef enum {
     SUICIDE,
     DEPLACEMENT,
     IMMOBILISATION,
-    TRANSFORMATIONFOURMILIERE,
+    TRANSFORMATION,
     AUCUNE,
 } Instruction;
 
@@ -39,7 +39,7 @@ typedef struct {
     int tresorNoire;
     Fourmi *rouge;
     Fourmi *noire;
-    Plateau* plateau;
+    Plateau *plateau;
 } Monde;
 
 struct Fourmi {

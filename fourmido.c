@@ -1,8 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
 //#include <SDL/SDL.h>
 #include "app.h"
-//#include "structures.h"
 
 /*void pause() {
     int continuer = 1;
