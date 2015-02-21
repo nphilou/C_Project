@@ -17,12 +17,6 @@ int estLibre(Monde *myWorld, int indice);
 
 void CombatFourmi(Fourmi *fourmiAttaquante, Fourmi *fourmi2, Monde *myworld);
 
-int map(int abscisse, int ordonnee, int cote);
-
-int chercheOrdonnee(Monde *myWorld, int indice);
-
-int chercheAbscisse(Monde *myWorld, int indice);
-
 Monde *creationMonde();
 
 int chercheLibre(int centre, Monde *myWorld);

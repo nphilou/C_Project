@@ -1,5 +1,3 @@
-//typedef struct Fourmiliere Fourmiliere;
-
 typedef struct Fourmi Fourmi;
 
 
@@ -55,12 +53,3 @@ struct Fourmi {
     Fourmi *fourmilierePrec;
     Instruction instruction;
 };
-/*
-struct Fourmiliere {
-    int couleur;
-    int tmpProduc;
-    char type[10];
-    Fourmiliere *origine;
-    Fourmiliere *suiv;
-};
-*/
