@@ -2,7 +2,7 @@
 
 void demandeDestination(int *abscisse, int *ordonnee, Monde* monde);
 
-int deplacementFourmi(Monde *myWorld, Fourmi *fourmi, int * abscisse, int * ordonnee);
+void deplacementFourmi(Monde *myWorld, Fourmi *fourmi, int * abscisse, int * ordonnee);
 
 
 void deplacementNord (Monde * myWorld, Fourmi * fourmi, int * abscisse, int * ordonnee);

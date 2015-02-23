@@ -73,33 +73,33 @@ Instruction demandeInstructionOuvriere(Monde *myWorld, Fourmi *listeFourmi) {
 TypeFourmi demandeProduction(Monde *myWorld, Fourmi *listeFourmi){
     TypeFourmi production;
     int productiontemp;
+    Couleur couleur = listeFourmi->couleur;
 
     do {
         printf("Que voulez vous produire ?\n");
         printf("REINE(0), SOLDAT(1), OUVRIERE(2)");
         scanf("%d", &productiontemp);
-        production = (TypeFourmi) productiontmp;
         switch (production) {
             case REINE:
-                creationFourmi(couleur, REINE, myWorld, chercheLibre(listeFourmiliere->position, myWorld));
+                creationFourmi(couleur, REINE, myWorld, chercheLibre(listeFourmi->position, myWorld));
                 //tmpprod !!!
                 break;
             case SOLDAT:
-                creationFourmi(couleur, SOLDAT, myWorld, chercheLibre(listeFourmiliere->position, myWorld));
+                creationFourmi(couleur, SOLDAT, myWorld, chercheLibre(listeFourmi->position, myWorld));
                 break;
             case OUVRIERE:
-                creationFourmi(couleur, OUVRIERE, myWorld, chercheLibre(listeFourmiliere->position, myWorld));
+                creationFourmi(couleur, OUVRIERE, myWorld, chercheLibre(listeFourmi->position, myWorld));
                 break;
             default:
                 printf("type de fourmi à produire invalide");
         }
-        if (instructiontemp != 0 || instructiontemp != 1) {
-            printf("Vous m'expliquez ? 0 ou 1, c'est pas si dur ?\n"); //A REVOIR
+        if (productiontemp < 0 || productiontemp != 1 || productiontemp != 2) {
+            printf("Vous m'expliquez ? 0 à 2, c'est pas si dur ?\n"); //A REVOIR
         }
-    } while (instructiontemp != 0 || instructiontemp != 1);
-    instruction = (Instruction) instructiontemp;
+    } while (productiontemp != 0 || productiontemp != 1 || productiontemp != 2);
+    production = (TypeFourmi) productiontemp;
 
-    return instruction;
+    return production;
 }
 
 void demandeInstruction(Monde *myWorld, Fourmi *joueur) {
@@ -127,7 +127,7 @@ void demandeInstruction(Monde *myWorld, Fourmi *joueur) {
                 
                 case PRODUCTION:
                     if(listeFourmi->tempsProd > 0){
-                        tempsProd--;
+                        listeFourmi->tempsProd--;
                     }else{
                         // on connait deja !! production = demandeProduction(myWorld, listeFourmi);
                         //creationFourmi()...
@@ -146,7 +146,7 @@ void demandeInstruction(Monde *myWorld, Fourmi *joueur) {
                     
                 case TRANSFORMATION:
                     if(listeFourmi->tempsTransformation > 0){
-                        tempsTransformation--;
+                        listeFourmi->tempsTransformation--;
                     }else{
                         //transformation
                         instruction = AUCUNE;
@@ -168,12 +168,24 @@ void demandeInstruction(Monde *myWorld, Fourmi *joueur) {
             if(listeFourmi->instruction == AUCUNE){    
                 switch (type) {
                     case(FOURMILIERE):
+                        instruction = demandeInstructionFourmiliere(myWorld, listeFourmi);
+                        break;
+                    
+                    case(REINE):
+                        instruction = demandeInstructionReine(myWorld, listeFourmi);
+                        break;
+                    
+                    case(SOLDAT):
+                        instruction = demandeInstructionSoldat(myWorld, listeFourmi);
+                        break;
                         
+                    case(OUVRIERE):
+                        instruction = demandeInstructionOuvriere(myWorld, listeFourmi);
                 }
             }
             
-            
-            
+            switch(instruction)
+            test
             
             
             

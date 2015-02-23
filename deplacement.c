@@ -147,7 +147,7 @@ void deplacementFourmi(Monde *myWorld, Fourmi *fourmi, int *abscisse, int * ordo
     int xF = chercheAbscisse(myWorld, fourmi->position);
     int yF = chercheOrdonnee(myWorld, fourmi->position);
     int caseInitial = map(xF, yF, myWorld->plateau->cote);
-    int destination = map(*abscisse, * ordonnee, myWorld -> plateau -> cote);
+    fourmi->destination = map(*abscisse, * ordonnee, myWorld -> plateau -> cote);
 
     myWorld->plateau->cases[caseInitial].fourmi = NULL;
     

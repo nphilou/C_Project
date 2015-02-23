@@ -14,12 +14,12 @@ void combatFourmi ( Fourmi * fourmi , Fourmi* fourmi2, Monde * myWorld){
         srand(time(NULL)); 
         scoreFourmi= rand()%101; 
         if (scoreFourmi >= 25){
-            printf (" vous avez remporté le combat"); 
+            printf (" vous avez remporté le combat\n"); 
             myWorld->plateau -> cases[indice].fourmi= fourmi; 
-            supprimeFourmi (fourmi2, myWorld); 
+            supprimeFourmi (fourmi2, myWorld, fourmi); 
         } else {
-            printf("vous avez perdu le combat");
-            supprimeFourmi (fourmi, myWorld); 
+            printf("vous avez perdu le combat\n");
+            supprimeFourmi (fourmi, myWorld, fourmi2); 
             return;
         }
    }
@@ -28,12 +28,12 @@ void combatFourmi ( Fourmi * fourmi , Fourmi* fourmi2, Monde * myWorld){
         srand(time(NULL)); 
         scoreFourmi= rand()%101; 
         if (scoreFourmi <= 25){
-            printf (" vous avez remporté le combat"); 
+            printf (" vous avez remporté le combat\n"); 
             myWorld->plateau -> cases[indice].fourmi= fourmi; 
-            supprimeFourmi (fourmi2, myWorld); 
+            supprimeFourmi (fourmi2, myWorld, fourmi); 
         } else {
-            printf("vous avez perdu le combat");
-            supprimeFourmi (fourmi, myWorld); 
+            printf("vous avez perdu le combat\n");
+            supprimeFourmi (fourmi, myWorld, fourmi2); 
             return;
         }
     }
@@ -43,12 +43,12 @@ void combatFourmi ( Fourmi * fourmi , Fourmi* fourmi2, Monde * myWorld){
         scoreFourmi= rand()%101; 
         do {
             if (scoreFourmi > 50){
-                printf (" vous avez remporté le combat"); 
+                printf (" vous avez remporté le combat\n"); 
                 myWorld->plateau -> cases[indice].fourmi= fourmi; 
-                supprimeFourmi (fourmi2, myWorld); 
+                supprimeFourmi (fourmi2, myWorld, fourmi); 
             } else {
-                printf("vous avez perdu le combat");
-                supprimeFourmi (fourmi, myWorld); 
+                printf("vous avez perdu le combat\n");
+                supprimeFourmi (fourmi, myWorld, fourmi2); 
                 return;
             }
         } while (scoreFourmi==50);

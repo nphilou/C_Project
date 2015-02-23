@@ -43,15 +43,21 @@ int main(int argc, char *argv[]) {
 
     affichePlateau(myWorld->plateau);
    
-    int a, b;
+    /*int a, b;
     demandeDestination(&a, &b, myWorld);
     printf("a = %d et b = %d \n", a, b);
     
-    int test = deplacementFourmi(myWorld, myWorld-> plateau -> cases[1].fourmi, &a, &b);
-    printf("test= %d\n", test);
+    //int test = deplacementFourmi(myWorld, myWorld-> plateau -> cases[1].fourmi, &a, &b);
+    //printf("test= %d\n", test);
+    */
+
    
-   supprimeFourmi(myWorld-> plateau -> cases[0].fourmi, myWorld);
-   //supprimeFourmi(myWorld-> plateau -> cases[1].fourmi, myWorld);
+    supprimeFourmi(myWorld -> plateau -> cases[0].fourmi, myWorld, myWorld -> plateau -> cases[].fourmi); 
+    printf("couleur de l'ouvriere\n", myWorld -> plateau -> cases[5].fourmi-> couleur);
+   //supprimeFourmi(myWorld-> plateau -> cases[5].fourmi, myWorld);
+   
+    //combatFourmi ( myWorld -> plateau -> cases[0].fourmi , myWorld -> plateau -> cases[24].fourmi,myWorld);
+   
    
    affichePlateau(myWorld->plateau);
 
