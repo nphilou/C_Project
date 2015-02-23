@@ -17,6 +17,8 @@ void demandeDestination(int *abscisse, int *ordonnee, Monde *monde) {
 
 
 // si xF < *abscisse
+
+//abscisse never used !
 void deplacementEst(Monde *myWorld, Fourmi *fourmi, int *abscisse, int *ordonnee) {
 
     int xF = chercheAbscisse(myWorld, fourmi->position);
@@ -48,6 +50,8 @@ void deplacementEst(Monde *myWorld, Fourmi *fourmi, int *abscisse, int *ordonnee
 }
 
 // if xF> *abscisse
+
+//abscisse never used
 void deplacementOuest(Monde *myWorld, Fourmi *fourmi, int *abscisse, int *ordonnee) {
 
     int xF = chercheAbscisse(myWorld, fourmi->position);
@@ -78,7 +82,8 @@ void deplacementOuest(Monde *myWorld, Fourmi *fourmi, int *abscisse, int *ordonn
 
 }
 
-//if yF < *ordonnee 
+//if yF < *ordonnee
+//ordonnee never used
 void deplacementSud(Monde *myWorld, Fourmi *fourmi, int *abscisse, int *ordonnee) {
 
     int xF = chercheAbscisse(myWorld, fourmi->position);
@@ -108,7 +113,9 @@ void deplacementSud(Monde *myWorld, Fourmi *fourmi, int *abscisse, int *ordonnee
     }
 }
 
-// if yF > *ordonnee 
+// if yF > *ordonnee
+
+//ordonnee never used !
 void deplacementNord(Monde *myWorld, Fourmi *fourmi, int *abscisse, int *ordonnee) {
 
     int xF = chercheAbscisse(myWorld, fourmi->position);
