@@ -8,13 +8,19 @@ SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -std=c++11 ${GCC_COVERAGE_COMPILE_FLAG
 SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}" )
 
 set(SOURCE_FILES
-    init.c
-    init.h
+    structures.h
     plateau.c
     plateau.h
+    init.c
+    init.h
+    combat.c
+    combat.h
+    deplacement.c
+    deplacement.h
+    instruction.c
+    instruction.h
     app.c
     app.h
-    structures.h
     fourmido.c)
 
 add_executable(C_Project ${SOURCE_FILES})

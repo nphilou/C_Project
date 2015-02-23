@@ -37,28 +37,30 @@ int main(int argc, char *argv[]) {
     scanf("%d", &x);
     scanf("%d", &y);*/
 
+    
     int indice = map(2, 2, myWorld->plateau->cote);
     creationFourmi(ROUGE, SOLDAT, myWorld, indice);
 
     affichePlateau(myWorld->plateau);
-    /*
+   
     int a, b;
     demandeDestination(&a, &b, myWorld);
-    printf("a = %d et b = %d ", a, b);
-*/
+    printf("a = %d et b = %d \n", a, b);
+    
+    int test = deplacementFourmi(myWorld, myWorld-> plateau -> cases[1].fourmi, &a, &b);
+    printf("test= %d\n", test);
+   
+   supprimeFourmi(myWorld-> plateau -> cases[0].fourmi, myWorld);
+   //supprimeFourmi(myWorld-> plateau -> cases[1].fourmi, myWorld);
+   
+   affichePlateau(myWorld->plateau);
+
+
+
     /*printf("case libre = %d\n", chercheLibre(indice, myWorld));
     creationFourmi(ROUGE, REINE, myWorld, chercheLibre(indice, myWorld));
     affichePlateau(myWorld->plateau);*/
 
-    /*int x, y;
-    printf("quelle destination pour la fourmi\n coordonnée:");
-    scanf("%d", &x);
-    printf("ordonnée");
-    scanf("%d", &y);
-    while (myWorld->plateau->cases[1].fourmi->position != map(x, y, myWorld->plateau->cote)) {
-        deplacementFourmi(myWorld, myWorld->plateau->cases[1].fourmi, 3, 2);
-        affichePlateau(myWorld->plateau);
-    }*/
 
     /*
     //creation de fourmis en masse :D

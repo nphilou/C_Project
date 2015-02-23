@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "instructions.h"
 
 Instruction demandeInstructionFourmiliere(Monde *myWorld, Fourmi *listeFourmi) {
     Instruction instruction;
@@ -69,65 +70,119 @@ Instruction demandeInstructionOuvriere(Monde *myWorld, Fourmi *listeFourmi) {
     return instruction;
 }
 
+TypeFourmi demandeProduction(Monde *myWorld, Fourmi *listeFourmi){
+    TypeFourmi production;
+    int productiontemp;
+
+    do {
+        printf("Que voulez vous produire ?\n");
+        printf("REINE(0), SOLDAT(1), OUVRIERE(2)");
+        scanf("%d", &productiontemp);
+        production = (TypeFourmi) productiontmp;
+        switch (production) {
+            case REINE:
+                creationFourmi(couleur, REINE, myWorld, chercheLibre(listeFourmiliere->position, myWorld));
+                //tmpprod !!!
+                break;
+            case SOLDAT:
+                creationFourmi(couleur, SOLDAT, myWorld, chercheLibre(listeFourmiliere->position, myWorld));
+                break;
+            case OUVRIERE:
+                creationFourmi(couleur, OUVRIERE, myWorld, chercheLibre(listeFourmiliere->position, myWorld));
+                break;
+            default:
+                printf("type de fourmi à produire invalide");
+        }
+        if (instructiontemp != 0 || instructiontemp != 1) {
+            printf("Vous m'expliquez ? 0 ou 1, c'est pas si dur ?\n"); //A REVOIR
+        }
+    } while (instructiontemp != 0 || instructiontemp != 1);
+    instruction = (Instruction) instructiontemp;
+
+    return instruction;
+}
+
 void demandeInstruction(Monde *myWorld, Fourmi *joueur) {
     Fourmi *listeFourmiliere;
     Fourmi *listeFourmi;
 
-
+    listeFourmiliere = joueur;
+    Couleur couleur = joueur->couleur;
+    
     Instruction instruction;
+    TypeFourmi type;
     TypeFourmi production;
+
     int x, y;
 
-    Couleur couleur = joueur->couleur;
-    listeFourmiliere = joueur;
-
-    int productiontmp;
-
+    
     while (listeFourmiliere != NULL) {
         listeFourmi = listeFourmiliere;
         while (listeFourmi != NULL) {
-            //if pas d'instruction : immobilisation = tresor, transfo = tmptransfo--, production : tmpprod--
-
-            if (listeFourmi->type == FOURMILIERE) {
-                //Fourmiliere occupee
-                if (listeFourmi->tempsProd > 0) {
-                    listeFourmi->tempsProd--;
+            instruction = listeFourmi->instruction;
+            type = listeFourmi->type;
+            production = listeFourmi->production;
+            
+            switch (instruction) {
+                
+                case PRODUCTION:
+                    if(listeFourmi->tempsProd > 0){
+                        tempsProd--;
+                    }else{
+                        // on connait deja !! production = demandeProduction(myWorld, listeFourmi);
+                        //creationFourmi()...
+                        instruction = AUCUNE;
+                    }
                     break;
-                }
-
-                instruction = demandeInstructionFourmiliere(myWorld, listeFourmi);
-
-                //Traitement instruction
-                switch (instruction) {
-                    case SUICIDE:
-                        printf("SUICIDE FOURMILIERE !!!!");
-                        break;
-                    case PRODUCTION:
-                        printf("Que voulez vous produire ?\n");
-                        printf("REINE(0), SOLDAT(1), OUVRIERE(2)");
-                        scanf("%d", &productiontmp);
-                        production = (TypeFourmi) productiontmp;
-                        switch (production) {
-                            case REINE:
-                                creationFourmi(couleur, REINE, myWorld, chercheLibre(listeFourmiliere->position, myWorld));
-                                //tmpprod !!!
-                                break;
-                            case SOLDAT:
-                                creationFourmi(couleur, SOLDAT, myWorld, chercheLibre(listeFourmiliere->position, myWorld));
-                                break;
-                            case OUVRIERE:
-                                creationFourmi(couleur, OUVRIERE, myWorld, chercheLibre(listeFourmiliere->position, myWorld));
-                                break;
-                            default:
-                                printf("type de fourmi à produire invalide");
-                        }
-                        break;
-                    default:
-                        printf("cas vide"); //renommer
-                }
-            } else {
-
+                    
+                case IMMOBILISATION:
+                    if(type == OUVRIERE){
+                        if(couleur == ROUGE) myWorld->tresorRouge++;
+                        if(couleur == NOIR) myWorld->tresorNoire++;
+                    }else{
+                        instruction = AUCUNE;
+                    }
+                    break;
+                    
+                case TRANSFORMATION:
+                    if(listeFourmi->tempsTransformation > 0){
+                        tempsTransformation--;
+                    }else{
+                        //transformation
+                        instruction = AUCUNE;
+                    }
+                    break;
+                    
+                case DEPLACEMENT:
+                    if(listeFourmi->position == listeFourmi->destination){
+                        instruction = AUCUNE;
+                    }else{
+                        deplacementFourmi(myWorld, listeFourmi, chercheAbscisse(listeFourmi->destination), chercheOrdonnee(listeFourmi->destination));
+                    }
+                    break;
+                    
+                default:
+                    instruction = AUCUNE;
             }
+            
+            if(listeFourmi->instruction == AUCUNE){    
+                switch (type) {
+                    case(FOURMILIERE):
+                        
+                }
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             listeFourmi = listeFourmi->suivant;
         }
         listeFourmiliere = listeFourmiliere->fourmiliereSuiv;

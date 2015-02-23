@@ -43,13 +43,18 @@ typedef struct {
 struct Fourmi {
     Couleur couleur;
     TypeFourmi type;
+    Instruction instruction;
     int position;
     int destination;
+    
     Fourmi *origine;
     Fourmi *precedant;
     Fourmi *suivant;
+    
+    int tempsTransformation;
+    
     int tempsProd;
+    TypeFourmi production;
     Fourmi *fourmiliereSuiv;
     Fourmi *fourmilierePrec;
-    Instruction instruction;
 };

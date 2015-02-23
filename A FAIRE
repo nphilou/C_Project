@@ -5,8 +5,7 @@ Legende :
 -- = Moins urgent
 
 Lea TODO List : 
-- Deplacement (++)
-> Faire plusieurs fonctions (deplacementE, O, SE, NE...)
+- Transformation (faire dans app.c, je le caserai plus tard) (++)
 
 - Sauvegarde (--)
 - Chargement (--)
@@ -31,3 +30,6 @@ General TODO List :
 
 **inclusions**
 structures < (configuration) < plateau < init < combat < deplacement < instruction < app < fourmido 
+
+/!\
+A chaque ajout de fichier, ajouter au Cmakelist, fourmidable.sh et git add
