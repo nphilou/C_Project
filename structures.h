@@ -46,13 +46,13 @@ struct Fourmi {
     Instruction instruction;
     int position;
     int destination;
-    
+
     Fourmi *origine;
     Fourmi *precedant;
     Fourmi *suivant;
-    
+
     int tempsTransformation;
-    
+
     int tempsProd;
     TypeFourmi production;
     Fourmi *fourmiliereSuiv;

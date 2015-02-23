@@ -3,7 +3,7 @@
 #include "plateau.h"
 
 int map(int abscisse, int ordonnee, int cote) {
-    if (abscisse < 0 || abscisse >= cote || ordonnee < 0 || ordonnee >= cote){
+    if (abscisse < 0 || abscisse >= cote || ordonnee < 0 || ordonnee >= cote) {
         return -1;
     }
     return cote * ordonnee + abscisse;

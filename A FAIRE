@@ -33,3 +33,7 @@ structures < (configuration) < plateau < init < combat < deplacement < instructi
 
 /!\
 A chaque ajout de fichier, ajouter au Cmakelist, fourmidable.sh et git add
+
+<!>
+2> logs/compile.log
+ 2> logs/link.log

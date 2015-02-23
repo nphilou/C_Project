@@ -37,12 +37,12 @@ int main(int argc, char *argv[]) {
     scanf("%d", &x);
     scanf("%d", &y);*/
 
-    
+
     int indice = map(2, 2, myWorld->plateau->cote);
     creationFourmi(ROUGE, SOLDAT, myWorld, indice);
 
     affichePlateau(myWorld->plateau);
-   
+
     /*int a, b;
     demandeDestination(&a, &b, myWorld);
     printf("a = %d et b = %d \n", a, b);
@@ -51,15 +51,15 @@ int main(int argc, char *argv[]) {
     //printf("test= %d\n", test);
     */
 
-   
-    supprimeFourmi(myWorld -> plateau -> cases[0].fourmi, myWorld, myWorld -> plateau -> cases[].fourmi); 
-    printf("couleur de l'ouvriere\n", myWorld -> plateau -> cases[5].fourmi-> couleur);
-   //supprimeFourmi(myWorld-> plateau -> cases[5].fourmi, myWorld);
-   
+
+    //supprimeFourmi(myWorld -> plateau -> cases[0].fourmi, myWorld, myWorld -> plateau -> cases[].fourmi);
+    //printf("couleur de l'ouvriere\n", myWorld -> plateau -> cases[5].fourmi-> couleur);
+    //supprimeFourmi(myWorld-> plateau -> cases[5].fourmi, myWorld);
+
     //combatFourmi ( myWorld -> plateau -> cases[0].fourmi , myWorld -> plateau -> cases[24].fourmi,myWorld);
-   
-   
-   affichePlateau(myWorld->plateau);
+
+
+    affichePlateau(myWorld->plateau);
 
 
 

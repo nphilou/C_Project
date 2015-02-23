@@ -17,8 +17,8 @@ set(SOURCE_FILES
     combat.h
     deplacement.c
     deplacement.h
-    instruction.c
-    instruction.h
+    instructions.c
+    instructions.h
     app.c
     app.h
     fourmido.c)

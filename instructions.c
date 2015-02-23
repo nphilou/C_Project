@@ -70,7 +70,7 @@ Instruction demandeInstructionOuvriere(Monde *myWorld, Fourmi *listeFourmi) {
     return instruction;
 }
 
-TypeFourmi demandeProduction(Monde *myWorld, Fourmi *listeFourmi){
+TypeFourmi demandeProduction(Monde *myWorld, Fourmi *listeFourmi) {
     TypeFourmi production;
     int productiontemp;
     Couleur couleur = listeFourmi->couleur;
@@ -108,93 +108,93 @@ void demandeInstruction(Monde *myWorld, Fourmi *joueur) {
 
     listeFourmiliere = joueur;
     Couleur couleur = joueur->couleur;
-    
+
     Instruction instruction;
     TypeFourmi type;
     TypeFourmi production;
 
     int x, y;
 
-    
+
     while (listeFourmiliere != NULL) {
         listeFourmi = listeFourmiliere;
         while (listeFourmi != NULL) {
             instruction = listeFourmi->instruction;
             type = listeFourmi->type;
             production = listeFourmi->production;
-            
+
             switch (instruction) {
-                
+
                 case PRODUCTION:
-                    if(listeFourmi->tempsProd > 0){
+                    if (listeFourmi->tempsProd > 0) {
                         listeFourmi->tempsProd--;
-                    }else{
+                    } else {
                         // on connait deja !! production = demandeProduction(myWorld, listeFourmi);
                         //creationFourmi()...
                         instruction = AUCUNE;
                     }
                     break;
-                    
+
                 case IMMOBILISATION:
-                    if(type == OUVRIERE){
-                        if(couleur == ROUGE) myWorld->tresorRouge++;
-                        if(couleur == NOIR) myWorld->tresorNoire++;
-                    }else{
+                    if (type == OUVRIERE) {
+                        if (couleur == ROUGE) myWorld->tresorRouge++;
+                        if (couleur == NOIR) myWorld->tresorNoire++;
+                    } else {
                         instruction = AUCUNE;
                     }
                     break;
-                    
+
                 case TRANSFORMATION:
-                    if(listeFourmi->tempsTransformation > 0){
+                    if (listeFourmi->tempsTransformation > 0) {
                         listeFourmi->tempsTransformation--;
-                    }else{
+                    } else {
                         //transformation
                         instruction = AUCUNE;
                     }
                     break;
-                    
+
                 case DEPLACEMENT:
-                    if(listeFourmi->position == listeFourmi->destination){
+                    if (listeFourmi->position == listeFourmi->destination) {
                         instruction = AUCUNE;
-                    }else{
-                        deplacementFourmi(myWorld, listeFourmi, chercheAbscisse(listeFourmi->destination), chercheOrdonnee(listeFourmi->destination));
+                    } else {
+                        deplacementFourmi(myWorld, listeFourmi, chercheAbscisse(myWorld, listeFourmi->destination), chercheOrdonnee(myWorld, listeFourmi->destination));
                     }
                     break;
-                    
+
                 default:
                     instruction = AUCUNE;
             }
-            
-            if(listeFourmi->instruction == AUCUNE){    
+
+            if (listeFourmi->instruction == AUCUNE) {
                 switch (type) {
                     case(FOURMILIERE):
                         instruction = demandeInstructionFourmiliere(myWorld, listeFourmi);
                         break;
-                    
+
                     case(REINE):
                         instruction = demandeInstructionReine(myWorld, listeFourmi);
                         break;
-                    
+
                     case(SOLDAT):
                         instruction = demandeInstructionSoldat(myWorld, listeFourmi);
                         break;
-                        
+
                     case(OUVRIERE):
                         instruction = demandeInstructionOuvriere(myWorld, listeFourmi);
                 }
             }
-            
-            switch(instruction)
-            test
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
+            //switch(instruction)
+
+
+
+
+
+
+
+
+
+
             listeFourmi = listeFourmi->suivant;
         }
         listeFourmiliere = listeFourmiliere->fourmiliereSuiv;
