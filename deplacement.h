@@ -1,6 +1,6 @@
 #include "combat.h"
 
-void demandeDestination(int *abscisse, int *ordonnee, Monde *monde);
+void demandeDestination(int *abscisse, int *ordonnee, Monde *monde, Fourmi *fourmi);
 
 void deplacementFourmi(Monde *myWorld, Fourmi *fourmi, int abscisse, int ordonnee);
 

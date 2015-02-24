@@ -168,7 +168,7 @@ Monde *creationMonde() {
     //Creation all
     creationFourmi(ROUGE, REINE, myWorld->rouge, myWorld, 1);
     creationFourmi(NOIR, REINE, myWorld->noire, myWorld, taille-2);
-    creationFourmi(ROUGE, OUVRIERE, myWorld->rouge, myWorld, cote); 
+    creationFourmi(ROUGE, OUVRIERE, myWorld->rouge, myWorld, cote);
     creationFourmi(NOIR, OUVRIERE, myWorld->noire, myWorld, taille - cote-1);
     
     /*myWorld->noire->suivant = initialReine(NOIR, plateau, myWorld->noire);

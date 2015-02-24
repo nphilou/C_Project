@@ -72,25 +72,26 @@ Instruction demandeInstructionOuvriere(Monde *myWorld, Fourmi *listeFourmi) {
     return instruction;
 }
 
-TypeFourmi demandeProduction(Monde *myWorld, Fourmi *listeFourmi) {
+TypeFourmi demandeProduction(Monde *myWorld, Fourmi *fourmi) {
     TypeFourmi production;
     int productiontemp;
-    Couleur couleur = listeFourmi->couleur;
+    Couleur couleur = fourmi->couleur;
 
     do {
         printf("Que voulez vous produire ?\n");
         printf("REINE(0), SOLDAT(1), OUVRIERE(2)"); //donner temps !
         scanf("%d", &productiontemp);
+        production = (TypeFourmi) productiontemp;
         switch (production) {
             case REINE:
-                listeFourmi->tempsProd = 6;
+                fourmi->tempsProd = 6;
                 //A SUIVRE
                 break;
             case SOLDAT:
-                creationFourmi(couleur, SOLDAT, myWorld, chercheLibre(listeFourmi->position, myWorld));
+                creationFourmi(couleur, SOLDAT, fourmi->origine, myWorld, chercheLibre(fourmi->position, myWorld));
                 break;
             case OUVRIERE:
-                creationFourmi(couleur, OUVRIERE, myWorld, chercheLibre(listeFourmi->position, myWorld));
+                creationFourmi(couleur, OUVRIERE, fourmi->origine, myWorld, chercheLibre(fourmi->position, myWorld));
                 break;
             default:
                 printf("type de fourmi à produire invalide");
@@ -105,22 +106,21 @@ TypeFourmi demandeProduction(Monde *myWorld, Fourmi *listeFourmi) {
 }
 
 void traiteInstructionActuelle(Monde *myWorld, Fourmi *fourmi){
-    Instruction *instruction = fourmi->instruction;
     TypeFourmi type = fourmi->type;
-    Couleur couleur = joueur->couleur;
+    Couleur couleur = fourmi->couleur;
     int caselibre;
     //TypeFourmi production = fourmi->production;
 
-    switch (instruction) {
+    switch (fourmi->instruction) {
 
         case PRODUCTION:
             if (fourmi->tempsProd > 0) {
                 fourmi->tempsProd--;
             } else {
-                //caselibre = chercheLibre(fourmi->position, myWorld);
-                //creationFourmi(couleur, production, listeFourmiliere, myWorld, caselibre);
-                //ca depend !
-                instruction = AUCUNE;
+                caselibre = chercheLibre(fourmi->position, myWorld);
+                creationFourmi(couleur, fourmi->production, fourmi->origine, myWorld, caselibre);
+                //ca depend ! ^
+                fourmi->instruction = AUCUNE;
             }
             break;
 
@@ -129,31 +129,33 @@ void traiteInstructionActuelle(Monde *myWorld, Fourmi *fourmi){
                 if (couleur == ROUGE) myWorld->tresorRouge++;
                 if (couleur == NOIR) myWorld->tresorNoire++;
             } else {
-                instruction = AUCUNE;
+                fourmi->instruction = AUCUNE;
             }
             break;
             
         case DEPLACEMENT:
             if (fourmi->position == fourmi->destination) {
-                instruction = AUCUNE;
+                fourmi->instruction = AUCUNE;
             } else {
                 deplacementFourmi(myWorld, fourmi, chercheAbscisse(myWorld, fourmi->destination), chercheOrdonnee(myWorld, fourmi->destination));
             }
             break;
 
         default:
-            instruction = AUCUNE;
+            fourmi->instruction = AUCUNE;
     }
 }
 
 //apres
-void traiteInstruction(Monde *myWorld, Fourmi *fourmi, Instruction instruction) {
+void traiteInstruction(Monde *myWorld, Fourmi *fourmi) {
+    Couleur couleur = fourmi->couleur;
     int x, y;
     TypeFourmi type = fourmi->type;
-    switch (instruction) {
+
+    switch (fourmi->instruction) {
     
         case SUICIDE:
-            supprimeFourmi(fourmi, myWorld);
+            suicideFourmi(fourmi, myWorld);
             break;
             
         case DEPLACEMENT:
@@ -173,7 +175,7 @@ void traiteInstruction(Monde *myWorld, Fourmi *fourmi, Instruction instruction) 
             //transformation !!!
             
         case PRODUCTION:
-        
+
         default:
             printf("cas vide");
     }
