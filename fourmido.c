@@ -39,9 +39,9 @@ int main(int argc, char *argv[]) {
 
 
     int indice = map(2, 2, myWorld->plateau->cote);
-    creationFourmi(ROUGE, SOLDAT, myWorld, indice);
+    creationFourmi(ROUGE, SOLDAT, myWorld->noire, myWorld, indice);
 
-    affichePlateau(myWorld->plateau);
+    //affichePlateau(myWorld->plateau);
 
     /*int a, b;
     demandeDestination(&a, &b, myWorld);
@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
     */
 
 
-    //supprimeFourmi(myWorld -> plateau -> cases[0].fourmi, myWorld, myWorld -> plateau -> cases[].fourmi);
+    supprimeFourmiliere(myWorld -> plateau -> cases[0].fourmi, myWorld);
     //printf("couleur de l'ouvriere\n", myWorld -> plateau -> cases[5].fourmi-> couleur);
     //supprimeFourmi(myWorld-> plateau -> cases[5].fourmi, myWorld);
 

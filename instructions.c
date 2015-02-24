@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "instructions.h"
 
+//renommer listefourmi
+
 Instruction demandeInstructionFourmiliere(Monde *myWorld, Fourmi *listeFourmi) {
     Instruction instruction;
     int instructiontemp;
@@ -77,12 +79,12 @@ TypeFourmi demandeProduction(Monde *myWorld, Fourmi *listeFourmi) {
 
     do {
         printf("Que voulez vous produire ?\n");
-        printf("REINE(0), SOLDAT(1), OUVRIERE(2)");
+        printf("REINE(0), SOLDAT(1), OUVRIERE(2)"); //donner temps !
         scanf("%d", &productiontemp);
         switch (production) {
             case REINE:
-                creationFourmi(couleur, REINE, myWorld, chercheLibre(listeFourmi->position, myWorld));
-                //tmpprod !!!
+                listeFourmi->tempsProd = 6;
+                //A SUIVRE
                 break;
             case SOLDAT:
                 creationFourmi(couleur, SOLDAT, myWorld, chercheLibre(listeFourmi->position, myWorld));
@@ -102,120 +104,125 @@ TypeFourmi demandeProduction(Monde *myWorld, Fourmi *listeFourmi) {
     return production;
 }
 
-void demandeInstruction(Monde *myWorld, Fourmi *joueur) {
+void traiteInstructionActuelle(Monde *myWorld, Fourmi *fourmi){
+    Instruction *instruction = fourmi->instruction;
+    TypeFourmi type = fourmi->type;
+    Couleur couleur = joueur->couleur;
+    int caselibre;
+    //TypeFourmi production = fourmi->production;
+
+    switch (instruction) {
+
+        case PRODUCTION:
+            if (fourmi->tempsProd > 0) {
+                fourmi->tempsProd--;
+            } else {
+                //caselibre = chercheLibre(fourmi->position, myWorld);
+                //creationFourmi(couleur, production, listeFourmiliere, myWorld, caselibre);
+                //ca depend !
+                instruction = AUCUNE;
+            }
+            break;
+
+        case IMMOBILISATION:
+            if (type == OUVRIERE) {
+                if (couleur == ROUGE) myWorld->tresorRouge++;
+                if (couleur == NOIR) myWorld->tresorNoire++;
+            } else {
+                instruction = AUCUNE;
+            }
+            break;
+            
+        case DEPLACEMENT:
+            if (fourmi->position == fourmi->destination) {
+                instruction = AUCUNE;
+            } else {
+                deplacementFourmi(myWorld, fourmi, chercheAbscisse(myWorld, fourmi->destination), chercheOrdonnee(myWorld, fourmi->destination));
+            }
+            break;
+
+        default:
+            instruction = AUCUNE;
+    }
+}
+
+//apres
+void traiteInstruction(Monde *myWorld, Fourmi *fourmi, Instruction instruction) {
+    int x, y;
+    TypeFourmi type = fourmi->type;
+    switch (instruction) {
+    
+        case SUICIDE:
+            supprimeFourmi(fourmi, myWorld);
+            break;
+            
+        case DEPLACEMENT:
+            demandeDestination(&x, &y, myWorld, fourmi);
+            deplacementFourmi(myWorld, fourmi, x, y);
+            fourmi->instruction = DEPLACEMENT;
+            break;
+            
+        case IMMOBILISATION:
+            if (type == OUVRIERE) {
+                if (couleur == ROUGE) myWorld->tresorRouge++;
+                if (couleur == NOIR) myWorld->tresorNoire++;
+            }
+            fourmi->instruction = IMMOBILISATION;
+            
+        case TRANSFORMATION:
+            //transformation !!!
+            
+        case PRODUCTION:
+        
+        default:
+            printf("cas vide");
+    }
+}
+
+void demandeInstruction(Monde *myWorld, Fourmi *fourmi){
+    switch (fourmi->type) {
+        case(FOURMILIERE):
+            instruction = demandeInstructionFourmiliere(myWorld, fourmi);
+            break;
+
+        case(REINE):
+            instruction = demandeInstructionReine(myWorld, fourmi);
+            break;
+
+        case(SOLDAT):
+            instruction = demandeInstructionSoldat(myWorld, fourmi);
+            break;
+
+        case(OUVRIERE):
+            instruction = demandeInstructionOuvriere(myWorld, fourmi);
+    }
+}
+
+void tour(Monde *myWorld, Fourmi *joueur) {
     Fourmi *listeFourmiliere;
     Fourmi *listeFourmi;
-
-    listeFourmiliere = joueur;
-    Couleur couleur = joueur->couleur;
-
     Instruction instruction;
-    TypeFourmi type;
-    TypeFourmi production;
-
-    int x, y;
-
-
+    
+    listeFourmiliere = joueur;
+    
     while (listeFourmiliere != NULL) {
         listeFourmi = listeFourmiliere;
         while (listeFourmi != NULL) {
-            instruction = listeFourmi->instruction;
-            type = listeFourmi->type;
-            production = listeFourmi->production;
-
-            switch (instruction) {
-
-                case PRODUCTION:
-                    if (listeFourmi->tempsProd > 0) {
-                        listeFourmi->tempsProd--;
-                    } else {
-                        // on connait deja !! production = demandeProduction(myWorld, listeFourmi);
-                        //creationFourmi()...
-                        instruction = AUCUNE;
-                    }
-                    break;
-
-                case IMMOBILISATION:
-                    if (type == OUVRIERE) {
-                        if (couleur == ROUGE) myWorld->tresorRouge++;
-                        if (couleur == NOIR) myWorld->tresorNoire++;
-                    } else {
-                        instruction = AUCUNE;
-                    }
-                    break;
-
-                case TRANSFORMATION:
-                    if (listeFourmi->tempsTransformation > 0) {
-                        listeFourmi->tempsTransformation--;
-                    } else {
-                        //transformation
-                        instruction = AUCUNE;
-                    }
-                    break;
-
-                case DEPLACEMENT:
-                    if (listeFourmi->position == listeFourmi->destination) {
-                        instruction = AUCUNE;
-                    } else {
-                        deplacementFourmi(myWorld, listeFourmi, chercheAbscisse(myWorld, listeFourmi->destination), chercheOrdonnee(myWorld, listeFourmi->destination));
-                    }
-                    break;
-
-                default:
-                    instruction = AUCUNE;
-            }
+            
+            traiteInstruction(myWorld, listeFourmi);
+            
+            
+            
+            
 
             if (listeFourmi->instruction == AUCUNE) {
-                switch (type) {
-                    case(FOURMILIERE):
-                        instruction = demandeInstructionFourmiliere(myWorld, listeFourmi);
-                        break;
-
-                    case(REINE):
-                        instruction = demandeInstructionReine(myWorld, listeFourmi);
-                        break;
-
-                    case(SOLDAT):
-                        instruction = demandeInstructionSoldat(myWorld, listeFourmi);
-                        break;
-
-                    case(OUVRIERE):
-                        instruction = demandeInstructionOuvriere(myWorld, listeFourmi);
-                }
+                demandeInstruction(myWorld, listeFourmi);
             }
 
-            //switch(instruction)
-
-
-
-
-
-
-
-
-
-
+            traiteInstruction(instruction);
+            
             listeFourmi = listeFourmi->suivant;
         }
         listeFourmiliere = listeFourmiliere->fourmiliereSuiv;
-    }
-
-}
-
-void traitementInstruction(Instruction instruction, Monde *myWorld, Fourmi *listeFourmi) {
-    int x, y;
-    switch (instruction) {
-        case SUICIDE:
-            //if fourmiliere, destruction totale (ecrire fonction pour detruire la fourmiliere avec 2 cas : prise ou suicide ?
-            //tuer unité
-            break;
-        case DEPLACEMENT:
-
-            deplacementFourmi(myWorld, listeFourmi, x, y);
-            break;
-        case IMMOBILISATION:
-            //cas a traiter avec tresor et tout..
-        default:
-            printf("cas vide"); //renommer
     }
 }

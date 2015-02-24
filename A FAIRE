@@ -6,6 +6,10 @@ Legende :
 
 Lea TODO List : 
 - Transformation (faire dans app.c, je le caserai plus tard) (++)
+-> changer type, deplacer dans la liste des fourmilieres, supprimer de la liste des fourmis
+
+- VOISINS :D
+- SCORES !!! :D
 
 - Sauvegarde (--)
 - Chargement (--)
@@ -36,4 +40,4 @@ A chaque ajout de fichier, ajouter au Cmakelist, fourmidable.sh et git add
 
 <!>
 2> logs/compile.log
- 2> logs/link.log
+2> logs/link.log

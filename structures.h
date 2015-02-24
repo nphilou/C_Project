@@ -51,8 +51,6 @@ struct Fourmi {
     Fourmi *precedant;
     Fourmi *suivant;
 
-    int tempsTransformation;
-
     int tempsProd;
     TypeFourmi production;
     Fourmi *fourmiliereSuiv;

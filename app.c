@@ -4,5 +4,8 @@
 
 #define TMAX 256
 
-//SUPPRIME FOURMI, A FAIRE ET A METTRE DANS INIT
-
+void transformationFourmi (Fourmi* fourmi, Monde*myWorld){
+    
+    creationFourmi(fourmi->couleur, FOURMILIERE,  )
+    supprimeAgent(fourmi, myWorld); 
+}
