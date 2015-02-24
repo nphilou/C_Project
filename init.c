@@ -3,8 +3,6 @@
 #include <math.h>
 #include "init.h"
 
-#define TRESOR 50
-
 Fourmi *initialisation(Couleur couleur, Plateau *plateau) {
     Fourmi *fourmi = calloc(1, sizeof(Fourmi));
 

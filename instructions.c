@@ -72,7 +72,7 @@ Instruction demandeInstructionOuvriere(Monde *myWorld, Fourmi *listeFourmi) {
     return instruction;
 }
 
-TypeFourmi demandeProduction(Monde *myWorld, Fourmi *fourmi) {
+void demandeProduction(Monde *myWorld, Fourmi *fourmi) {
     TypeFourmi production;
     int productiontemp;
     Couleur couleur = fourmi->couleur;
@@ -99,10 +99,8 @@ TypeFourmi demandeProduction(Monde *myWorld, Fourmi *fourmi) {
         if (productiontemp < 0 || productiontemp != 1 || productiontemp != 2) {
             printf("Vous m'expliquez ? 0 à 2, c'est pas si dur ?\n"); //A REVOIR
         }
-    } while (productiontemp != 0 || productiontemp != 1 || productiontemp != 2);
-    production = (TypeFourmi) productiontemp;
-
-    return production;
+    } while (productiontemp != 0 || productiontemp != 1 || productiontemp != 2  );
+    fourmi->production = production;
 }
 
 void traiteInstructionActuelle(Monde *myWorld, Fourmi *fourmi){

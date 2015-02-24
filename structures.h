@@ -1,5 +1,6 @@
-typedef struct Fourmi Fourmi;
+#include "config.h"
 
+typedef struct Fourmi Fourmi;
 
 typedef struct {
     Fourmi *fourmi;
