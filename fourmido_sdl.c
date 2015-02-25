@@ -34,6 +34,8 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
+    SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
+    SDL_Flip(ecran);
 
     pause();
 
