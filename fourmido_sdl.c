@@ -1,8 +1,8 @@
 #include <stdio.h>
-//#include <SDL/SDL.h>
+#include <SDL/SDL.h>
 #include "app.h"
 
-/*void pause() {
+void pause() {
     int continuer = 1;
     SDL_Event event;
 
@@ -13,7 +13,7 @@
                 continuer = 0;
         }
     }
-}*/
+}
 
 int main(int argc, char *argv[]) {
 
@@ -33,18 +33,8 @@ int main(int argc, char *argv[]) {
     creationFourmi(ROUGE, SOLDAT, myWorld->noire, myWorld, indice);
     indice = map(3, 2, myWorld->plateau->cote);
     
-    
-    
-    //creationFourmiliere(ROUGE, myWorld , indice);
-
-    //supprimeFourmiliere(myWorld -> plateau -> cases[0].fourmi, myWorld);
-   // suicideFourmi(myWorld-> plateau -> cases[5].fourmi, myWorld);
-
-    //combatFourmi ( myWorld -> plateau -> cases[0].fourmi , myWorld -> plateau -> cases[24].fourmi,myWorld);
-
-
     affichePlateau(myWorld->plateau);
-
+/*
     int premierJoueur = (int) ROUGE;
     int i = 1;
     while(i){
@@ -55,6 +45,6 @@ int main(int argc, char *argv[]) {
         printf("Quitter ? OUI(0), NON(1)");
         scanf("%d", &i);
     }
-    
+    */
     return 0;
 }

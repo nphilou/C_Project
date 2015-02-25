@@ -30,36 +30,42 @@ int estLibre(Monde *myWorld, int indice) {
 
 void affichePlateau(Plateau *plateau) {
     int largeur, hauteur;
+    int couleur;
 
     for (largeur = 0; largeur < plateau->cote; largeur++) {
-        printf(" %d ", largeur);
-        printf("   ");
+        printf(" %d   ", largeur);
     }
+    
     printf("\n");
     for (hauteur = 0; hauteur < plateau->cote; hauteur++) {
         for (largeur = 0; largeur < plateau->cote; largeur++) {
 
             if (plateau->cases[map(largeur, hauteur, plateau->cote)].fourmi == NULL) {
-                printf("   ");
+                printf("    ");
             } else {
+                couleur = (int) plateau->cases[map(largeur, hauteur, plateau->cote)].fourmi->couleur;
                 switch (plateau->cases[map(largeur, hauteur, plateau->cote)].fourmi->type) {
                     case FOURMILIERE:
-                        printf(" F ");
+                        if (!couleur) printf(" Fr ");
+                        else printf(" Fn ");
                         break;
                     case SOLDAT:
-                        printf(" S ");
+                        if (!couleur) printf(" Sr ");
+                        else printf(" Sn ");
                         break;
                     case OUVRIERE:
-                        printf(" O ");
+                        if (!couleur) printf(" Or ");
+                        else printf(" On ");
                         break;
                     case REINE:
-                        printf(" R ");
+                        if (!couleur) printf(" Rr ");
+                        else printf(" Rn ");
                         break;
                     default:
-                        printf("   ");
+                        break;
                 }
             }
-            printf(" | ");
+            printf("|");
         }
         printf(" %d\n\n", hauteur);
     }

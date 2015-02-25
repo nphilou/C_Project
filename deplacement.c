@@ -148,9 +148,8 @@ void deplacementFourmi(Monde *myWorld, Fourmi *fourmi, int abscisse, int ordonne
 
     xF = chercheAbscisse(myWorld, fourmi->position);
     yF = chercheOrdonnee(myWorld, fourmi->position);
-    printf("***l'abscisse de la fourmi: %d, l'ordonnee: %d\n", xF, yF);
+    //printf("***l'abscisse de la fourmi: %d, l'ordonnee: %d\n", xF, yF);
 
-    affichePlateau(myWorld->plateau);
- 
+    //affichePlateau(myWorld->plateau);
 }
 

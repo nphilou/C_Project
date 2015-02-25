@@ -1,5 +1,12 @@
 #include "deplacement.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+
+//renommer listefourmi + isdigit !
+
+int *couleurTresor(Monde *myWorld, Fourmi *fourmi);
+
 Instruction demandeInstructionFourmiliere(Monde *myWorld, Fourmi *listeFourmi);
 
 Instruction demandeInstructionReine(Monde *myWorld, Fourmi *listeFourmi);
@@ -8,6 +15,12 @@ Instruction demandeInstructionSoldat(Monde *myWorld, Fourmi *listeFourmi);
 
 Instruction demandeInstructionOuvriere(Monde *myWorld, Fourmi *listeFourmi);
 
-void demandeInstruction(Monde *myWorld, Fourmi *joueur);
+int demandeProduction(Monde *myWorld, Fourmi *fourmi);
 
-void traitementInstruction(Instruction instruction, Monde *myWorld, Fourmi *listeFourmi);
+void traiteInstructionActuelle(Monde *myWorld, Fourmi *fourmi);
+
+void traiteInstruction(Monde *myWorld, Fourmi *fourmi);
+
+Instruction demandeInstruction(Monde *myWorld, Fourmi *fourmi);
+
+void tour(Monde *myWorld, Fourmi *joueur, Fourmi *joueurAdverse);

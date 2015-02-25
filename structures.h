@@ -22,8 +22,8 @@ typedef enum {
 typedef enum {
     PRODUCTION,
     SUICIDE,
-    DEPLACEMENT,
     IMMOBILISATION,
+    DEPLACEMENT,
     TRANSFORMATION,
     AUCUNE,
 } Instruction;
@@ -51,7 +51,10 @@ struct Fourmi {
     Fourmi *origine;
     Fourmi *precedant;
     Fourmi *suivant;
-
+    
+    Fourmi * voisinSuiv; 
+    Fourmi * voisinPrec;
+    
     int tempsProd;
     TypeFourmi production;
     Fourmi *fourmiliereSuiv;
