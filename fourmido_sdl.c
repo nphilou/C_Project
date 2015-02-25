@@ -17,15 +17,27 @@ void pause() {
 
 int main(int argc, char *argv[]) {
 
-    /* SDL_Init(SDL_INIT_VIDEO); // Initialisation de la SDL
+    SDL_Surface *ecran = NULL;
 
-    SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE); // Ouverture de la fenêtre
+    SDL_Init(SDL_INIT_VIDEO);
+
+    if (SDL_Init(SDL_INIT_VIDEO) == -1) {
+        fprintf(stderr, "Erreur d'initialisation de la SDL");
+        exit(EXIT_FAILURE);
+    }
+
+    ecran = SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
     SDL_WM_SetCaption("Hohoho", NULL);
 
-    pause(); // Mise en pause du programme
+    if (ecran == NULL){
+        fprintf(stderr, "Impossible de charger le mode vidéo : %s\n", SDL_GetError());
+        exit(EXIT_FAILURE);
+    }
 
-    SDL_Quit(); // Arrêt de la SDL
-    */
+
+    pause();
+
+    SDL_Quit();
 
     Monde *myWorld = creationMonde();
 

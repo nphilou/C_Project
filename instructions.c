@@ -108,19 +108,19 @@ int demandeProduction(Monde *myWorld, Fourmi *fourmi) {
         switch (production) {
             case REINE:
                 if (*tresor < COUT_REINE) return 0;
-                fourmi->tempsProd = COUT_REINE;
+                fourmi->tempsProd = TEMPS_REINE;
                 *tresor -= COUT_REINE;
                 break;
                 
             case SOLDAT:
                 if (*tresor < COUT_SOLDAT) return 0;
-                fourmi->tempsProd = COUT_SOLDAT;
+                fourmi->tempsProd = TEMPS_SOLDAT;
                 *tresor -= COUT_SOLDAT;
                 break;
                 
             case OUVRIERE:
                 if (*tresor < COUT_OUVRIERE) return 0;
-                fourmi->tempsProd = COUT_OUVRIERE;
+                fourmi->tempsProd = TEMPS_OUVRIERE;
                 *tresor -= COUT_OUVRIERE;
                 break;
                 
@@ -240,6 +240,7 @@ Instruction demandeInstruction(Monde *myWorld, Fourmi *fourmi){
             
         default:
             printf("ERREUR : Type de fourmi inconnu");
+            instruction = AUCUNE;
     }
     
     return instruction;
