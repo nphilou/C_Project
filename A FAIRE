@@ -5,7 +5,7 @@ Legende :
 -- = Moins urgent
 
 Lea TODO List : 
-- Transformation (faire dans app.c, je le caserai plus tard) (++)  //OK 
+- Transformation (faire dans app.c, je le caserai plus tard) (++)  
 -> changer type, deplacer dans la liste des fourmilieres, supprimer de la liste des fourmis
 
 - VOISINS :D    (deplacement/combat) 

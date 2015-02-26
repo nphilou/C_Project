@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
     //supprimeFourmiliere (myWorld -> plateau -> cases[0].fourmi, myWorld);
     //suicideFourmi(myWorld-> plateau -> cases[5].fourmi, myWorld);
 
-    priseFourmiliere( myWorld -> plateau -> cases[0].fourmi , myWorld,myWorld -> plateau -> cases[23].fourmi);
+    //priseFourmiliere( myWorld -> plateau -> cases[0].fourmi , myWorld,myWorld -> plateau -> cases[23].fourmi);
     /*if ( myWorld -> plateau -> cases[0].fourmi == NULL ||  myWorld -> plateau -> cases[23].fourmi == NULL){
       printf(" ca marche"); 
     }*/

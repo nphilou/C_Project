@@ -58,17 +58,13 @@ void combatFourmi(Fourmi * attaque, Fourmi * defense, Monde *myWorld) {
     }
 }
 
-
-
 void supprimeFourmi (Monde * myWorld, Fourmi * aSupprimer,  Fourmi * gagnante){
-    
     
     int type = aSupprimer-> type; 
     
     if (type == FOURMILIERE){
         priseFourmiliere(aSupprimer, myWorld, gagnante); 
     } else {
-        supprimeAgent(aSupprimer, myWorld); 
+        supprimeAgent (aSupprimer, myWorld); 
     }
-    
 }
