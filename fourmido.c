@@ -31,21 +31,24 @@ int main(int argc, char *argv[]) {
 
     int indice = map(2, 2, myWorld->plateau->cote);
     creationFourmi(ROUGE, SOLDAT, myWorld->noire, myWorld, indice);
-    indice = map(3, 2, myWorld->plateau->cote);
+   // indice = map(3, 2, myWorld->plateau->cote);
     
-    
+     
+    affichePlateau(myWorld->plateau);
     
     //creationFourmiliere(ROUGE, myWorld , indice);
-
-    //supprimeFourmiliere(myWorld -> plateau -> cases[0].fourmi, myWorld);
-   // suicideFourmi(myWorld-> plateau -> cases[5].fourmi, myWorld);
+ 
+    
+    //printf("supprime fourmiliere, indice = %d\n", myWorld -> plateau -> cases[24].fourmi->position);
+    supprimeFourmiliere (myWorld -> plateau -> cases[24].fourmi, myWorld);
+    //suicideFourmi(myWorld-> plateau -> cases[5].fourmi, myWorld);
 
     //combatFourmi ( myWorld -> plateau -> cases[0].fourmi , myWorld -> plateau -> cases[24].fourmi,myWorld);
 
 
     affichePlateau(myWorld->plateau);
 
-    int premierJoueur = (int) ROUGE;
+    /*int premierJoueur = (int) ROUGE;
     int i = 1;
     while(i){
         printf("((((((((((((((((TOUR ROUGE))))))))))))))))\n");
@@ -54,7 +57,7 @@ int main(int argc, char *argv[]) {
         tour(myWorld, myWorld->noire, myWorld->rouge);
         printf("Quitter ? OUI(0), NON(1)");
         scanf("%d", &i);
-    }
+    }*/
     
     return 0;
 }
