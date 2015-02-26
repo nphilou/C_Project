@@ -13,8 +13,10 @@ void transformeFourmi (Fourmi* fourmi, Monde*myWorld);
 void suicideFourmi(Fourmi *fourmi, Monde *myWorld);
 void supprimeAgent(Fourmi *fourmi, Monde *myWorld);
 void priseFourmiliere (Fourmi *fourmi, Monde *myWorld, Fourmi * ennemie);
+void supprimeFourmiliereFin(Fourmi* fourmi, Monde * myWorld);
 void supprimeFourmiliere (Fourmi* fourmi, Monde * myWorld);
 void changeCouleur(Fourmi* fourmi, Couleur couleur, Monde *myWorld, Fourmi *ennemie);
+
 
 int chercheFourmiliere (Fourmi * fourmi, Monde * myWorld);
 
