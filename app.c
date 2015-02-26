@@ -20,13 +20,13 @@ void sauvegarde (Monde* myWorld){
     temp = myWorld -> rouge; 
     fprintf (file, "%d %d\n", temp-> couleur, myWorld -> tresorRouge);
     while (temp -> fourmiliereSuiv!= NULL){
-        while (temp -> voisinSuiv != NULL){
+        //while (temp -> voisinSuiv != NULL){
             while ( temp -> suivant != NULL){
                 fprintf (file, "%d %d %d\n", temp -> type, temp > indice, temp-> instruction);
                 temp = temp -> suivant; 
             }
-            temp = temp ->voisinSuiv; 
-        }
+            //temp = temp ->voisinSuiv; 
+        //}
         temp = temp -> fourmiliereSuiv;
     } 
     
@@ -38,11 +38,15 @@ void sauvegarde (Monde* myWorld){
             temp = temp -> suivant; 
         }
         temp = temp -> voisinSuiv; 
-    } 
+    }
     
+    // a qui le tour 
+    fprintf (file, "")
 }
 
 void chargement (Monde*myWorld){
+    
+    // couleur _ son tresor _ ttes les fourmis du monde : type/indice/instruction
     
     FILE * file = fopen("derniere sauvegarde.txt", "r"); 
     

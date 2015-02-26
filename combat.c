@@ -3,7 +3,7 @@
 #include <time.h>
 #include "combat.h"
 
-/*
+
 void combatFourmi(Fourmi * attaque, Fourmi * defense, Monde *myWorld) {  
 
     int scoreFourmi = 0;
@@ -19,7 +19,7 @@ void combatFourmi(Fourmi * attaque, Fourmi * defense, Monde *myWorld) {
             return;
         } else {
             printf("vous avez perdu le combat\n");
-            suprrimeAgent(attaque, myWorld);
+            supprimeAgent(attaque, myWorld);
             return;
         }
     }
@@ -62,7 +62,8 @@ void combatFourmi(Fourmi * attaque, Fourmi * defense, Monde *myWorld) {
 
 void supprimeFourmi (Monde * myWorld, Fourmi * aSupprimer,  Fourmi * gagnante){
     
-    type = aSupprimer-> type; 
+    
+    int type = aSupprimer-> type; 
     
     if (type == FOURMILIERE){
         priseFourmiliere(aSupprimer, myWorld, gagnante); 
@@ -71,4 +72,3 @@ void supprimeFourmi (Monde * myWorld, Fourmi * aSupprimer,  Fourmi * gagnante){
     }
     
 }
-*/

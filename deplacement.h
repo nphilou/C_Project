@@ -12,3 +12,7 @@ void deplacementSud(Monde *myWorld, Fourmi *fourmi, int abscisse);
 void deplacementOuest(Monde *myWorld, Fourmi *fourmi, int ordonnee);
 
 void deplacementEst(Monde *myWorld, Fourmi *fourmi, int ordonnee);
+
+
+void ajoutFourmi (Monde* myWorld, Fourmi * fourmi, int indice);
+void combatCase (Monde * myWorld, Fourmi * fourmi, int indice);

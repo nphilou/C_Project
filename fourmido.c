@@ -39,12 +39,15 @@ int main(int argc, char *argv[]) {
     //creationFourmiliere(ROUGE, myWorld , indice);
  
     
+    
     //printf("supprime fourmiliere, indice = %d\n", myWorld -> plateau -> cases[24].fourmi->position);
-    supprimeFourmiliere (myWorld -> plateau -> cases[24].fourmi, myWorld);
+    //supprimeFourmiliere (myWorld -> plateau -> cases[0].fourmi, myWorld);
     //suicideFourmi(myWorld-> plateau -> cases[5].fourmi, myWorld);
 
-    //combatFourmi ( myWorld -> plateau -> cases[0].fourmi , myWorld -> plateau -> cases[24].fourmi,myWorld);
-
+    priseFourmiliere( myWorld -> plateau -> cases[0].fourmi , myWorld,myWorld -> plateau -> cases[23].fourmi);
+    /*if ( myWorld -> plateau -> cases[0].fourmi == NULL ||  myWorld -> plateau -> cases[23].fourmi == NULL){
+      printf(" ca marche"); 
+    }*/
 
     affichePlateau(myWorld->plateau);
 
