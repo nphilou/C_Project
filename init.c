@@ -197,7 +197,7 @@ void supprimeFourmiliereFin(Fourmi* fourmi, Monde * myWorld){
 
 void changeCouleur(Monde *myWorld, Fourmi* fourmi, Fourmi *ennemie){
     
-    enum couleur;
+    enum Couleur couleur;
     int indice = fourmi -> position; 
     
     if (fourmi-> couleur == ROUGE){
