@@ -41,7 +41,7 @@ void affichePlateau(Plateau *plateau) {
         for (largeur = 0; largeur < plateau->cote; largeur++) {
 
             if (plateau->cases[map(largeur, hauteur, plateau->cote)].fourmi == NULL) {
-                printf("  %d ", map(largeur, hauteur, plateau->cote));
+                printf("    ");
             } else {
                 couleur = (int) plateau->cases[map(largeur, hauteur, plateau->cote)].fourmi->couleur;
                 switch (plateau->cases[map(largeur, hauteur, plateau->cote)].fourmi->type) {

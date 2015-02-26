@@ -137,28 +137,29 @@ void supprimeAgent(Fourmi *fourmi, Monde *myWorld){
 
 void priseFourmiliere (Fourmi *fourmi, Monde *myWorld, Fourmi * ennemie){
     printf("priseFourmiliere");
-    /*
+    
     Fourmi *temp;
     temp = fourmi;
     int indice = fourmi -> position; 
     
     while (temp -> suivant != NULL){
 
-        printf ("indice de la fourmi %d\n", temp -> suivant-> position); 
-        printf("type de la fourmi: %d\n", temp -> suivant -> type); 
         if (temp -> suivant -> type != OUVRIERE){
             supprimeAgent(temp->suivant, myWorld);
         } else {
             printf("je change de couleur mon ouvriere\n"); 
             changeCouleur(myWorld, temp -> suivant , ennemie); 
         }
+        
+        printf ("indice de la fourmi %d\n", temp -> suivant-> position); 
+        printf("type de la fourmi: %d\n", temp -> suivant -> type); 
         temp = temp -> suivant;
         affichePlateau(myWorld->plateau);
     }
     
     supprimeFourmiliereFin(myWorld -> plateau -> cases[indice].fourmi, myWorld);
     affichePlateau(myWorld->plateau);
-    */
+    
 }
 
 void supprimeFourmiliere (Fourmi* fourmi, Monde * myWorld){
@@ -193,7 +194,7 @@ void supprimeFourmiliereFin(Fourmi* fourmi, Monde * myWorld){
     
     myWorld->plateau->cases[indice].fourmi = NULL;
 }
-/*
+
 void changeCouleur(Monde *myWorld, Fourmi* fourmi, Fourmi *ennemie){
     
     enum couleur;
@@ -208,7 +209,7 @@ void changeCouleur(Monde *myWorld, Fourmi* fourmi, Fourmi *ennemie){
     supprimeAgent(fourmi, myWorld); 
     creationFourmi(couleur, OUVRIERE, ennemie-> origine, myWorld, indice);
     
-    
+    /*
     while (ennemie -> suivant != NULL){
         ennemie = ennemie -> suivant; 
     }
@@ -218,9 +219,9 @@ void changeCouleur(Monde *myWorld, Fourmi* fourmi, Fourmi *ennemie){
     temp -> precedant = ennemie; 
     ennemie -> suivant = temp; 
     temp -> suivant = NULL; 
-    
-}
     */
+}
+    
 void suicideFourmi (Fourmi * fourmi, Monde * myWorld){
     
     if (fourmi -> type == FOURMILIERE){
