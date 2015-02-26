@@ -1,5 +1,0 @@
-init.c: In function ‘changeCouleur’:
-init.c:204:9: error: ‘couleur’ undeclared (first use in this function)
-         couleur = NOIR;
-         ^
-init.c:204:9: note: each undeclared identifier is reported only once for each function it appears in

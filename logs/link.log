@@ -1,3 +1,0 @@
-init.o: In function `priseFourmiliere':
-init.c:(.text+0x466): undefined reference to `changeCouleur'
-collect2: error: ld returned 1 exit status
