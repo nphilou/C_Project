@@ -22,22 +22,11 @@ void pause()
     }
 }
 
-int main(int argc, char *argv[]) {
+void affichePlateauSDL(Monde *myWorld, TTF_Font *police, SDL_Surface *ecran, SDL_Surface *fourmiliere, SDL_Surface *ouvriere, SDL_Surface *reine, SDL_Surface *soldat, SDL_Surface *vide, SDL_Surface *texteNoir, SDL_Surface *texteRouge){
+    SDL_Rect position;
 
-    //Creation monde
-    Monde *myWorld = creationMonde();
-    affichePlateau(myWorld->plateau);
-    int indice = map(2, 2, myWorld->plateau->cote);
-    creationFourmi(ROUGE, SOLDAT, myWorld->noire, myWorld, indice);
-
-    //Initialisation surfaces, position, evenement, police
-    SDL_Surface *ecran = NULL, *fourmiliere = NULL, *ouvriere = NULL, *reine = NULL, *soldat = NULL, *vide = NULL;
-    SDL_Surface *texteNoir = NULL, *texteRouge = NULL;
     char tresorNoir[20] = "";
     char tresorRouge[20] = "";
-    SDL_Rect position;
-    SDL_Event event;
-    TTF_Font *police = NULL;
 
     //Definition couleurs
     SDL_Color couleurNoire = {0, 0, 0};
@@ -47,29 +36,10 @@ int main(int argc, char *argv[]) {
     position.x = 0;
     position.y = 0;
 
-    //Initialisation SDL et SDL_ttf
-    SDL_Init(SDL_INIT_VIDEO);
-    TTF_Init();
-
-    //Creation fenetre
-    ecran = SDL_SetVideoMode(1200, 600, 32, SDL_HWSURFACE);
+    //Effacement de l'ecran
     SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
-    SDL_WM_SetCaption("Hohoho", NULL);
 
-    //Chargement miniatures unites
-    fourmiliere = IMG_Load("miniatures/fourmiliere.png");
-    reine = IMG_Load("miniatures/reine.png");
-    ouvriere = IMG_Load("miniatures/ouvriere.png");
-    soldat = IMG_Load("miniatures/soldat.png");
-    vide = IMG_Load("miniatures/vide.png");
-
-    //Chargement police
-    police = TTF_OpenFont("fonts/minecraftia.ttf", 30);
-
-
-
-    SDL_EnableKeyRepeat(10, 10);
-
+    //Variables pour l'affichage 2D
     int largeur, hauteur, couleur;
     int cote = myWorld->plateau->cote;
 
@@ -121,13 +91,72 @@ int main(int argc, char *argv[]) {
     SDL_BlitSurface(texteRouge, NULL, ecran, &position);
 
     SDL_Flip(ecran);
+
+}
+
+int main(int argc, char *argv[]) {
+
+    //Creation monde
+    Monde *myWorld = creationMonde();
+    affichePlateau(myWorld->plateau);
+
+
+    //Declaration surfaces, unites, evenement, police
+    SDL_Surface *ecran = NULL, *fourmiliere = NULL, *ouvriere = NULL, *reine = NULL, *soldat = NULL, *vide = NULL;
+    SDL_Surface *texteNoir = NULL, *texteRouge = NULL;
+    TTF_Font *police = NULL;
+    SDL_Event event;
+
+    //Initialisation SDL et SDL_ttf
+    SDL_Init(SDL_INIT_VIDEO);
+    TTF_Init();
+
+    //Creation fenetre
+    ecran = SDL_SetVideoMode(1200, 600, 32, SDL_HWSURFACE);
+    SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
+    SDL_WM_SetCaption("Hohoho", NULL);
+
+    //Chargement miniatures unites
+    fourmiliere = IMG_Load("miniatures/fourmiliere.png");
+    reine = IMG_Load("miniatures/reine.png");
+    ouvriere = IMG_Load("miniatures/ouvriere.png");
+    soldat = IMG_Load("miniatures/soldat.png");
+    vide = IMG_Load("miniatures/vide.png");
+
+    //Chargement police
+    police = TTF_OpenFont("fonts/minecraftia.ttf", 30);
+
+    SDL_EnableKeyRepeat(10, 10);
+
+    affichePlateauSDL(myWorld, police, ecran, fourmiliere, ouvriere, reine, soldat, vide, texteNoir, texteRouge);
+
+    int premierJoueur = (int) ROUGE;
+    int i = 1;
+    while(i){
+        printf("((((((((((((((((TOUR ROUGE))))))))))))))))\n");
+        tour(myWorld, myWorld->rouge, myWorld->noire);
+        printf("((((((((((((((((TOUR NOIR))))))))))))))))\n");
+        tour(myWorld, myWorld->noire, myWorld->rouge);
+        printf("Quitter ? OUI(0), NON(1)");
+        scanf("%d", &i);
+    }
+
+    SDL_Flip(ecran);
+
+    affichePlateauSDL(myWorld, police, ecran, fourmiliere, ouvriere, reine, soldat, vide, texteNoir, texteRouge);
+
     pause();
+
+    TTF_CloseFont(police);
+    TTF_Quit();
 
     SDL_FreeSurface(fourmiliere);
     SDL_FreeSurface(ouvriere);
     SDL_FreeSurface(reine);
     SDL_FreeSurface(soldat);
     SDL_FreeSurface(vide);
+    SDL_FreeSurface(texteNoir);
+    SDL_FreeSurface(texteRouge);
 
     SDL_Quit();
 
