@@ -1,0 +1,4 @@
+fourmido.c: In function ‘main’:
+fourmido.c:63:9: warning: unused variable ‘premierJoueur’ [-Wunused-variable]
+     int premierJoueur = (int) ROUGE;
+         ^

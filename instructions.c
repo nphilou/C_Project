@@ -175,6 +175,11 @@ void traiteInstructionActuelle(Monde *myWorld, Fourmi *fourmi){
             }
             break;
 
+        case TRANSFORMATION:
+            transformeFourmi (fourmi, myWorld);
+            fourmi->instruction = AUCUNE;
+            break;
+
         default:
             printf("cas defaut\n");
             fourmi->instruction = AUCUNE;
@@ -209,10 +214,12 @@ void traiteInstruction(Monde *myWorld, Fourmi *fourmi) {
             break;
             
         case TRANSFORMATION:
-            printf("transformation");
-            //transformeFourmi (fourmi, myWorld);
+            fourmi->instruction = TRANSFORMATION;
             break;
-            
+
+        case PRODUCTION:
+            fourmi->instruction = PRODUCTION;
+            break;
         default:
             fourmi->instruction = AUCUNE;
     }

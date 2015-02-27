@@ -29,29 +29,38 @@ int main(int argc, char *argv[]) {
 
     Monde *myWorld = creationMonde();
 
-    int indice = map(2, 2, myWorld->plateau->cote);
-    creationFourmi(ROUGE, SOLDAT, myWorld->noire, myWorld, indice);
-   // indice = map(3, 2, myWorld->plateau->cote);
-    
-     
-    affichePlateau(myWorld->plateau);
-    
+    int indice1 = map(2, 2, myWorld->plateau->cote);
+    int indice2 = map(1, 1, myWorld->plateau->cote);
+    creationFourmi(NOIR, SOLDAT, myWorld->noire, myWorld, indice1);
+    creationFourmi(ROUGE, SOLDAT, myWorld->rouge, myWorld, indice2);
+    // indice = map(3, 2, myWorld->plateau->cote);
+
+    //affichePlateau(myWorld->plateau);
+
     //creationFourmiliere(ROUGE, myWorld , indice);
- 
-    
-    
+
+
+
     //printf("supprime fourmiliere, indice = %d\n", myWorld -> plateau -> cases[24].fourmi->position);
     //supprimeFourmiliere (myWorld -> plateau -> cases[0].fourmi, myWorld);
     //suicideFourmi(myWorld-> plateau -> cases[5].fourmi, myWorld);
+    //transformeFourmi (myWorld -> plateau -> cases[1].fourmi,myWorld); 
 
-    priseFourmiliere( myWorld -> plateau -> cases[0].fourmi , myWorld,myWorld -> plateau -> cases[23].fourmi);
-    /*if ( myWorld -> plateau -> cases[0].fourmi == NULL ||  myWorld -> plateau -> cases[23].fourmi == NULL){
-      printf(" ca marche"); 
-    }*/
+    //printf("la fourmiliere precedente position:%d\n", myWorld-> plateau -> cases[1].fourmi -> fourmilierePrec -> position);
+    //affichePlateau(myWorld->plateau);
 
-    affichePlateau(myWorld->plateau);
+    //priseFourmiliere( myWorld -> plateau -> cases[0].fourmi , myWorld, myWorld -> plateau -> cases[24].fourmi);
 
-    /*int premierJoueur = (int) ROUGE;
+    //combatFourmi(myWorld -> plateau -> cases[18].fourmi, myWorld -> plateau -> cases[0].fourmi, myWorld); 
+
+
+
+    //deplacementFourmi(myWorld, myWorld -> plateau -> cases[6].fourmi, 2,2);
+
+    //affichePlateau(myWorld->plateau);
+
+
+    int premierJoueur = (int) ROUGE;
     int i = 1;
     while(i){
         printf("((((((((((((((((TOUR ROUGE))))))))))))))))\n");
@@ -60,7 +69,7 @@ int main(int argc, char *argv[]) {
         tour(myWorld, myWorld->noire, myWorld->rouge);
         printf("Quitter ? OUI(0), NON(1)");
         scanf("%d", &i);
-    }*/
-    
+    }
+
     return 0;
 }
