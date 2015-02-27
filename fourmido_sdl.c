@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-//#include <SDL/SDL_ttf>
+#include <SDL/SDL_ttf.h>
 #include "app.h"
+
 #define TAILLE_CASE 80
 
 void pause()
@@ -21,81 +22,53 @@ void pause()
     }
 }
 
-void affichePlateauSDL(Plateau *plateau) {
-    int largeur, hauteur;
-    int couleur;
-
-    for (largeur = 0; largeur < plateau->cote; largeur++) {
-        printf(" %d   ", largeur);
-    }
-
-    printf("\n");
-    for (hauteur = 0; hauteur < plateau->cote; hauteur++) {
-        for (largeur = 0; largeur < plateau->cote; largeur++) {
-            
-            
-
-            if (plateau->cases[map(largeur, hauteur, plateau->cote)].fourmi == NULL) {
-                printf("    ");
-            } else {
-                couleur = (int) plateau->cases[map(largeur, hauteur, plateau->cote)].fourmi->couleur;
-                switch (plateau->cases[map(largeur, hauteur, plateau->cote)].fourmi->type) {
-                    case FOURMILIERE:
-                        if (!couleur) printf(" Fr ");
-                        else printf(" Fn ");
-                        break;
-                    case SOLDAT:
-                        if (!couleur) printf(" Sr ");
-                        else printf(" Sn ");
-                        break;
-                    case OUVRIERE:
-                        if (!couleur) printf(" Or ");
-                        else printf(" On ");
-                        break;
-                    case REINE:
-                        if (!couleur) printf(" Rr ");
-                        else printf(" Rn ");
-                        break;
-                    default:
-                        break;
-                }
-            }
-            printf("|");
-        }
-        printf(" %d\n\n", hauteur);
-    }
-}
-
 int main(int argc, char *argv[]) {
 
+    //Creation monde
     Monde *myWorld = creationMonde();
     affichePlateau(myWorld->plateau);
+    int indice = map(2, 2, myWorld->plateau->cote);
+    creationFourmi(ROUGE, SOLDAT, myWorld->noire, myWorld, indice);
 
-
+    //Initialisation surfaces, position, evenement, police
     SDL_Surface *ecran = NULL, *fourmiliere = NULL, *ouvriere = NULL, *reine = NULL, *soldat = NULL, *vide = NULL;
+    SDL_Surface *texteNoir = NULL, *texteRouge = NULL;
+    char tresorNoir[20] = "";
+    char tresorRouge[20] = "";
     SDL_Rect position;
     SDL_Event event;
-    //TTF_Font *police = NULL;
-    SDL_Color couleurNoire = {0,0,0};
+    TTF_Font *police = NULL;
 
+    //Definition couleurs
+    SDL_Color couleurNoire = {0, 0, 0};
+    SDL_Color couleurRouge = {255, 0, 0};
+
+    //Definition position *optionnel*
     position.x = 0;
     position.y = 0;
 
+    //Initialisation SDL et SDL_ttf
     SDL_Init(SDL_INIT_VIDEO);
-    //TTF_Init();
+    TTF_Init();
 
-    ecran = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE);
+    //Creation fenetre
+    ecran = SDL_SetVideoMode(1200, 600, 32, SDL_HWSURFACE);
     SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
     SDL_WM_SetCaption("Hohoho", NULL);
 
+    //Chargement miniatures unites
     fourmiliere = IMG_Load("miniatures/fourmiliere.png");
     reine = IMG_Load("miniatures/reine.png");
     ouvriere = IMG_Load("miniatures/ouvriere.png");
     soldat = IMG_Load("miniatures/soldat.png");
     vide = IMG_Load("miniatures/vide.png");
 
+    //Chargement police
+    police = TTF_OpenFont("fonts/minecraftia.ttf", 30);
+
+
+
     SDL_EnableKeyRepeat(10, 10);
-    //SDL_BlitSurface(fourmiliere, NULL, ecran, &position);
 
     int largeur, hauteur, couleur;
     int cote = myWorld->plateau->cote;
@@ -105,7 +78,7 @@ int main(int argc, char *argv[]) {
 
             position.x = largeur * TAILLE_CASE;
             position.y = hauteur * TAILLE_CASE;
-            printf("x = %d et y = %d\n", position.x, position.y);
+            //printf("x = %d et y = %d\n", position.x, position.y);
 
             if(myWorld->plateau->cases[map(largeur, hauteur, cote)].fourmi == NULL){
                 SDL_BlitSurface(vide, NULL, ecran, &position);
@@ -132,6 +105,20 @@ int main(int argc, char *argv[]) {
             }
         }
     }
+
+    //Chaine tresorNoir
+    sprintf(tresorNoir, "Tresor : %d", myWorld->tresorNoire);
+    texteNoir = TTF_RenderText_Blended(police, tresorNoir, couleurNoire);
+    position.x = 600;
+    position.y = 60;
+    SDL_BlitSurface(texteNoir, NULL, ecran, &position);
+
+    //Chaine tresorRouge
+    sprintf(tresorRouge, "Tresor : %d", myWorld->tresorRouge);
+    texteRouge = TTF_RenderText_Blended(police, tresorRouge, couleurRouge);
+    position.x = 600;
+    position.y = 120;
+    SDL_BlitSurface(texteRouge, NULL, ecran, &position);
 
     SDL_Flip(ecran);
     pause();
