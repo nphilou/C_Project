@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-#include <SDL/SDL_ttf>
+//#include <SDL/SDL_ttf>
 #include "app.h"
 #define TAILLE_CASE 80
 
@@ -75,14 +75,14 @@ int main(int argc, char *argv[]) {
     SDL_Surface *ecran = NULL, *fourmiliere = NULL, *ouvriere = NULL, *reine = NULL, *soldat = NULL, *vide = NULL;
     SDL_Rect position;
     SDL_Event event;
-    TTF_Font *police = NULL;
+    //TTF_Font *police = NULL;
     SDL_Color couleurNoire = {0,0,0};
 
     position.x = 0;
     position.y = 0;
 
     SDL_Init(SDL_INIT_VIDEO);
-    TTF_Init();
+    //TTF_Init();
 
     ecran = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE);
     SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
