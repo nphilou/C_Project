@@ -5,6 +5,7 @@
 
 #include "structures.h"
 #include "affichage.h"
+#include "plateau.h"
 
 static SDL_Surface *ecran = NULL,
         *fourmiliere = NULL,
