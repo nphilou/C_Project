@@ -3,11 +3,10 @@
 
 #include "config.h"
 #include "structures.h"
-#include "instructions.h"
 #include "plateau.h"
 #include "init.h"
 #include "affichage.h"
-
+#include "instructions.h"
 
 
 

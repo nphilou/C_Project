@@ -5,9 +5,9 @@
 
 #include "structures.h"
 #include "affichage.h"
-
-
-
+#include "init.h"
+#include "plateau.h"
+#include "instructions.h"
 
 
 int main(int argc, char *argv[]) {
@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
 
     }
 */
-    int premierJoueur = (int) ROUGE;
+
     int i = 1;
     while (i) {
         printf("((((((((((((((((TOUR ROUGE))))))))))))))))\n");

@@ -24,6 +24,7 @@ set(SOURCE_FILES
     instructions.h
     app.c
     app.h
-    fourmido.c)
+    fourmido.c
+    fourmido_sdl.c)
 
 add_executable(C_Project ${SOURCE_FILES})
