@@ -1,13 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "instructions.h"
 
-void affichePlateauSDL(Monde *myWorld);
-void initPlateau();
+#include "config.h"
+#include "structures.h"
+#include "instructions.h"
+#include "plateau.h"
+#include "init.h"
+#include "affichage.h"
+
+
+
 
 //renommer listefourmi + isdigit !
 
-int *couleurTresor(Monde *myWorld, Fourmi *fourmi){
+int *couleurTresor(Monde *myWorld, Fourmi *fourmi) {
     if (fourmi->couleur == ROUGE) return &myWorld->tresorRouge;
     else return &myWorld->tresorNoire;
 }
@@ -20,17 +26,17 @@ Instruction demandeInstructionFourmiliere(Monde *myWorld, Fourmi *listeFourmi) {
         printf("Donnez une instruction pour la fourmiliere à la case %d, %d\n", chercheAbscisse(myWorld, listeFourmi->position), chercheOrdonnee(myWorld, listeFourmi->position));
         printf("PRODUCTION(0), SUICIDE(1), IMMOBILISATION (2): ");
         scanf("%d", &instructiontemp);
-        
-        if (!instructiontemp && !demandeProduction(myWorld, listeFourmi)){
+
+        if (!instructiontemp && !demandeProduction(myWorld, listeFourmi)) {
             printf("Ressources insuffisantes\n");
         }
         if (instructiontemp < 0 || instructiontemp > 2) {
             printf("Vous m'expliquez ? 0 à 2, c'est pas si dur ?\n"); //A REVOIR
         }
     } while (instructiontemp < 0 || instructiontemp > 2);
-    
+
     instruction = (Instruction) instructiontemp;
-    
+
     return instruction;
 }
 
@@ -38,8 +44,8 @@ Instruction demandeInstructionReine(Monde *myWorld, Fourmi *listeFourmi) {
     Instruction instruction;
     int instructiontemp;
     int *tresor = couleurTresor(myWorld, listeFourmi);
-    
-    if(*tresor > COUT_TRANSFORMATION){
+
+    if (*tresor > COUT_TRANSFORMATION) {
         do {
             printf("Donnez une instruction pour la reine à la case %d, %d\n", chercheAbscisse(myWorld, listeFourmi->position), chercheOrdonnee(myWorld, listeFourmi->position));
             printf("SUICIDE(1), IMMOBILISATION(2), DEPLACEMENT(3), TRANSFORMATION(4) : ");
@@ -58,7 +64,7 @@ Instruction demandeInstructionReine(Monde *myWorld, Fourmi *listeFourmi) {
             }
         } while (instructiontemp < 1 || instructiontemp > 3);
     }
-    
+
     instruction = (Instruction) instructiontemp;
     return instruction;
 }
@@ -101,49 +107,49 @@ int demandeProduction(Monde *myWorld, Fourmi *fourmi) {
     TypeFourmi production;
     int productiontemp;
     int *tresor = couleurTresor(myWorld, fourmi);
-    
+
     do {
         printf("Que voulez vous produire ?\n");
         printf("REINE(0), SOLDAT(1), OUVRIERE(2) : "); //donner temps !
         scanf("%d", &productiontemp);
         production = (TypeFourmi) productiontemp;
-        
+
         switch (production) {
             case REINE:
                 if (*tresor < COUT_REINE) return 0;
                 fourmi->tempsProd = TEMPS_REINE;
                 *tresor -= COUT_REINE;
                 break;
-                
+
             case SOLDAT:
                 if (*tresor < COUT_SOLDAT) return 0;
                 fourmi->tempsProd = TEMPS_SOLDAT;
                 *tresor -= COUT_SOLDAT;
                 break;
-                
+
             case OUVRIERE:
                 if (*tresor < COUT_OUVRIERE) return 0;
                 fourmi->tempsProd = TEMPS_OUVRIERE;
                 *tresor -= COUT_OUVRIERE;
                 break;
-                
+
             default:
                 printf("Type de fourmi à produire invalide !\n");
         }
     } while (productiontemp < 0 || productiontemp > 2);
-    
+
     fourmi->production = production;
-    
+
     return 1;
 }
 
-void traiteInstructionActuelle(Monde *myWorld, Fourmi *fourmi){
+void traiteInstructionActuelle(Monde *myWorld, Fourmi *fourmi) {
     TypeFourmi type = fourmi->type;
     Couleur couleur = fourmi->couleur;
     int caselibre;
-    
+
     //printf("inst de fourmi = %d", fourmi->instruction)
-    
+
     switch (fourmi->instruction) {
 
         case PRODUCTION:
@@ -152,7 +158,7 @@ void traiteInstructionActuelle(Monde *myWorld, Fourmi *fourmi){
                 fourmi->tempsProd--;
             }
             //METTRE DANS LA MEME CASE QUE LA FOURMILIERE
-            if(fourmi->tempsProd == 0) {
+            if (fourmi->tempsProd == 0) {
                 caselibre = chercheLibre(fourmi->position, myWorld);
                 creationFourmi(couleur, fourmi->production, fourmi->origine, myWorld, caselibre);
                 fourmi->instruction = AUCUNE;
@@ -168,7 +174,7 @@ void traiteInstructionActuelle(Monde *myWorld, Fourmi *fourmi){
                 fourmi->instruction = AUCUNE;
             }
             break;
-            
+
         case DEPLACEMENT:
             printf("cas deplacement\n");
             if (fourmi->position == fourmi->destination) {
@@ -181,7 +187,7 @@ void traiteInstructionActuelle(Monde *myWorld, Fourmi *fourmi){
             break;
 
         case TRANSFORMATION:
-            transformeFourmi (fourmi, myWorld);
+            transformeFourmi(fourmi, myWorld);
             fourmi->instruction = AUCUNE;
             break;
 
@@ -197,19 +203,19 @@ void traiteInstruction(Monde *myWorld, Fourmi *fourmi) {
     TypeFourmi type = fourmi->type;
 
     switch (fourmi->instruction) {
-    
+
         case SUICIDE:
             printf("cas suicide !!\n");
             suicideFourmi(fourmi, myWorld);
             fourmi->instruction = SUICIDE;
             break;
-            
+
         case DEPLACEMENT:
             demandeDestination(&x, &y, myWorld, fourmi);
             deplacementFourmi(myWorld, fourmi, x, y);
             fourmi->instruction = DEPLACEMENT;
             break;
-            
+
         case IMMOBILISATION:
             if (type == OUVRIERE) {
                 if (couleur == ROUGE) myWorld->tresorRouge += RECOLTE_OUVRIERE;
@@ -217,7 +223,7 @@ void traiteInstruction(Monde *myWorld, Fourmi *fourmi) {
             }
             fourmi->instruction = IMMOBILISATION;
             break;
-            
+
         case TRANSFORMATION:
             fourmi->instruction = TRANSFORMATION;
             break;
@@ -230,9 +236,9 @@ void traiteInstruction(Monde *myWorld, Fourmi *fourmi) {
     }
 }
 
-Instruction demandeInstruction(Monde *myWorld, Fourmi *fourmi){
+Instruction demandeInstruction(Monde *myWorld, Fourmi *fourmi) {
     Instruction instruction;
-    
+
     switch (fourmi->type) {
         case(FOURMILIERE):
             instruction = demandeInstructionFourmiliere(myWorld, fourmi);
@@ -248,13 +254,13 @@ Instruction demandeInstruction(Monde *myWorld, Fourmi *fourmi){
 
         case(OUVRIERE):
             instruction = demandeInstructionOuvriere(myWorld, fourmi);
-            break; 
-            
+            break;
+
         default:
             printf("ERREUR : Type de fourmi inconnu");
             instruction = AUCUNE;
     }
-    
+
     return instruction;
 }
 
@@ -278,26 +284,26 @@ void tour(Monde *myWorld, Fourmi *joueur, Fourmi *joueurAdverse) {
             listeFourmiAdverse = listeFourmiAdverse->suivant;
         }
         listeFourmiliereAdverse = listeFourmiliereAdverse->fourmiliereSuiv;
-        
+
     }
     printf("Traitement instruction courante adverse !");
     affichePlateauSDL(myWorld);
-    
+
     while (listeFourmiliere != NULL) {
         listeFourmi = listeFourmiliere;
         while (listeFourmi != NULL) {
-            
+
             traiteInstructionActuelle(myWorld, listeFourmi);
-            
+
             if (listeFourmi->instruction == AUCUNE) {
                 listeFourmi->instruction = demandeInstruction(myWorld, listeFourmi);
-                
+
                 traiteInstruction(myWorld, listeFourmi);
             }
 
             affichePlateauSDL(myWorld);
-            
-            if(listeFourmi->type == FOURMILIERE && listeFourmi->instruction == SUICIDE) break;
+
+            if (listeFourmi->type == FOURMILIERE && listeFourmi->instruction == SUICIDE) break;
             listeFourmi = listeFourmi->suivant;
         }
         listeFourmiliere = listeFourmiliere->fourmiliereSuiv;

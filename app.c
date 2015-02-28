@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "structures.h"
 #include "app.h"
 
 #define TMAX 256

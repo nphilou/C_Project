@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "deplacement.h"
 
+#include "structures.h"
+#include "plateau.h"
+#include "deplacement.h"
 
 void demandeDestination(int *abscisse, int *ordonnee, Monde *monde, Fourmi *fourmi) {
     int tmp0, tmp1;
@@ -23,7 +25,7 @@ void deplacementEst(Monde *myWorld, Fourmi *fourmi, int ordonnee) {
     int xF = chercheAbscisse(myWorld, fourmi->position);
     int yF = chercheOrdonnee(myWorld, fourmi->position);
     int cote = myWorld->plateau->cote, indice;
-    Couleur couleur = fourmi -> couleur;
+    Couleur couleur = fourmi->couleur;
 
     int caseInitial = map(xF, yF, myWorld->plateau->cote);
     myWorld->plateau->cases[caseInitial].fourmi = NULL;
@@ -38,13 +40,13 @@ void deplacementEst(Monde *myWorld, Fourmi *fourmi, int ordonnee) {
 
 
     if (!estLibre(myWorld, indice)) {
-        if(myWorld -> plateau -> cases[indice].fourmi -> couleur == couleur){
-            ajoutFourmi (myWorld, fourmi,indice);
+        if (myWorld->plateau->cases[indice].fourmi->couleur == couleur) {
+            ajoutFourmi(myWorld, fourmi, indice);
             affichePlateau(myWorld->plateau);
-            printf("position fourmi precedente:%d\n", fourmi -> voisinPrec -> position );
+            printf("position fourmi precedente:%d\n", fourmi->voisinPrec->position);
         } else {
-            printf("position*** fourmi:%d\n",indice);
-            combatCase (myWorld,  fourmi, indice);
+            printf("position*** fourmi:%d\n", indice);
+            combatCase(myWorld, fourmi, indice);
         }
     } else {
         printf("case libre\n");
@@ -65,7 +67,7 @@ void deplacementOuest(Monde *myWorld, Fourmi *fourmi, int ordonnee) {
     int xF = chercheAbscisse(myWorld, fourmi->position);
     int yF = chercheOrdonnee(myWorld, fourmi->position);
     int cote = myWorld->plateau->cote, indice;
-    Couleur couleur = fourmi -> couleur;
+    Couleur couleur = fourmi->couleur;
 
     int caseInitial = map(xF, yF, myWorld->plateau->cote);
     myWorld->plateau->cases[caseInitial].fourmi = NULL;
@@ -82,10 +84,10 @@ void deplacementOuest(Monde *myWorld, Fourmi *fourmi, int ordonnee) {
 
 
     if (!estLibre(myWorld, indice)) {
-        if(myWorld -> plateau -> cases[indice].fourmi -> couleur == couleur){
-            ajoutFourmi (myWorld, fourmi,indice);
+        if (myWorld->plateau->cases[indice].fourmi->couleur == couleur) {
+            ajoutFourmi(myWorld, fourmi, indice);
         } else {
-            combatCase (myWorld,  fourmi, indice);
+            combatCase(myWorld, fourmi, indice);
         }
     } else {
         myWorld->plateau->cases[indice].fourmi = fourmi;
@@ -143,7 +145,7 @@ void deplacementNord(Monde *myWorld, Fourmi *fourmi, int abscisse) {
     int xF = chercheAbscisse(myWorld, fourmi->position);
     int yF = chercheOrdonnee(myWorld, fourmi->position);
     int cote = myWorld->plateau->cote, indice;
-    Couleur couleur = fourmi -> couleur;
+    Couleur couleur = fourmi->couleur;
 
     int caseInitial = map(xF, yF, myWorld->plateau->cote);
     myWorld->plateau->cases[caseInitial].fourmi = NULL;
@@ -160,10 +162,10 @@ void deplacementNord(Monde *myWorld, Fourmi *fourmi, int abscisse) {
 
 
     if (!estLibre(myWorld, indice)) {
-        if(myWorld -> plateau -> cases[indice].fourmi -> couleur == couleur){
-            ajoutFourmi (myWorld, fourmi,indice);
+        if (myWorld->plateau->cases[indice].fourmi->couleur == couleur) {
+            ajoutFourmi(myWorld, fourmi, indice);
         } else {
-            combatCase (myWorld,  fourmi, indice);
+            combatCase(myWorld, fourmi, indice);
         }
     } else {
         myWorld->plateau->cases[indice].fourmi = fourmi;
@@ -175,7 +177,6 @@ void deplacementNord(Monde *myWorld, Fourmi *fourmi, int abscisse) {
     fourmi->position = indice;
     */
 }
-
 
 
 void deplacementFourmi(Monde *myWorld, Fourmi *fourmi, int abscisse, int ordonnee) {
@@ -190,7 +191,7 @@ void deplacementFourmi(Monde *myWorld, Fourmi *fourmi, int abscisse, int ordonne
 
     if (xF < abscisse) {
         printf("ici *\n");
-        deplacementEst(myWorld, fourmi,  ordonnee);
+        deplacementEst(myWorld, fourmi, ordonnee);
 
     }
     else if (xF > abscisse) {
@@ -213,44 +214,41 @@ void deplacementFourmi(Monde *myWorld, Fourmi *fourmi, int abscisse, int ordonne
 }
 
 
+void ajoutFourmi(Monde *myWorld, Fourmi *fourmi, int indice) {
 
+    Fourmi *temp;
 
-
-void ajoutFourmi (Monde* myWorld, Fourmi * fourmi, int indice){
-
-    Fourmi* temp;
-
-    temp= myWorld -> plateau -> cases[indice].fourmi;
-    while (temp -> voisinSuiv != NULL){
-        temp = temp -> voisinSuiv;
+    temp = myWorld->plateau->cases[indice].fourmi;
+    while (temp->voisinSuiv != NULL) {
+        temp = temp->voisinSuiv;
     }
 
-    temp -> voisinSuiv = fourmi;
-    fourmi -> voisinPrec = temp;
-    fourmi -> voisinSuiv = NULL;
-    fourmi -> position = indice;
+    temp->voisinSuiv = fourmi;
+    fourmi->voisinPrec = temp;
+    fourmi->voisinSuiv = NULL;
+    fourmi->position = indice;
 }
 
-void combatCase (Monde * myWorld, Fourmi * fourmi, int indice){
+void combatCase(Monde *myWorld, Fourmi *fourmi, int indice) {
 
     printf("combat case2\n");
 
-    Fourmi * temp;
-    temp = myWorld -> plateau -> cases[indice].fourmi;
+    Fourmi *temp;
+    temp = myWorld->plateau->cases[indice].fourmi;
     int combat = 1;
     printf("combat=%d\n", combat);
 
-    while ((temp -> voisinSuiv != NULL) && (combat ==1)){
+    while ((temp->voisinSuiv != NULL) && (combat == 1)) {
         printf("combat voisin\n");
-        temp = temp -> voisinSuiv;
-        combat = combatFourmi(fourmi, temp-> voisinSuiv, myWorld);
+        temp = temp->voisinSuiv;
+        combat = combatFourmi(myWorld, fourmi, temp->voisinSuiv);
     }
 
-    combat = combatFourmi(fourmi, temp , myWorld);
-    if (combat == 1){
+    combat = combatFourmi(myWorld, fourmi, temp);
+    if (combat == 1) {
         printf("remporte le combat\n");
-        myWorld -> plateau -> cases[indice].fourmi = fourmi;
-        fourmi -> position = indice;
+        myWorld->plateau->cases[indice].fourmi = fourmi;
+        fourmi->position = indice;
     } else {
         printf("vous avez perdu le combat, pas de chance\n");
     }

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "structures.h"
 #include "plateau.h"
 
 int map(int abscisse, int ordonnee, int cote) {
@@ -35,7 +36,7 @@ void affichePlateau(Plateau *plateau) {
     for (largeur = 0; largeur < plateau->cote; largeur++) {
         printf(" %d   ", largeur);
     }
-    
+
     printf("\n");
     for (hauteur = 0; hauteur < plateau->cote; hauteur++) {
         for (largeur = 0; largeur < plateau->cote; largeur++) {
@@ -73,15 +74,12 @@ void affichePlateau(Plateau *plateau) {
 
 int chercheLibre(int centre, Monde *myWorld) {
 
-    int cote = myWorld->plateau->cote; //raccourci
+    int cote = myWorld->plateau->cote;
     int rayon;
     int haut, droite, bas, gauche, ligne;
     int ordonnee = chercheOrdonnee(myWorld, centre);
     int abscisse = chercheAbscisse(myWorld, centre);
 
-    //if plateau rempli
-
-    //on s'eloigne du centre (rayon augmente)
     for (rayon = 1; rayon < cote; rayon++) {
 
         //haut

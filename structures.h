@@ -1,62 +1,58 @@
-#include "config.h"
+#ifndef DEF_STRUCTURES
+#define DEF_STRUCTURES
 
-typedef struct Fourmi Fourmi;
+    typedef struct Fourmi Fourmi;
+    typedef struct {
+        Fourmi *fourmi;
+    } Case;
+    typedef struct {
+        int cote;
+        int nombrecases;
+        Case cases[256];
+    } Plateau;
+    typedef enum {
+        REINE,
+        SOLDAT,
+        OUVRIERE,
+        FOURMILIERE,
+    } TypeFourmi;
+    typedef enum {
+        PRODUCTION,
+        SUICIDE,
+        IMMOBILISATION,
+        DEPLACEMENT,
+        TRANSFORMATION,
+        AUCUNE,
+    } Instruction;
+    typedef enum {
+        ROUGE,
+        NOIR,
+    } Couleur;
+    typedef struct {
+        int tresorRouge;
+        int tresorNoire;
+        Fourmi *rouge;
+        Fourmi *noire;
+        Plateau *plateau;
+    } Monde;
+    struct Fourmi {
+        Couleur couleur;
+        TypeFourmi type;
+        Instruction instruction;
+        int position;
+        int destination;
 
-typedef struct {
-    Fourmi *fourmi;
-} Case;
+        Fourmi *origine;
+        Fourmi *precedant;
+        Fourmi *suivant;
 
-typedef struct {
-    int cote;
-    int nombrecases;
-    Case cases[256];
-} Plateau;
+        Fourmi *voisinSuiv;
+        Fourmi *voisinPrec;
 
-typedef enum {
-    REINE,
-    SOLDAT,
-    OUVRIERE,
-    FOURMILIERE,
-} TypeFourmi;
+        int tempsProd;
+        TypeFourmi production;
+        Fourmi *fourmiliereSuiv;
+        Fourmi *fourmilierePrec;
+    };
 
-typedef enum {
-    PRODUCTION,
-    SUICIDE,
-    IMMOBILISATION,
-    DEPLACEMENT,
-    TRANSFORMATION,
-    AUCUNE,
-} Instruction;
-
-typedef enum {
-    ROUGE,
-    NOIR,
-} Couleur;
-
-typedef struct {
-    int tresorRouge;
-    int tresorNoire;
-    Fourmi *rouge;
-    Fourmi *noire;
-    Plateau *plateau;
-} Monde;
-
-struct Fourmi {
-    Couleur couleur;
-    TypeFourmi type;
-    Instruction instruction;
-    int position;
-    int destination;
-
-    Fourmi *origine;
-    Fourmi *precedant;
-    Fourmi *suivant;
-    
-    Fourmi * voisinSuiv; 
-    Fourmi * voisinPrec;
-    
-    int tempsProd;
-    TypeFourmi production;
-    Fourmi *fourmiliereSuiv;
-    Fourmi *fourmilierePrec;
-};
+#endif
