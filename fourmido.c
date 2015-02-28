@@ -11,16 +11,17 @@ int main(int argc, char *argv[]) {
     Monde *myWorld = creationMonde();
 
     int indice1 = map(2, 2, myWorld->plateau->cote);
-    int indice2 = map(1, 1, myWorld->plateau->cote);
+    int indice2 = map(2, 2, myWorld->plateau->cote);
     creationFourmi(NOIR, SOLDAT, myWorld->noire, myWorld, indice1);
     creationFourmi(ROUGE, SOLDAT, myWorld->rouge, myWorld, indice2);
     // indice = map(3, 2, myWorld->plateau->cote);
 
-    //affichePlateau(myWorld->plateau);
+    affichePlateau(myWorld->plateau);
 
     //creationFourmiliere(ROUGE, myWorld , indice);
 
-
+    printf("le type de ma fourmi:%d", myWorld -> plateau -> cases[12].fourmi-> type); 
+    printf("le type de ma fourmi suivante :%d", myWorld -> plateau -> cases[12].fourmi-> voisinSuiv-> type); 
 
     //printf("supprime fourmiliere, indice = %d\n", myWorld -> plateau -> cases[24].fourmi->position);
     //supprimeFourmiliere (myWorld -> plateau -> cases[0].fourmi, myWorld);
@@ -40,7 +41,7 @@ int main(int argc, char *argv[]) {
 
     //affichePlateau(myWorld->plateau);
 
-
+/*
     int premierJoueur = (int) ROUGE;
     int i = 1;
     while(i){
@@ -51,6 +52,6 @@ int main(int argc, char *argv[]) {
         printf("Quitter ? OUI(0), NON(1)");
         scanf("%d", &i);
     }
-
+*/
     return 0;
 }
