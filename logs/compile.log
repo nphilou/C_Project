@@ -279,9 +279,12 @@ In file included from combat.h:1:0,
 init.h:9:6: note: expected ‘struct Monde *’ but argument is of type ‘struct Monde *’
  void creationFourmi(Couleur couleur, TypeFourmi typefourmi,Fourmi *origine, Monde *myWorld, int indice);
       ^
-fourmido.c:36:5: warning: passing argument 4 of ‘creationFourmi’ from incompatible pointer type [enabled by default]
-     creationFourmi(ROUGE, SOLDAT, myWorld->rouge, myWorld, indice2);
-     ^
+fourmido.c:36:59: error: expected expression before ‘while’
+     creationFourmi(ROUGE, SOLDAT, myWorld->rouge, myWorld,while (myWorld-> plateau -> cases[12].fourmi != NULL){
+                                                           ^
+fourmido.c:81:1: warning: passing argument 4 of ‘creationFourmi’ from incompatible pointer type [enabled by default]
+ }
+ ^
 In file included from combat.h:1:0,
                  from deplacement.h:1,
                  from instructions.h:1,
@@ -290,15 +293,12 @@ In file included from combat.h:1:0,
 init.h:9:6: note: expected ‘struct Monde *’ but argument is of type ‘struct Monde *’
  void creationFourmi(Couleur couleur, TypeFourmi typefourmi,Fourmi *origine, Monde *myWorld, int indice);
       ^
-fourmido.c:39:5: warning: passing argument 1 of ‘affichePlateau’ from incompatible pointer type [enabled by default]
-     affichePlateau(myWorld->plateau);
-     ^
-In file included from init.h:1:0,
-                 from combat.h:1,
-                 from deplacement.h:1,
-                 from instructions.h:1,
-                 from app.h:1,
-                 from fourmido.c:3:
-plateau.h:11:6: note: expected ‘struct Plateau *’ but argument is of type ‘struct Plateau *’
- void affichePlateau(Plateau *plateau);
-      ^
+fourmido.c:81:1: error: expected ‘;’ before ‘}’ token
+ }
+ ^
+fourmido.c:34:9: warning: unused variable ‘indice2’ [-Wunused-variable]
+     int indice2 = map(2, 2, myWorld->plateau->cote);
+         ^
+fourmido.c:81:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
