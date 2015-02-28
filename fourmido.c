@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     Monde *myWorld = creationMonde();
 
     int indice1 = map(2, 2, myWorld->plateau->cote);
-    int indice2 = map(2, 2, myWorld->plateau->cote);
+    int indice2 = map(1,1, myWorld->plateau->cote);
     creationFourmi(NOIR, SOLDAT, myWorld->noire, myWorld, indice1);
     creationFourmi(ROUGE, SOLDAT, myWorld->rouge, myWorld, indice2);
     // indice = map(3, 2, myWorld->plateau->cote);
@@ -39,10 +39,10 @@ int main(int argc, char *argv[]) {
 
 
     affichePlateau(myWorld->plateau);
-
+    /*
     printf("type de la fourmi: %d", myWorld -> plateau ->cases[12].fourmi -> type);
     printf("type fourmi suivante: %d", myWorld -> plateau -> cases[12].fourmi -> voisinSuiv->type);
-
+    */
     //creationFourmiliere(ROUGE, myWorld , indice);
 
 
