@@ -7,15 +7,6 @@
 
 int main(int argc, char *argv[]) {
 
-    /* SDL_Init(SDL_INIT_VIDEO); // Initialisation de la SDL
-
-    SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE); // Ouverture de la fenêtre
-    SDL_WM_SetCaption("Hohoho", NULL);
-
-    pause(); // Mise en pause du programme
-
-    SDL_Quit(); // Arrêt de la SDL
-    */
 
     Monde *myWorld = creationMonde();
 
