@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
 
     //priseFourmiliere( myWorld -> plateau -> cases[0].fourmi , myWorld, myWorld -> plateau -> cases[24].fourmi);
 
-    //combatFourmi(myWorld -> plateau -> cases[18].fourmi, myWorld -> plateau -> cases[0].fourmi, myWorld); 
+    combatFourmi(myWorld -> plateau -> cases[18].fourmi, myWorld -> plateau -> cases[12].fourmi, myWorld);
 
 
 
@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
 
     //affichePlateau(myWorld->plateau);
 
-
+/*
     int premierJoueur = (int) ROUGE;
     int i = 1;
     while(i){
@@ -69,7 +69,7 @@ int main(int argc, char *argv[]) {
         tour(myWorld, myWorld->noire, myWorld->rouge);
         printf("Quitter ? OUI(0), NON(1)");
         scanf("%d", &i);
-    }
+    }*/
 
     return 0;
 }
