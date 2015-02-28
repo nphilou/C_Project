@@ -1,6 +1,12 @@
-affichage.c: In function ‘affichePlateauSDL’:
-affichage.c:76:27: warning: variable ‘couleur’ set but not used [-Wunused-but-set-variable]
 instructions.c: In function ‘traiteInstructionActuelle’:
 instructions.c:184:17: warning: implicit declaration of function ‘deplacementFourmi’ [-Wimplicit-function-declaration]
+                 deplacementFourmi(myWorld, fourmi, chercheAbscisse(myWorld, fourmi->destination), chercheOrdonnee(myWorld, fourmi->destination));
+                 ^
 instructions.c: In function ‘traiteInstruction’:
 instructions.c:213:13: warning: implicit declaration of function ‘demandeDestination’ [-Wimplicit-function-declaration]
+             demandeDestination(&x, &y, myWorld, fourmi);
+             ^
+fourmido.c: In function ‘main’:
+fourmido.c:44:9: warning: unused variable ‘premierJoueur’ [-Wunused-variable]
+     int premierJoueur = (int) ROUGE;
+         ^
