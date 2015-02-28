@@ -1,4 +1,314 @@
+In file included from fourmido.c:4:0:
+structures.h:7:3: error: conflicting types for ‘Case’
+ } Case;
+   ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:7:3: note: previous declaration of ‘Case’ was here
+ } Case;
+   ^
+In file included from fourmido.c:4:0:
+structures.h:13:3: error: conflicting types for ‘Plateau’
+ } Plateau;
+   ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:13:3: note: previous declaration of ‘Plateau’ was here
+ } Plateau;
+   ^
+In file included from fourmido.c:4:0:
+structures.h:16:5: error: redeclaration of enumerator ‘REINE’
+     REINE,
+     ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:16:5: note: previous definition of ‘REINE’ was here
+     REINE,
+     ^
+In file included from fourmido.c:4:0:
+structures.h:17:5: error: redeclaration of enumerator ‘SOLDAT’
+     SOLDAT,
+     ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:17:5: note: previous definition of ‘SOLDAT’ was here
+     SOLDAT,
+     ^
+In file included from fourmido.c:4:0:
+structures.h:18:5: error: redeclaration of enumerator ‘OUVRIERE’
+     OUVRIERE,
+     ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:18:5: note: previous definition of ‘OUVRIERE’ was here
+     OUVRIERE,
+     ^
+In file included from fourmido.c:4:0:
+structures.h:19:5: error: redeclaration of enumerator ‘FOURMILIERE’
+     FOURMILIERE,
+     ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:19:5: note: previous definition of ‘FOURMILIERE’ was here
+     FOURMILIERE,
+     ^
+In file included from fourmido.c:4:0:
+structures.h:20:3: error: conflicting types for ‘TypeFourmi’
+ } TypeFourmi;
+   ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:20:3: note: previous declaration of ‘TypeFourmi’ was here
+ } TypeFourmi;
+   ^
+In file included from fourmido.c:4:0:
+structures.h:23:5: error: redeclaration of enumerator ‘PRODUCTION’
+     PRODUCTION,
+     ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:23:5: note: previous definition of ‘PRODUCTION’ was here
+     PRODUCTION,
+     ^
+In file included from fourmido.c:4:0:
+structures.h:24:5: error: redeclaration of enumerator ‘SUICIDE’
+     SUICIDE,
+     ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:24:5: note: previous definition of ‘SUICIDE’ was here
+     SUICIDE,
+     ^
+In file included from fourmido.c:4:0:
+structures.h:25:5: error: redeclaration of enumerator ‘IMMOBILISATION’
+     IMMOBILISATION,
+     ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:25:5: note: previous definition of ‘IMMOBILISATION’ was here
+     IMMOBILISATION,
+     ^
+In file included from fourmido.c:4:0:
+structures.h:26:5: error: redeclaration of enumerator ‘DEPLACEMENT’
+     DEPLACEMENT,
+     ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:26:5: note: previous definition of ‘DEPLACEMENT’ was here
+     DEPLACEMENT,
+     ^
+In file included from fourmido.c:4:0:
+structures.h:27:5: error: redeclaration of enumerator ‘TRANSFORMATION’
+     TRANSFORMATION,
+     ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:27:5: note: previous definition of ‘TRANSFORMATION’ was here
+     TRANSFORMATION,
+     ^
+In file included from fourmido.c:4:0:
+structures.h:28:5: error: redeclaration of enumerator ‘AUCUNE’
+     AUCUNE,
+     ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:28:5: note: previous definition of ‘AUCUNE’ was here
+     AUCUNE,
+     ^
+In file included from fourmido.c:4:0:
+structures.h:29:3: error: conflicting types for ‘Instruction’
+ } Instruction;
+   ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:29:3: note: previous declaration of ‘Instruction’ was here
+ } Instruction;
+   ^
+In file included from fourmido.c:4:0:
+structures.h:32:5: error: redeclaration of enumerator ‘ROUGE’
+     ROUGE,
+     ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:32:5: note: previous definition of ‘ROUGE’ was here
+     ROUGE,
+     ^
+In file included from fourmido.c:4:0:
+structures.h:33:5: error: redeclaration of enumerator ‘NOIR’
+     NOIR,
+     ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:33:5: note: previous definition of ‘NOIR’ was here
+     NOIR,
+     ^
+In file included from fourmido.c:4:0:
+structures.h:34:3: error: conflicting types for ‘Couleur’
+ } Couleur;
+   ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:34:3: note: previous declaration of ‘Couleur’ was here
+ } Couleur;
+   ^
+In file included from fourmido.c:4:0:
+structures.h:42:3: error: conflicting types for ‘Monde’
+ } Monde;
+   ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:42:3: note: previous declaration of ‘Monde’ was here
+ } Monde;
+   ^
+In file included from fourmido.c:4:0:
+structures.h:44:8: error: redefinition of ‘struct Fourmi’
+ struct Fourmi {
+        ^
+In file included from plateau.h:1:0,
+                 from init.h:1,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+structures.h:3:16: note: originally defined here
+ typedef struct Fourmi Fourmi;
+                ^
 fourmido.c: In function ‘main’:
-fourmido.c:63:9: warning: unused variable ‘premierJoueur’ [-Wunused-variable]
-     int premierJoueur = (int) ROUGE;
-         ^
+fourmido.c:31:22: warning: initialization from incompatible pointer type [enabled by default]
+     Monde *myWorld = creationMonde();
+                      ^
+fourmido.c:35:5: warning: passing argument 4 of ‘creationFourmi’ from incompatible pointer type [enabled by default]
+     creationFourmi(NOIR, SOLDAT, myWorld->noire, myWorld, indice1);
+     ^
+In file included from combat.h:1:0,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+init.h:9:6: note: expected ‘struct Monde *’ but argument is of type ‘struct Monde *’
+ void creationFourmi(Couleur couleur, TypeFourmi typefourmi,Fourmi *origine, Monde *myWorld, int indice);
+      ^
+fourmido.c:36:5: warning: passing argument 4 of ‘creationFourmi’ from incompatible pointer type [enabled by default]
+     creationFourmi(ROUGE, SOLDAT, myWorld->rouge, myWorld, indice2);
+     ^
+In file included from combat.h:1:0,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+init.h:9:6: note: expected ‘struct Monde *’ but argument is of type ‘struct Monde *’
+ void creationFourmi(Couleur couleur, TypeFourmi typefourmi,Fourmi *origine, Monde *myWorld, int indice);
+      ^
+fourmido.c:41:5: warning: passing argument 1 of ‘affichePlateau’ from incompatible pointer type [enabled by default]
+     affichePlateau(myWorld->plateau);
+     ^
+In file included from init.h:1:0,
+                 from combat.h:1,
+                 from deplacement.h:1,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+plateau.h:11:6: note: expected ‘struct Plateau *’ but argument is of type ‘struct Plateau *’
+ void affichePlateau(Plateau *plateau);
+      ^
+fourmido.c:60:5: warning: passing argument 3 of ‘combatFourmi’ from incompatible pointer type [enabled by default]
+     combatFourmi(myWorld -> plateau -> cases[18].fourmi, myWorld -> plateau -> cases[12].fourmi, myWorld);
+     ^
+In file included from deplacement.h:1:0,
+                 from instructions.h:1,
+                 from app.h:1,
+                 from fourmido.c:3:
+combat.h:3:5: note: expected ‘struct Monde *’ but argument is of type ‘struct Monde *’
+ int combatFourmi(Fourmi *fourmi, Fourmi *fourmi2, Monde *myWorld);
+     ^

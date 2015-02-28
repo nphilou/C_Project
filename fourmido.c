@@ -5,7 +5,6 @@
 #include "app.h"
 #include "init.h"
 
-
 int main(int argc, char *argv[]) {
 
     /* SDL_Init(SDL_INIT_VIDEO); // Initialisation de la SDL
@@ -42,7 +41,7 @@ int main(int argc, char *argv[]) {
 
     //priseFourmiliere( myWorld -> plateau -> cases[0].fourmi , myWorld, myWorld -> plateau -> cases[24].fourmi);
 
-    //combatFourmi(myWorld -> plateau -> cases[18].fourmi, myWorld -> plateau -> cases[0].fourmi, myWorld);
+    //combatFourmi(myWorld -> plateau -> cases[18].fourmi, myWorld -> plateau -> cases[0].fourmi, myWorld); 
 
 
 
@@ -50,8 +49,10 @@ int main(int argc, char *argv[]) {
 
     //affichePlateau(myWorld->plateau);
 
+
+    int premierJoueur = (int) ROUGE;
     int i = 1;
-    while (i) {
+    while(i){
         printf("((((((((((((((((TOUR ROUGE))))))))))))))))\n");
         tour(myWorld, myWorld->rouge, myWorld->noire);
         printf("((((((((((((((((TOUR NOIR))))))))))))))))\n");
