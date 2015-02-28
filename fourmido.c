@@ -1,6 +1,7 @@
 #include <stdio.h>
 //#include <SDL/SDL.h>
 #include "app.h"
+#include "structures.h"
 
 /*void pause() {
     int continuer = 1;
@@ -30,12 +31,13 @@ int main(int argc, char *argv[]) {
     Monde *myWorld = creationMonde();
 
     int indice1 = map(2, 2, myWorld->plateau->cote);
-    int indice2 = map(1, 1, myWorld->plateau->cote);
+    int indice2 = map(2, 2, myWorld->plateau->cote);
     creationFourmi(NOIR, SOLDAT, myWorld->noire, myWorld, indice1);
     creationFourmi(ROUGE, SOLDAT, myWorld->rouge, myWorld, indice2);
     // indice = map(3, 2, myWorld->plateau->cote);
 
-    //affichePlateau(myWorld->plateau);
+    affichePlateau(myWorld->plateau);
+
 
     //creationFourmiliere(ROUGE, myWorld , indice);
 
@@ -51,7 +53,7 @@ int main(int argc, char *argv[]) {
 
     //priseFourmiliere( myWorld -> plateau -> cases[0].fourmi , myWorld, myWorld -> plateau -> cases[24].fourmi);
 
-    combatFourmi(myWorld -> plateau -> cases[18].fourmi, myWorld -> plateau -> cases[12].fourmi, myWorld);
+   // combatFourmi(myWorld -> plateau -> cases[18].fourmi, myWorld -> plateau -> cases[12].fourmi, myWorld);
 
 
 
