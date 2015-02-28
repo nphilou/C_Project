@@ -7,10 +7,16 @@
 #include "init.h"
 #include "affichage.h"
 #include "instructions.h"
+#include "deplacement.h"
 
-
-
-//renommer listefourmi + isdigit !
+void lireEntier(int *entier){
+    char saisie[255];
+    while(1){
+        fgets(saisie, 255, stdin);
+        if (sscanf(saisie, "%d", entier) == 1) break;
+        printf("Veuillez entrer un entier !\n");
+    }
+}
 
 int *couleurTresor(Monde *myWorld, Fourmi *fourmi) {
     if (fourmi->couleur == ROUGE) return &myWorld->tresorRouge;
