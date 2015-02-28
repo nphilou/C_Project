@@ -4,6 +4,7 @@
 #include "structures.h"
 #include "plateau.h"
 #include "deplacement.h"
+#include "combat.h"
 
 void demandeDestination(int *abscisse, int *ordonnee, Monde *monde, Fourmi *fourmi) {
     int tmp0, tmp1;
