@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "instructions.h"
 
+void affichePlateauSDL(Monde *myWorld);
+void initPlateau();
+
 //renommer listefourmi + isdigit !
 
 int *couleurTresor(Monde *myWorld, Fourmi *fourmi){
@@ -169,8 +172,10 @@ void traiteInstructionActuelle(Monde *myWorld, Fourmi *fourmi){
         case DEPLACEMENT:
             printf("cas deplacement\n");
             if (fourmi->position == fourmi->destination) {
+                printf("je suis arrive !");
                 fourmi->instruction = AUCUNE;
             } else {
+
                 deplacementFourmi(myWorld, fourmi, chercheAbscisse(myWorld, fourmi->destination), chercheOrdonnee(myWorld, fourmi->destination));
             }
             break;
@@ -262,6 +267,7 @@ void tour(Monde *myWorld, Fourmi *joueur, Fourmi *joueurAdverse) {
     listeFourmiliere = joueur;
     listeFourmiliereAdverse = joueurAdverse;
 
+    printf("Traitement instruction courante adverse !");
     while (listeFourmiliereAdverse != NULL) {
         listeFourmiAdverse = listeFourmiliereAdverse;
 
@@ -274,8 +280,8 @@ void tour(Monde *myWorld, Fourmi *joueur, Fourmi *joueurAdverse) {
         listeFourmiliereAdverse = listeFourmiliereAdverse->fourmiliereSuiv;
         
     }
-    
-    affichePlateau(myWorld->plateau);
+    printf("Traitement instruction courante adverse !");
+    affichePlateauSDL(myWorld);
     
     while (listeFourmiliere != NULL) {
         listeFourmi = listeFourmiliere;
@@ -288,8 +294,8 @@ void tour(Monde *myWorld, Fourmi *joueur, Fourmi *joueurAdverse) {
                 
                 traiteInstruction(myWorld, listeFourmi);
             }
-            
-            affichePlateau(myWorld->plateau);
+
+            affichePlateauSDL(myWorld);
             
             if(listeFourmi->type == FOURMILIERE && listeFourmi->instruction == SUICIDE) break;
             listeFourmi = listeFourmi->suivant;

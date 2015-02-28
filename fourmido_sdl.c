@@ -6,23 +6,55 @@
 
 #define TAILLE_CASE 80
 
-void pause()
-{
+void pause() {
     int continuer = 1;
     SDL_Event event;
 
-    while (continuer)
-    {
+    while (continuer) {
         SDL_WaitEvent(&event);
-        switch(event.type)
-        {
+        switch (event.type) {
             case SDL_QUIT:
                 continuer = 0;
         }
     }
 }
 
-void affichePlateauSDL(Monde *myWorld, TTF_Font *police, SDL_Surface *ecran, SDL_Surface *fourmiliere, SDL_Surface *ouvriere, SDL_Surface *reine, SDL_Surface *soldat, SDL_Surface *vide, SDL_Surface *texteNoir, SDL_Surface *texteRouge){
+
+static SDL_Surface *ecran = NULL,
+        *fourmiliere = NULL,
+        *ouvriere = NULL,
+        *reine = NULL,
+        *soldat = NULL,
+        *vide = NULL,
+        *texteNoir = NULL,
+        *texteRouge = NULL;
+
+static TTF_Font *police = NULL;
+
+void initPlateau() {
+    ecran = SDL_SetVideoMode(1200, 600, 32, SDL_HWSURFACE);
+    fourmiliere = IMG_Load("miniatures/fourmiliere.png");
+    ouvriere = IMG_Load("miniatures/ouvriere.png");
+    reine = IMG_Load("miniatures/reine.png");
+    soldat = IMG_Load("miniatures/soldat.png");
+    vide = IMG_Load("miniatures/vide.png");
+    texteNoir = NULL;
+    texteRouge = NULL;
+
+    police = TTF_OpenFont("fonts/minecraftia.ttf", 30);
+}
+
+void affichePlateauSDL(Monde *myWorld) {
+
+    static int initialized = 0;
+    if (!initialized) {
+        //Declaration surfaces, unites, evenement, police
+        initPlateau();
+        initialized = 1;
+    }
+
+    SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
+
     SDL_Rect position;
 
     char tresorNoir[20] = "";
@@ -48,9 +80,10 @@ void affichePlateauSDL(Monde *myWorld, TTF_Font *police, SDL_Surface *ecran, SDL
 
             position.x = largeur * TAILLE_CASE;
             position.y = hauteur * TAILLE_CASE;
-            //printf("x = %d et y = %d\n", position.x, position.y);
+            //print3
+            // f("x = %d et y = %d\n", position.x, position.y);
 
-            if(myWorld->plateau->cases[map(largeur, hauteur, cote)].fourmi == NULL){
+            if (myWorld->plateau->cases[map(largeur, hauteur, cote)].fourmi == NULL) {
                 SDL_BlitSurface(vide, NULL, ecran, &position);
                 continue;
             }
@@ -91,7 +124,6 @@ void affichePlateauSDL(Monde *myWorld, TTF_Font *police, SDL_Surface *ecran, SDL
     SDL_BlitSurface(texteRouge, NULL, ecran, &position);
 
     SDL_Flip(ecran);
-
 }
 
 int main(int argc, char *argv[]) {
@@ -100,11 +132,6 @@ int main(int argc, char *argv[]) {
     Monde *myWorld = creationMonde();
     affichePlateau(myWorld->plateau);
 
-
-    //Declaration surfaces, unites, evenement, police
-    SDL_Surface *ecran = NULL, *fourmiliere = NULL, *ouvriere = NULL, *reine = NULL, *soldat = NULL, *vide = NULL;
-    SDL_Surface *texteNoir = NULL, *texteRouge = NULL;
-    TTF_Font *police = NULL;
     SDL_Event event;
 
     //Initialisation SDL et SDL_ttf
@@ -112,61 +139,14 @@ int main(int argc, char *argv[]) {
     TTF_Init();
 
     //Creation fenetre
-    ecran = SDL_SetVideoMode(1200, 600, 32, SDL_HWSURFACE);
-    SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
     SDL_WM_SetCaption("Hohoho", NULL);
 
-    //Chargement miniatures unites
-    fourmiliere = IMG_Load("miniatures/fourmiliere.png");
-    reine = IMG_Load("miniatures/reine.png");
-    ouvriere = IMG_Load("miniatures/ouvriere.png");
-    soldat = IMG_Load("miniatures/soldat.png");
-    vide = IMG_Load("miniatures/vide.png");
-
-    //Chargement police
-    police = TTF_OpenFont("fonts/minecraftia.ttf", 30);
-
-    SDL_EnableKeyRepeat(10, 10);
-
-    affichePlateauSDL(myWorld, police, ecran, fourmiliere, ouvriere, reine, soldat, vide, texteNoir, texteRouge);
-
-    int premierJoueur = (int) ROUGE;
-    int i = 1;
-    while(i){
-        printf("((((((((((((((((TOUR ROUGE))))))))))))))))\n");
-        tour(myWorld, myWorld->rouge, myWorld->noire);
-        printf("((((((((((((((((TOUR NOIR))))))))))))))))\n");
-        tour(myWorld, myWorld->noire, myWorld->rouge);
-        printf("Quitter ? OUI(0), NON(1)");
-        scanf("%d", &i);
-    }
-
-    SDL_Flip(ecran);
-
-    affichePlateauSDL(myWorld, police, ecran, fourmiliere, ouvriere, reine, soldat, vide, texteNoir, texteRouge);
-
-    pause();
-
-    TTF_CloseFont(police);
-    TTF_Quit();
-
-    SDL_FreeSurface(fourmiliere);
-    SDL_FreeSurface(ouvriere);
-    SDL_FreeSurface(reine);
-    SDL_FreeSurface(soldat);
-    SDL_FreeSurface(vide);
-    SDL_FreeSurface(texteNoir);
-    SDL_FreeSurface(texteRouge);
-
-    SDL_Quit();
-
-
-    /*
-    while (continuer)
-    {
+    affichePlateauSDL(myWorld);
+/*
+    int continuer = 1;
+    while (continuer) {
         SDL_WaitEvent(&event);
-        switch (event.type)
-        {
+        switch (event.type) {
             case SDL_QUIT:
                 continuer = 0;
                 break;
@@ -183,17 +163,8 @@ int main(int argc, char *argv[]) {
                 break;
         }
 
-    }*/
-/*
-    SDL_FreeSurface(fourmiliere);
-    SDL_FreeSurface(ouvriere);
-    SDL_FreeSurface(reine);
-    SDL_FreeSurface(soldat);
-    SDL_FreeSurface(vide);
-    SDL_Quit();
+    }
 */
-    
-/*
     int premierJoueur = (int) ROUGE;
     int i = 1;
     while(i){
@@ -204,6 +175,23 @@ int main(int argc, char *argv[]) {
         printf("Quitter ? OUI(0), NON(1)");
         scanf("%d", &i);
     }
-    */
+
+
+
+    //pause();
+
+    //TTF_CloseFont(police);
+    TTF_Quit();
+
+    /*SDL_FreeSurface(fourmiliere);
+    SDL_FreeSurface(ouvriere);
+    SDL_FreeSurface(reine);
+    SDL_FreeSurface(soldat);
+    SDL_FreeSurface(vide);
+    SDL_FreeSurface(texteNoir);
+    SDL_FreeSurface(texteRouge);*/
+
+    SDL_Quit();
+
     return 0;
 }
