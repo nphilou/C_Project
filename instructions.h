@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//renommer listefourmi + isdigit !
-
 int *couleurTresor(Monde *myWorld, Fourmi *fourmi);
 
 Instruction demandeInstructionFourmiliere(Monde *myWorld, Fourmi *listeFourmi);
