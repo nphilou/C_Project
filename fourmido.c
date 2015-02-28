@@ -1,7 +1,7 @@
 #include <stdio.h>
 //#include <SDL/SDL.h>
 #include "app.h"
-#include "structures.h"
+# include "structures.h"
 
 /*void pause() {
     int continuer = 1;
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
     affichePlateau(myWorld->plateau);
 
     printf("type de la fourmi: %d", myWorld -> plateau ->cases[12].fourmi -> type);
-    printf("type fourmi suivante: %d", myWorld -> plateau -> cases[12].fourmi -> voisinSuiv);
+    printf("type fourmi suivante: %d", myWorld -> plateau -> cases[12].fourmi -> voisinSuiv->type);
 
     //creationFourmiliere(ROUGE, myWorld , indice);
 
@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
 
     //priseFourmiliere( myWorld -> plateau -> cases[0].fourmi , myWorld, myWorld -> plateau -> cases[24].fourmi);
 
-   // combatFourmi(myWorld -> plateau -> cases[18].fourmi, myWorld -> plateau -> cases[12].fourmi, myWorld);
+    combatFourmi(myWorld -> plateau -> cases[18].fourmi, myWorld -> plateau -> cases[12].fourmi, myWorld);
 
 
 
