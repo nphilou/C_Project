@@ -15,7 +15,6 @@ int main(int argc, char *argv[]) {
 
     //Creation monde
     Monde *myWorld = creationMonde();
-    affichePlateau(myWorld->plateau);
 
     SDL_Event event;
 

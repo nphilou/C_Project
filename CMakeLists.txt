@@ -24,7 +24,6 @@ set(SOURCE_FILES
     instructions.h
     app.c
     app.h
-    fourmido.c
     fourmido_sdl.c
     jeu.c
     jeu.h)

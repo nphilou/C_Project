@@ -15,29 +15,15 @@ Lea TODO List :
 - Chargement (--)
 > Mettre les deux dans un fichier sauvegarde.c
 
-- Combats (++)
 
-Phil TODO List :
-- Demander instructions 
-- Traitement instructions
-- Chargement cfg
-- SDL <3
+/!\ Ajout de fichier
+A chaque ajout de fichier, ajouter au Cmakelist, fourmidable_SDL.sh et git add
 
-
-General TODO List : 
-
-- Renommer les variables.
-- Enlever les tests.
-- Free !!! (voir valgrind)
-- if def pour savoir qui commence
-- Mettre plein de commentaires dans les entêtes
-
-**inclusions**
-structures < (configuration) < plateau < init < combat < deplacement < instruction < app < fourmido 
-
-/!\
-A chaque ajout de fichier, ajouter au Cmakelist, fourmidable.sh et git add
-
-<!>
+Pour écrire dans un fichier (script bash)
 2> logs/compile.log
 2> logs/link.log
+
+Comment utiliser Cmake :
+cmake . CMakelist.txt
+make
+./C_Project
