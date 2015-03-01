@@ -1,4 +1,0 @@
-instructions.o: In function `tour':
-instructions.c:(.text+0x93a): undefined reference to `affichePlateauSDL'
-instructions.c:(.text+0x9a1): undefined reference to `affichePlateauSDL'
-collect2: error: ld returned 1 exit status

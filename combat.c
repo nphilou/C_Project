@@ -14,11 +14,9 @@ int combatFourmi(Monde *myWorld, Fourmi *attaque, Fourmi *defense) {
 
     if (attaque->type == SOLDAT && defense->type != SOLDAT) {
         srand((unsigned int) time(NULL));
-        scoreFourmi = rand() % 101;
+        scoreFourmi = rand() % 100;
         if (scoreFourmi >= FORCE_AGENT_VS_SOLDAT) {
             printf(" vous avez remporté le combat\n");
-            //myWorld->plateau->cases[indice].fourmi = attaque;
-            //attaque -> position= indice;
             supprimeFourmi(myWorld, defense, attaque);
             return 1;
         } else {
@@ -30,11 +28,9 @@ int combatFourmi(Monde *myWorld, Fourmi *attaque, Fourmi *defense) {
 
     if (attaque->type != SOLDAT && defense->type == SOLDAT) {
         srand((unsigned int) time(NULL));
-        scoreFourmi = rand() % 101;
+        scoreFourmi = rand() % 100;
         if (scoreFourmi <= FORCE_AGENT_VS_SOLDAT) {
             printf(" vous avez remporté le combat\n");
-            //myWorld->plateau->cases[indice].fourmi = attaque;
-            //attaque -> position = indice;
             supprimeAgent(defense, myWorld);
             return 1;
         } else {
@@ -45,16 +41,14 @@ int combatFourmi(Monde *myWorld, Fourmi *attaque, Fourmi *defense) {
     }
 
 
-    if (attaque->type != SOLDAT && defense->type != SOLDAT) {
+    if ((attaque->type != SOLDAT && defense->type != SOLDAT) || (attaque->type == SOLDAT && defense -> type == SOLDAT)) {
 
         srand((unsigned int) time(NULL));
 
         do {
-            scoreFourmi = rand() % 101;
+            scoreFourmi = rand() % 100;
             if (scoreFourmi > 50) {
                 printf(" vous avez remporté le combat\n");
-                // myWorld->plateau->cases[indice].fourmi = attaque;
-                //attaque -> position = indice;
                 supprimeFourmi(myWorld, defense, attaque);
                 return 1;
             } else if (scoreFourmi < 50) {

@@ -25,6 +25,8 @@ set(SOURCE_FILES
     app.c
     app.h
     fourmido.c
-    fourmido_sdl.c)
+    fourmido_sdl.c
+    jeu.c
+    jeu.h)
 
 add_executable(C_Project ${SOURCE_FILES})

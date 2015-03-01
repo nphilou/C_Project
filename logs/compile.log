@@ -1,12 +1,15 @@
-instructions.c: In function ‘traiteInstructionActuelle’:
-instructions.c:184:17: warning: implicit declaration of function ‘deplacementFourmi’ [-Wimplicit-function-declaration]
-                 deplacementFourmi(myWorld, fourmi, chercheAbscisse(myWorld, fourmi->destination), chercheOrdonnee(myWorld, fourmi->destination));
-                 ^
-instructions.c: In function ‘traiteInstruction’:
-instructions.c:213:13: warning: implicit declaration of function ‘demandeDestination’ [-Wimplicit-function-declaration]
-             demandeDestination(&x, &y, myWorld, fourmi);
-             ^
+affichage.c: In function ‘affichePlateauSDL’:
+affichage.c:76:27: warning: variable ‘couleur’ set but not used [-Wunused-but-set-variable]
+     int largeur, hauteur, couleur;
+                           ^
+init.c:244:5: error: conflicting types for ‘chercheFourmiliere’
+ int chercheFourmiliere(Fourmi *fourmi) {
+     ^
+In file included from init.c:7:0:
+init.h:14:9: note: previous declaration of ‘chercheFourmiliere’ was here
+     int chercheFourmiliere(Fourmi *fourmi, Monde *myWorld);
+         ^
 fourmido.c: In function ‘main’:
-fourmido.c:44:9: warning: unused variable ‘premierJoueur’ [-Wunused-variable]
+fourmido.c:50:9: warning: unused variable ‘premierJoueur’ [-Wunused-variable]
      int premierJoueur = (int) ROUGE;
          ^
