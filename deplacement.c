@@ -165,7 +165,6 @@ void deplacementFourmi(Monde *myWorld, Fourmi *fourmi, int abscisse, int ordonne
 
     if (xF < abscisse) {
         deplacementEst(myWorld, fourmi, ordonnee);
-
     }
     else if (xF > abscisse) {
         deplacementOuest(myWorld, fourmi, ordonnee);
