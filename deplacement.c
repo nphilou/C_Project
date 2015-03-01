@@ -5,15 +5,17 @@
 #include "plateau.h"
 #include "deplacement.h"
 #include "combat.h"
+#include "instructions.h"
+#include "affichage.h"
 
 void demandeDestination(int *abscisse, int *ordonnee, Monde *monde, Fourmi *fourmi) {
     int tmp0, tmp1;
     do {
         printf("Donnez une destination : abscisse ? \n");
-        scanf("%d", &tmp0);
+        lireEntier(&tmp0);
         *abscisse = tmp0;
         printf("ordonnee ? \n");
-        scanf("%d", &tmp1);
+        lireEntier(&tmp1);
         *ordonnee = tmp1;
 
     } while (map(tmp0, tmp1, monde->plateau->cote) < 0);
@@ -28,8 +30,8 @@ void deplacementEst(Monde *myWorld, Fourmi *fourmi, int ordonnee) {
     int cote = myWorld->plateau->cote, indice;
     Couleur couleur = fourmi->couleur;
 
-    int caseInitial = map(xF, yF, myWorld->plateau->cote);
-    modifVoisin (myWorld, fourmi,caseInitial);
+    int caseInitiale = fourmi->position;
+    modifVoisin(myWorld, fourmi, caseInitiale);
 
     if (yF > ordonnee) {
         indice = map(xF + 1, yF - 1, cote);
@@ -42,10 +44,8 @@ void deplacementEst(Monde *myWorld, Fourmi *fourmi, int ordonnee) {
     if (!estLibre(myWorld, indice)) {
         if (myWorld->plateau->cases[indice].fourmi->couleur == couleur) {
             ajoutFourmi(myWorld, fourmi, indice);
-            affichePlateau(myWorld->plateau);
-            printf("position fourmi precedente:%d\n", fourmi->voisinPrec->position);
+            affichePlateauSDL(myWorld);
         } else {
-            printf("position*** fourmi:%d\n", indice);
             combatCase(myWorld, fourmi, indice);
         }
     } else {
@@ -63,8 +63,8 @@ void deplacementOuest(Monde *myWorld, Fourmi *fourmi, int ordonnee) {
     int cote = myWorld->plateau->cote, indice;
     Couleur couleur = fourmi->couleur;
 
-    int caseInitial = map(xF, yF, myWorld->plateau->cote);
-    modifVoisin (myWorld,fourmi, caseInitial);
+    int caseInitiale = fourmi->position;
+    modifVoisin(myWorld, fourmi, caseInitiale);
 
     if (yF > ordonnee) {
         indice = map(xF - 1, yF - 1, cote);
@@ -87,10 +87,6 @@ void deplacementOuest(Monde *myWorld, Fourmi *fourmi, int ordonnee) {
         myWorld->plateau->cases[indice].fourmi = fourmi;
         fourmi->position = indice;
     }
-/*
-    myWorld->plateau->cases[indice].fourmi = fourmi;
-    fourmi->position = indice;
-    */
 }
 
 //if yF < *ordonnee
@@ -101,8 +97,8 @@ void deplacementSud(Monde *myWorld, Fourmi *fourmi, int abscisse) {
     int cote = myWorld->plateau->cote, indice;
     Couleur couleur = fourmi->couleur;
 
-    int caseInitial = map(xF, yF, myWorld->plateau->cote);
-    modifVoisin (myWorld,fourmi,caseInitial);
+    int caseInitiale = fourmi->position;
+    modifVoisin(myWorld, fourmi, caseInitiale);
 
     if (xF > abscisse) {
         indice = map(xF - 1, yF + 1, cote);
@@ -119,18 +115,12 @@ void deplacementSud(Monde *myWorld, Fourmi *fourmi, int abscisse) {
         if (myWorld->plateau->cases[indice].fourmi->couleur == couleur) {
             ajoutFourmi(myWorld, fourmi, indice);
         } else {
-            printf("position*** fourmi:%d\n", indice);
             combatCase(myWorld, fourmi, indice);
-            printf("bou");
         }
     } else {
         myWorld->plateau->cases[indice].fourmi = fourmi;
         fourmi->position = indice;
     }
-/*
-    myWorld->plateau->cases[indice].fourmi = fourmi;
-    fourmi->position = indice;
-    */
 }
 
 // if yF > *ordonnee
@@ -141,8 +131,8 @@ void deplacementNord(Monde *myWorld, Fourmi *fourmi, int abscisse) {
     int cote = myWorld->plateau->cote, indice;
     Couleur couleur = fourmi->couleur;
 
-    int caseInitial = map(xF, yF, myWorld->plateau->cote);
-    modifVoisin (myWorld,fourmi, caseInitial);
+    int caseInitiale = fourmi->position;
+    modifVoisin(myWorld, fourmi, caseInitiale);
 
     if (xF > abscisse) {
         indice = map(xF - 1, yF - 1, cote);
@@ -171,27 +161,20 @@ void deplacementFourmi(Monde *myWorld, Fourmi *fourmi, int abscisse, int ordonne
 
     int xF = chercheAbscisse(myWorld, fourmi->position);
     int yF = chercheOrdonnee(myWorld, fourmi->position);
-    //int caseInitial = map(xF, yF, myWorld->plateau->cote);
     fourmi->destination = map(abscisse, ordonnee, myWorld->plateau->cote);
 
-    //myWorld->plateau->cases[caseInitial].fourmi = NULL;
-
     if (xF < abscisse) {
-        printf("ici *\n");
         deplacementEst(myWorld, fourmi, ordonnee);
 
     }
     else if (xF > abscisse) {
         deplacementOuest(myWorld, fourmi, ordonnee);
-        printf("ici**\n");
     }
     else if (yF < ordonnee) {
         deplacementSud(myWorld, fourmi, abscisse);
-        printf("ici***\n");
     }
     else if (yF > ordonnee) {
         deplacementNord(myWorld, fourmi, abscisse);
-        printf("ici****\n");
     }
 }
 
@@ -213,8 +196,6 @@ void ajoutFourmi(Monde *myWorld, Fourmi *fourmi, int indice) {
 
 void combatCase(Monde *myWorld, Fourmi *fourmi, int indice) {
 
-    printf("***combat case***\n");
-
     Fourmi *temp;
     temp = myWorld->plateau->cases[indice].fourmi;
     int combat = 1;
@@ -228,7 +209,6 @@ void combatCase(Monde *myWorld, Fourmi *fourmi, int indice) {
     }
     if (combat == 1) {
         printf("remporte le combat\n");
-        myWorld->plateau->cases[fourmi->position].fourmi = NULL;
         myWorld->plateau->cases[indice].fourmi = fourmi;
         fourmi->position = indice;
     } else {
@@ -236,29 +216,37 @@ void combatCase(Monde *myWorld, Fourmi *fourmi, int indice) {
     }
 }
 
-void modifVoisin (Monde*myWorld, Fourmi*fourmi,  int caseInitiale){
+void modifVoisin(Monde *myWorld, Fourmi *fourmi, int caseInitiale) {
 
-    Fourmi*temp;
-    temp =fourmi;
+    Fourmi *temp;
+    temp = fourmi;
 
- // savoir si la fourmi que je veux deplacer est celle sur laquelle pointe la case ou non ..
+    //savoir si la fourmi que je veux deplacer est celle sur laquelle pointe la case ou non ..
 
-    if(temp -> voisinSuiv != NULL && temp -> voisinPrec != NULL) {
-        temp -> voisinSuiv -> voisinPrec = temp -> voisinPrec;
-        temp -> voisinPrec -> voisinSuiv = temp -> voisinSuiv;
-        if (myWorld->plateau->cases[caseInitiale].fourmi==temp) {
+    //cas voisinPrec et voisinSuiv
+    if (temp->voisinSuiv != NULL && temp->voisinPrec != NULL) {
+        temp->voisinSuiv->voisinPrec = temp->voisinPrec;
+        temp->voisinPrec->voisinSuiv = temp->voisinSuiv;
+
+        //modification pointeur tableau cases
+        if (myWorld->plateau->cases[caseInitiale].fourmi == temp) {
             myWorld->plateau->cases[caseInitiale].fourmi = temp->voisinSuiv;
         }
-    } else if (temp -> voisinSuiv !=NULL && temp -> voisinPrec == NULL){
-        temp -> voisinSuiv ->voisinPrec = NULL;
-        if (myWorld->plateau->cases[caseInitiale].fourmi==temp) {
+
+    } else if (temp->voisinSuiv != NULL && temp->voisinPrec == NULL) {
+        temp->voisinSuiv->voisinPrec = NULL;
+
+        if (myWorld->plateau->cases[caseInitiale].fourmi == temp) {
             myWorld->plateau->cases[caseInitiale].fourmi = temp->voisinSuiv;
         }
-    } else if (temp -> voisinSuiv ==NULL && temp -> voisinPrec != NULL){
-        temp -> voisinPrec -> voisinSuiv = NULL;
-        if (myWorld->plateau->cases[caseInitiale].fourmi==temp) {
+
+    } else if (temp->voisinSuiv == NULL && temp->voisinPrec != NULL) {
+        temp->voisinPrec->voisinSuiv = NULL;
+
+        if (myWorld->plateau->cases[caseInitiale].fourmi == temp) {
             myWorld->plateau->cases[caseInitiale].fourmi = temp->voisinPrec;
         }
+
     } else {
         myWorld->plateau->cases[caseInitiale].fourmi = NULL;
     }
