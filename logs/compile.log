@@ -10,6 +10,6 @@ init.h:14:9: note: previous declaration of ‘chercheFourmiliere’ was here
      int chercheFourmiliere(Fourmi *fourmi, Monde *myWorld);
          ^
 fourmido.c: In function ‘main’:
-fourmido.c:50:9: warning: unused variable ‘premierJoueur’ [-Wunused-variable]
+fourmido.c:49:9: warning: unused variable ‘premierJoueur’ [-Wunused-variable]
      int premierJoueur = (int) ROUGE;
          ^

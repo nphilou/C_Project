@@ -13,13 +13,13 @@ int main(int argc, char *argv[]) {
     Monde *myWorld = creationMonde();
 
     int indice1 = map(2, 2, myWorld->plateau->cote);
-    /*int indice2 = map(2, 2, myWorld->plateau->cote);
-    int indice3 = map(2, 2, myWorld->plateau->cote);
+    int indice2 = map(2, 2, myWorld->plateau->cote);
+    int indice3 = map(3, 2, myWorld->plateau->cote);
     int indice4 = map(3, 2, myWorld->plateau->cote);
     creationFourmi(ROUGE, OUVRIERE, myWorld->rouge, myWorld, indice1);
     creationFourmi(ROUGE, SOLDAT, myWorld->rouge, myWorld, indice2);
-    creationFourmi(ROUGE, OUVRIERE, myWorld->rouge, myWorld, indice3);*/
-    creationFourmi(NOIR, SOLDAT, myWorld->noire, myWorld, indice1);
+    creationFourmi(ROUGE, OUVRIERE, myWorld->noire, myWorld, indice3);
+    creationFourmi(NOIR, SOLDAT, myWorld->noire, myWorld, indice4);
 
 
    //affichePlateau(myWorld->plateau);
@@ -37,8 +37,6 @@ int main(int argc, char *argv[]) {
     //printf("la fourmiliere precedente position:%d\n", myWorld-> plateau -> cases[1].fourmi -> fourmilierePrec -> position);
     //affichePlateau(myWorld->plateau);
 
-    //priseFourmiliere( myWorld -> plateau -> cases[0].fourmi , myWorld, myWorld -> plateau -> cases[24].fourmi);
-
     //combatCase(myWorld, myWorld -> plateau -> cases[13].fourmi, 12);
     //affichePlateau(myWorld->plateau);
 
@@ -47,7 +45,7 @@ int main(int argc, char *argv[]) {
     //affichePlateau(myWorld->plateau);
     //printf("type fourmi:%d\n", myWorld -> plateau -> cases[12].fourmi -> voisinSuiv-> type);
 
-    /*
+
     int premierJoueur = (int) ROUGE;
     int i = 1;
     while(i){
@@ -57,7 +55,7 @@ int main(int argc, char *argv[]) {
         tour(myWorld, myWorld->noire, myWorld->rouge);
         printf("Quitter ? OUI(0), NON(1)");
         scanf("%d", &i);
-    }*/
+    }
 
     return 0;
 }
