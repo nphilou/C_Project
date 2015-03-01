@@ -1,4 +1,0 @@
-affichage.c: In function ‘affichePlateauSDL’:
-affichage.c:76:27: warning: variable ‘couleur’ set but not used [-Wunused-but-set-variable]
-     int largeur, hauteur, couleur;
-                           ^
