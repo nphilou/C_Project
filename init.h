@@ -11,7 +11,7 @@
     void supprimeFourmiliereFin(Fourmi *fourmi, Monde *myWorld);
     void supprimeFourmiliere(Fourmi *fourmi, Monde *myWorld);
     void changeCouleur(Monde *myWorld, Fourmi *fourmi, Fourmi *ennemie);
-    int chercheFourmiliere(Fourmi *fourmi, Monde *myWorld);
+    int chercheFourmiliere(Fourmi *fourmi);
     Monde *creationMonde();
 
 #endif

@@ -8,7 +8,7 @@
 #include "init.h"
 #include "plateau.h"
 #include "instructions.h"
-
+#include "jeu.h"
 
 
 int main(int argc, char *argv[]) {
@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
 
     }
 */
-
+    int premierJoueur = (int) ROUGE;
     int i = 1;
     while (i) {
         printf("((((((((((((((((TOUR ROUGE))))))))))))))))\n");
@@ -63,6 +63,7 @@ int main(int argc, char *argv[]) {
         printf("Quitter ? OUI(0), NON(1)");
         scanf("%d", &i);
     }
+    sauvegarde(myWorld, premierJoueur);
 
     TTF_Quit();
     videPlateau();

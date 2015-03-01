@@ -1,8 +1,10 @@
-#include "jeu.h"
-#include "instructions.h"
-//#include <stdio.h>
-//#include <stdlib.h>
+
+
+#include <stdio.h>
+#include <stdlib.h>
 #include "structures.h"
+#include "instructions.h"
+#include "jeu.h"
 
 void sauvegarde (Monde* myWorld, int joueur){
 
@@ -14,7 +16,7 @@ void sauvegarde (Monde* myWorld, int joueur){
     fprintf (file, "%d %d\n", temp-> couleur, myWorld -> tresorRouge);
     while (temp -> fourmiliereSuiv!= NULL){
             while ( temp -> suivant != NULL){
-                fprintf (file, "%d %d %d %d %d\n", temp -> origine, temp -> type, temp -> couleur, temp -> position, temp-> instruction);
+                fprintf (file, "%d %d %d %d %d\n", temp -> origine->position, temp -> type, temp -> couleur, temp -> position, temp-> instruction);
                 temp = temp -> suivant;
             }
         temp = temp -> fourmiliereSuiv;
@@ -24,7 +26,7 @@ void sauvegarde (Monde* myWorld, int joueur){
     fprintf (file, "%d %d\n", temp-> couleur, myWorld -> tresorNoire);
      while (temp -> fourmiliereSuiv!= NULL){
             while ( temp -> suivant != NULL){
-                fprintf (file, "%d %d %d %d %d\n", temp -> origine, temp -> type, temp -> couleur, temp -> position, temp-> instruction);
+                fprintf (file, "%d %d %d %d %d\n", temp -> origine->position, temp -> type, temp -> couleur, temp -> position, temp-> instruction);
                 temp = temp -> suivant;
             }
         temp = temp -> fourmiliereSuiv;

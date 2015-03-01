@@ -1,18 +1,29 @@
 affichage.c: In function ‘affichePlateauSDL’:
 affichage.c:76:27: warning: variable ‘couleur’ set but not used [-Wunused-but-set-variable]
-     int largeur, hauteur, couleur;
-                           ^
-init.c:244:5: error: conflicting types for ‘chercheFourmiliere’
- int chercheFourmiliere(Fourmi *fourmi) {
-     ^
-In file included from init.c:7:0:
-init.h:14:9: note: previous declaration of ‘chercheFourmiliere’ was here
-     int chercheFourmiliere(Fourmi *fourmi, Monde *myWorld);
-         ^
-jeu.c: In function ‘sauvegarde’:
-jeu.c:18:17: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘struct Fourmi *’ [-Wformat=]
-                 fprintf (file, "%d %d %d %d %d\n", temp -> origine, temp -> type, temp -> couleur, temp -> position, temp-> instruction);
-                 ^
-jeu.c:28:17: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘struct Fourmi *’ [-Wformat=]
-                 fprintf (file, "%d %d %d %d %d\n", temp -> origine, temp -> type, temp -> couleur, temp -> position, temp-> instruction);
-                 ^
+In file included from jeu.c:2:0:
+instructions.h:9:20: error: unknown type name ‘Monde’
+instructions.h:9:36: error: unknown type name ‘Fourmi’
+instructions.h:11:1: error: unknown type name ‘Instruction’
+instructions.h:11:43: error: unknown type name ‘Monde’
+instructions.h:11:59: error: unknown type name ‘Fourmi’
+instructions.h:13:1: error: unknown type name ‘Instruction’
+instructions.h:13:37: error: unknown type name ‘Monde’
+instructions.h:13:53: error: unknown type name ‘Fourmi’
+instructions.h:15:1: error: unknown type name ‘Instruction’
+instructions.h:15:38: error: unknown type name ‘Monde’
+instructions.h:15:54: error: unknown type name ‘Fourmi’
+instructions.h:17:1: error: unknown type name ‘Instruction’
+instructions.h:17:40: error: unknown type name ‘Monde’
+instructions.h:17:56: error: unknown type name ‘Fourmi’
+instructions.h:19:23: error: unknown type name ‘Monde’
+instructions.h:19:39: error: unknown type name ‘Fourmi’
+instructions.h:21:32: error: unknown type name ‘Monde’
+instructions.h:21:48: error: unknown type name ‘Fourmi’
+instructions.h:23:24: error: unknown type name ‘Monde’
+instructions.h:23:40: error: unknown type name ‘Fourmi’
+instructions.h:25:1: error: unknown type name ‘Instruction’
+instructions.h:25:32: error: unknown type name ‘Monde’
+instructions.h:25:48: error: unknown type name ‘Fourmi’
+instructions.h:27:11: error: unknown type name ‘Monde’
+instructions.h:27:27: error: unknown type name ‘Fourmi’
+instructions.h:27:43: error: unknown type name ‘Fourmi’

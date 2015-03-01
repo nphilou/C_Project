@@ -38,13 +38,15 @@ Instruction demandeInstructionFourmiliere(Monde *myWorld, Fourmi *listeFourmi) {
 
         if(!instructiontemp) productionPossible = demandeProduction(myWorld, listeFourmi);
 
-        if (!instructiontemp && !productionPossible)
+        if (!instructiontemp && !productionPossible){
             printf("Ressources insuffisantes\n");
+            continue;
+        }
 
         if (instructiontemp < 0 || instructiontemp > 2)
             printf("Vous m'expliquez ? 0 à 2, ce n'est pas si dur ?\n");
 
-    } while (instructiontemp < 0 || instructiontemp > 2 || !productionPossible);
+    } while (instructiontemp < 0 || instructiontemp > 2);
 
     instruction = (Instruction) instructiontemp;
 
@@ -56,7 +58,7 @@ Instruction demandeInstructionReine(Monde *myWorld, Fourmi *listeFourmi) {
     int instructiontemp;
     int *tresor = couleurTresor(myWorld, listeFourmi);
 
-    if (*tresor > COUT_TRANSFORMATION && !chercheFourmiliere(listeFourmi, myWorld)) {
+    if (*tresor >= COUT_TRANSFORMATION && !chercheFourmiliere(listeFourmi)) {
         do {
             printf("Donnez une instruction pour la reine à la case %d, %d\n",
                     chercheAbscisse(myWorld, listeFourmi->position),
@@ -326,7 +328,7 @@ void tour(Monde *myWorld, Fourmi *joueur, Fourmi *joueurAdverse) {
 
             if (listeFourmi->instruction == AUCUNE) {
                 listeFourmi->instruction = demandeInstruction(myWorld, listeFourmi);
-
+                printf("vous avez entré inst = %d", (int) listeFourmi->instruction);
                 traiteInstruction(myWorld, listeFourmi);
             }
 
