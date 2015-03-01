@@ -9,7 +9,10 @@ In file included from init.c:7:0:
 init.h:14:9: note: previous declaration of ‘chercheFourmiliere’ was here
      int chercheFourmiliere(Fourmi *fourmi, Monde *myWorld);
          ^
-fourmido.c: In function ‘main’:
-fourmido.c:49:9: warning: unused variable ‘premierJoueur’ [-Wunused-variable]
-     int premierJoueur = (int) ROUGE;
-         ^
+jeu.c: In function ‘sauvegarde’:
+jeu.c:18:17: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘struct Fourmi *’ [-Wformat=]
+                 fprintf (file, "%d %d %d %d %d\n", temp -> origine, temp -> type, temp -> couleur, temp -> position, temp-> instruction);
+                 ^
+jeu.c:28:17: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘struct Fourmi *’ [-Wformat=]
+                 fprintf (file, "%d %d %d %d %d\n", temp -> origine, temp -> type, temp -> couleur, temp -> position, temp-> instruction);
+                 ^

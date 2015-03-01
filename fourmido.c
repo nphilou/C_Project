@@ -4,6 +4,7 @@
 #include "plateau.h"
 #include "app.h"
 #include "init.h"
+#include "jeu.h"
 #include "deplacement.h"
 
 
@@ -43,7 +44,7 @@ int main(int argc, char *argv[]) {
     //deplacementFourmi(myWorld, myWorld -> plateau -> cases[6].fourmi, 2,2);
 
     //affichePlateau(myWorld->plateau);
-    //printf("type fourmi:%d\n", myWorld -> plateau -> cases[12].fourmi -> voisinSuiv-> type);
+    //printf("type fourmi:%d\n", myWorld -> plateau -> cases[24].fourmi -> type);
 
 
     int premierJoueur = (int) ROUGE;
@@ -52,10 +53,12 @@ int main(int argc, char *argv[]) {
         printf("((((((((((((((((TOUR ROUGE))))))))))))))))\n");
         tour(myWorld, myWorld->rouge, myWorld->noire);
         printf("((((((((((((((((TOUR NOIR))))))))))))))))\n");
+        premierJoueur = (int) NOIR;
         tour(myWorld, myWorld->noire, myWorld->rouge);
         printf("Quitter ? OUI(0), NON(1)");
         scanf("%d", &i);
     }
+    sauvegarde(myWorld, premierJoueur);
 
     return 0;
 }

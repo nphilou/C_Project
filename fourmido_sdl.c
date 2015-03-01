@@ -10,6 +10,7 @@
 #include "instructions.h"
 
 
+
 int main(int argc, char *argv[]) {
 
 
@@ -27,6 +28,7 @@ int main(int argc, char *argv[]) {
     SDL_WM_SetCaption("Fourmido", NULL);
 
     affichePlateauSDL(myWorld);
+
 
 /*
     int continuer = 1;

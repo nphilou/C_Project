@@ -240,15 +240,11 @@ void combatCase(Monde *myWorld, Fourmi *fourmi, int indice) {
 
     while ((temp != NULL) && (combat == 1)) {
         printf("combat voisin\n");
-        printf("type de la fourmi:%d\n", temp -> type);
+        printf("type de la fourmi:%d\n", temp->type);
         combat = combatFourmi(myWorld, fourmi, temp);
         printf("combat=%d\n", combat);
         temp = temp->voisinSuiv;
     }
-    /*if (combat==1){
-        combat = combatFourmi(myWorld, fourmi, temp);
-    }*/
-
     if (combat == 1) {
         printf("remporte le combat\n");
         myWorld->plateau->cases[fourmi->position].fourmi = NULL;

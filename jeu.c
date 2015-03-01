@@ -1,20 +1,12 @@
 #include "jeu.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "instructions.h"
+//#include <stdio.h>
+//#include <stdlib.h>
 #include "structures.h"
-#include "app.h"
 
+void sauvegarde (Monde* myWorld, int joueur){
 
-/*
-void sauvegarde (Monde* myWorld){
-    // ttes fourmi: fourmiliere/ouviere/soldat/reine par equipe
-    // leur position
-    // derniere instruction pour chaque fourmi
-    // tresor
-    // a qui le tour de jouer !!
-
-
-    FILE *file = fopen (" derniere sauvegarde.txt", "w+");
+    FILE *file = fopen ("derniere_sauvegarde.txt", "w+");
 
     Fourmi *temp;
 
@@ -22,7 +14,7 @@ void sauvegarde (Monde* myWorld){
     fprintf (file, "%d %d\n", temp-> couleur, myWorld -> tresorRouge);
     while (temp -> fourmiliereSuiv!= NULL){
             while ( temp -> suivant != NULL){
-                fprintf (file, "%d %d %d %d %d\n", temp -> origine, temp -> type, temp -> couleur, temp > indice, temp-> instruction);
+                fprintf (file, "%d %d %d %d %d\n", temp -> origine, temp -> type, temp -> couleur, temp -> position, temp-> instruction);
                 temp = temp -> suivant;
             }
         temp = temp -> fourmiliereSuiv;
@@ -32,24 +24,25 @@ void sauvegarde (Monde* myWorld){
     fprintf (file, "%d %d\n", temp-> couleur, myWorld -> tresorNoire);
      while (temp -> fourmiliereSuiv!= NULL){
             while ( temp -> suivant != NULL){
-                fprintf (file, "%d %d %d %d %d\n", temp -> origine, temp -> type, temp -> couleur, temp > indice, temp-> instruction);
+                fprintf (file, "%d %d %d %d %d\n", temp -> origine, temp -> type, temp -> couleur, temp -> position, temp-> instruction);
                 temp = temp -> suivant;
             }
         temp = temp -> fourmiliereSuiv;
     }
-
     // a qui le tour ...
-    fprintf (file, "")
+    fprintf (file, "%d\n", joueur);
 }
 
+/*
 void chargement (Monde*myWorld){
 
     //couleur equipe/tresor
-    //origine/type/couleur/indice/instruction
+    //origine/type/couleur/position/instruction
+    //joueur tour !
 
-    FILE * file = fopen("derniere sauvegarde.txt", "r");
+    FILE * file = fopen("derniere_sauvegarde.txt", "r");
 
-    if(f==NULL){
+    if(file==NULL){
         printf("error");
         exit(EXIT_FAILURE);
     }
@@ -65,4 +58,29 @@ void chargement (Monde*myWorld){
     fclose (file);
 
 }
+
+
+void jeu (Monde * myWorld){
+
+    //
+
+    int i = 1;
+    int joueur; //0 =rouge , 1=noir
+    while (i) {
+        printf("((((((((((((((((TOUR ROUGE))))))))))))))))\n");
+        joueur=0;
+        tour(myWorld, myWorld->rouge, myWorld->noire);
+        printf("((((((((((((((((TOUR NOIR))))))))))))))))\n");
+        joueur=1;
+        tour(myWorld, myWorld->noire, myWorld->rouge);
+        printf("Quitter ? OUI(0), NON(1)");
+        scanf("%d", &i);
+    }
+    sauvegarde(myWorld, joueur);
+
+}
+
+void afficherGagnant () {} // SCORE
+
+void videMemoire (){}
 */
