@@ -1,0 +1,4 @@
+fourmido.c: In function ‘main’:
+fourmido.c:14:12: warning: unused variable ‘myWorld’ [-Wunused-variable]
+     Monde *myWorld = creationMonde();
+            ^

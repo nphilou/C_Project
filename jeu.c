@@ -49,11 +49,10 @@ void sauvegarde (Monde* myWorld, int joueur){
             tempFourmiliere = tempFourmiliere -> fourmiliereSuiv;
         }
     } else {
-        fprintf (file, "%d %d %d\n", tempFourmiliere-> position, tempFourmiliere->instruction, tempFourmiliere-> couleur);
-        tempFourmi = tempFourmiliere->suivant;
-        while (tempFourmi != NULL) {
-            fprintf(file, "%d %d %d %d %d\n",tempFourmi->type, tempFourmi->origine->position,  tempFourmi->couleur, tempFourmi->position, tempFourmi->instruction);
-            tempFourmi = tempFourmi -> suivant;
+        tempFourmi = tempFourmiliere;
+        while ( tempFourmi != NULL){
+            fprintf (file, "%d %d %d %d %d\n", tempFourmi -> type,tempFourmi -> origine->position,  tempFourmi -> couleur, tempFourmi -> position, tempFourmi-> instruction);
+            tempFourmi = tempFourmi-> suivant;
         }
     }
     // a qui le tour ...
@@ -61,16 +60,14 @@ void sauvegarde (Monde* myWorld, int joueur){
 }
 
 
-/*
+
 void chargement (){
 
     //myWorld -> tresorRouge, myWorld -> tresorNoire
     //ROUGE
-    //tempFourmiliere-> position, tempFourmiliere->instruction, tempFourmiliere-> couleur
-    //tempAgent -> origine -> position, tempAgent -> type, tempAgent -> couleur, tempAgent -> position, tempAgent-> instruction
+    //tempAgent -> type,tempAgent -> origine -> position,  tempAgent -> couleur, tempAgent -> position, tempAgent-> instruction
     //joueur tour !
 
-    // meme chose pour equipe NOIRE
 
     FILE * file = fopen("derniere_sauvegarde.txt", "r");
 
@@ -79,17 +76,23 @@ void chargement (){
         exit(EXIT_FAILURE);
     }
 
-    int i=0,compt;
-    int * tab;
+    int tab[15] = {0};
+    char ligne[TMAX] = "";
 
-    tab= recupereEntier(file, &compt);
+    while(fgets(ligne, TMAX, file)!= NULL){
+        fscanf(ligne, "%d %d %d %d %d", &tab[0], &tab[1], &tab[2], &tab[3], &tab[4]);
+    }
+
+
+    printf("mon fichier : %d %d %d %d %d", tab[0], tab[1], tab[2], tab[3], tab[4]);
+
     fclose (file);
-
+/*
     Monde *myWorld = chargementMonde(tab, compt);
     affichePlateau(myWorld->plateau);
-
+*/
 }
-
+/*
 int * recupereEntier (FILE*file, int *compt){
     char temp[15];
     char * p;

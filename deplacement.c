@@ -29,9 +29,10 @@ void deplacementEst(Monde *myWorld, Fourmi *fourmi, int ordonnee) {
     int yF = chercheOrdonnee(myWorld, fourmi->position);
     int cote = myWorld->plateau->cote, indice;
     Couleur couleur = fourmi->couleur;
+    int resCombat;
 
     int caseInitiale = fourmi->position;
-    modifVoisin(myWorld, fourmi, caseInitiale);
+   // modifVoisin(myWorld, fourmi, caseInitiale);
 
     if (yF > ordonnee) {
         indice = map(xF + 1, yF - 1, cote);
@@ -43,14 +44,23 @@ void deplacementEst(Monde *myWorld, Fourmi *fourmi, int ordonnee) {
 
     if (!estLibre(myWorld, indice)) {
         if (myWorld->plateau->cases[indice].fourmi->couleur == couleur) {
+            modifVoisin(myWorld, fourmi, caseInitiale);
+            affichePlateauSDL(myWorld);
             ajoutFourmi(myWorld, fourmi, indice);
             affichePlateauSDL(myWorld);
         } else {
-            combatCase(myWorld, fourmi, indice);
+            resCombat= combatCase(myWorld, fourmi, indice);
+            if (resCombat == 1){
+                affichePlateauSDL(myWorld);
+                modifVoisin(myWorld, fourmi, caseInitiale);
+                affichePlateauSDL(myWorld);
+            }
         }
     } else {
-        printf("case libre\n");
+        modifVoisin(myWorld, fourmi, caseInitiale);
+        affichePlateauSDL(myWorld);
         myWorld->plateau->cases[indice].fourmi = fourmi;
+        affichePlateauSDL(myWorld);
         fourmi->position = indice;
     }
 }
@@ -62,9 +72,10 @@ void deplacementOuest(Monde *myWorld, Fourmi *fourmi, int ordonnee) {
     int yF = chercheOrdonnee(myWorld, fourmi->position);
     int cote = myWorld->plateau->cote, indice;
     Couleur couleur = fourmi->couleur;
+    int resCombat;
 
     int caseInitiale = fourmi->position;
-    modifVoisin(myWorld, fourmi, caseInitiale);
+    //modifVoisin(myWorld, fourmi, caseInitiale);
 
     if (yF > ordonnee) {
         indice = map(xF - 1, yF - 1, cote);
@@ -79,12 +90,23 @@ void deplacementOuest(Monde *myWorld, Fourmi *fourmi, int ordonnee) {
 
     if (!estLibre(myWorld, indice)) {
         if (myWorld->plateau->cases[indice].fourmi->couleur == couleur) {
+            modifVoisin(myWorld, fourmi, caseInitiale);
+            affichePlateauSDL(myWorld);
             ajoutFourmi(myWorld, fourmi, indice);
+            affichePlateauSDL(myWorld);
         } else {
-            combatCase(myWorld, fourmi, indice);
+            resCombat= combatCase(myWorld, fourmi, indice);
+            affichePlateauSDL(myWorld);
+            if (resCombat == 1){
+                modifVoisin(myWorld, fourmi, caseInitiale);
+                affichePlateauSDL(myWorld);
+            }
         }
     } else {
+        modifVoisin(myWorld, fourmi, caseInitiale);
+        affichePlateauSDL(myWorld);
         myWorld->plateau->cases[indice].fourmi = fourmi;
+        affichePlateauSDL(myWorld);
         fourmi->position = indice;
     }
 }
@@ -96,9 +118,10 @@ void deplacementSud(Monde *myWorld, Fourmi *fourmi, int abscisse) {
     int yF = chercheOrdonnee(myWorld, fourmi->position);
     int cote = myWorld->plateau->cote, indice;
     Couleur couleur = fourmi->couleur;
+    int resCombat;
 
     int caseInitiale = fourmi->position;
-    modifVoisin(myWorld, fourmi, caseInitiale);
+    //modifVoisin(myWorld, fourmi, caseInitiale);
 
     if (xF > abscisse) {
         indice = map(xF - 1, yF + 1, cote);
@@ -113,11 +136,18 @@ void deplacementSud(Monde *myWorld, Fourmi *fourmi, int abscisse) {
 
     if (!estLibre(myWorld, indice)) {
         if (myWorld->plateau->cases[indice].fourmi->couleur == couleur) {
+            modifVoisin(myWorld, fourmi, caseInitiale);
+            affichePlateauSDL(myWorld);
             ajoutFourmi(myWorld, fourmi, indice);
+            affichePlateauSDL(myWorld);
         } else {
-            combatCase(myWorld, fourmi, indice);
+            resCombat= combatCase(myWorld, fourmi, indice);
+            if (resCombat == 1){
+                modifVoisin(myWorld, fourmi, caseInitiale);
+            }
         }
     } else {
+        modifVoisin(myWorld, fourmi, caseInitiale);
         myWorld->plateau->cases[indice].fourmi = fourmi;
         fourmi->position = indice;
     }
@@ -130,9 +160,9 @@ void deplacementNord(Monde *myWorld, Fourmi *fourmi, int abscisse) {
     int yF = chercheOrdonnee(myWorld, fourmi->position);
     int cote = myWorld->plateau->cote, indice;
     Couleur couleur = fourmi->couleur;
+    int resCombat;
 
     int caseInitiale = fourmi->position;
-    modifVoisin(myWorld, fourmi, caseInitiale);
 
     if (xF > abscisse) {
         indice = map(xF - 1, yF - 1, cote);
@@ -145,12 +175,22 @@ void deplacementNord(Monde *myWorld, Fourmi *fourmi, int abscisse) {
 
     if (!estLibre(myWorld, indice)) {
         if (myWorld->plateau->cases[indice].fourmi->couleur == couleur) {
+            modifVoisin(myWorld, fourmi, caseInitiale);
+            affichePlateauSDL(myWorld);
             ajoutFourmi(myWorld, fourmi, indice);
+            affichePlateauSDL(myWorld);
         } else {
-            combatCase(myWorld, fourmi, indice);
+            resCombat= combatCase(myWorld, fourmi, indice);
+            if (resCombat == 1){
+                modifVoisin(myWorld, fourmi, caseInitiale);
+                affichePlateauSDL(myWorld);
+            }
         }
     } else {
+        modifVoisin(myWorld, fourmi, caseInitiale);
+        affichePlateauSDL(myWorld);
         myWorld->plateau->cases[indice].fourmi = fourmi;
+        affichePlateauSDL(myWorld);
         fourmi->position = indice;
     }
 }
@@ -165,15 +205,19 @@ void deplacementFourmi(Monde *myWorld, Fourmi *fourmi, int abscisse, int ordonne
 
     if (xF < abscisse) {
         deplacementEst(myWorld, fourmi, ordonnee);
+        affichePlateauSDL(myWorld);
     }
     else if (xF > abscisse) {
         deplacementOuest(myWorld, fourmi, ordonnee);
+        affichePlateauSDL(myWorld);
     }
     else if (yF < ordonnee) {
         deplacementSud(myWorld, fourmi, abscisse);
+        affichePlateauSDL(myWorld);
     }
     else if (yF > ordonnee) {
         deplacementNord(myWorld, fourmi, abscisse);
+        affichePlateauSDL(myWorld);
     }
 }
 
@@ -193,7 +237,7 @@ void ajoutFourmi(Monde *myWorld, Fourmi *fourmi, int indice) {
     fourmi->position = indice;
 }
 
-void combatCase(Monde *myWorld, Fourmi *fourmi, int indice) {
+int combatCase(Monde *myWorld, Fourmi *fourmi, int indice) {
 
     Fourmi *temp;
     temp = myWorld->plateau->cases[indice].fourmi;
@@ -213,6 +257,7 @@ void combatCase(Monde *myWorld, Fourmi *fourmi, int indice) {
     } else {
         printf("vous avez perdu le combat, pas de chance\n");
     }
+    return combat;
 }
 
 void modifVoisin(Monde *myWorld, Fourmi *fourmi, int caseInitiale) {
@@ -220,34 +265,23 @@ void modifVoisin(Monde *myWorld, Fourmi *fourmi, int caseInitiale) {
     Fourmi *temp;
     temp = fourmi;
 
-    //savoir si la fourmi que je veux deplacer est celle sur laquelle pointe la case ou non ..
-
     //cas voisinPrec et voisinSuiv
     if (temp->voisinSuiv != NULL && temp->voisinPrec != NULL) {
         temp->voisinSuiv->voisinPrec = temp->voisinPrec;
         temp->voisinPrec->voisinSuiv = temp->voisinSuiv;
 
-        //modification pointeur tableau cases
-        if (myWorld->plateau->cases[caseInitiale].fourmi == temp) {
-            myWorld->plateau->cases[caseInitiale].fourmi = temp->voisinSuiv;
-        }
-
     } else if (temp->voisinSuiv != NULL && temp->voisinPrec == NULL) {
         temp->voisinSuiv->voisinPrec = NULL;
-
-        if (myWorld->plateau->cases[caseInitiale].fourmi == temp) {
-            myWorld->plateau->cases[caseInitiale].fourmi = temp->voisinSuiv;
-        }
+        myWorld->plateau->cases[caseInitiale].fourmi = temp->voisinSuiv;
 
     } else if (temp->voisinSuiv == NULL && temp->voisinPrec != NULL) {
         temp->voisinPrec->voisinSuiv = NULL;
 
-        if (myWorld->plateau->cases[caseInitiale].fourmi == temp) {
-            myWorld->plateau->cases[caseInitiale].fourmi = temp->voisinPrec;
-        }
-
     } else {
         myWorld->plateau->cases[caseInitiale].fourmi = NULL;
     }
+
+    fourmi -> voisinPrec = NULL;
+    fourmi -> voisinSuiv =NULL;
 
 }

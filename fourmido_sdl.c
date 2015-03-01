@@ -67,6 +67,7 @@ int main(int argc, char *argv[]) {
         lireEntier(&i);
     }
     sauvegarde(myWorld, premierJoueur);
+    chargement();
 
     TTF_Quit();
     SDL_Quit();
