@@ -126,3 +126,15 @@ void affichePlateauSDL(Monde *myWorld) {
 
     SDL_Flip(ecran);
 }
+
+void videPlateau() {
+    TTF_CloseFont(police);
+
+    SDL_FreeSurface(fourmiliere);
+    SDL_FreeSurface(ouvriere);
+    SDL_FreeSurface(reine);
+    SDL_FreeSurface(soldat);
+    SDL_FreeSurface(vide);
+    SDL_FreeSurface(texteNoir);
+    SDL_FreeSurface(texteRouge);
+}

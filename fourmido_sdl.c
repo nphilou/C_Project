@@ -12,6 +12,7 @@
 
 int main(int argc, char *argv[]) {
 
+
     //Creation monde
     Monde *myWorld = creationMonde();
     affichePlateau(myWorld->plateau);
@@ -61,21 +62,8 @@ int main(int argc, char *argv[]) {
         scanf("%d", &i);
     }
 
-
-
-    //pause();
-
-    //TTF_CloseFont(police);
     TTF_Quit();
-
-    /*SDL_FreeSurface(fourmiliere);
-    SDL_FreeSurface(ouvriere);
-    SDL_FreeSurface(reine);
-    SDL_FreeSurface(soldat);
-    SDL_FreeSurface(vide);
-    SDL_FreeSurface(texteNoir);
-    SDL_FreeSurface(texteRouge);*/
-
+    videPlateau();
     SDL_Quit();
 
     return 0;
