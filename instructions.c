@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "config.h"
 #include "structures.h"
@@ -10,11 +11,18 @@
 #include "deplacement.h"
 
 void lireEntier(int *entier) {
-    char saisie[255];
+    char saisie[255] = "";
+    char *positionEntree = NULL;
+
     while (1) {
         fgets(saisie, 255, stdin);
+        positionEntree = strchr(saisie, '\n');
+
+        if (positionEntree != NULL) {
+            *positionEntree = '\0';
+        }
+
         if (sscanf(saisie, "%d", entier) == 1) break;
-        printf("Veuillez entrer un entier !\n");
     }
 }
 
@@ -26,10 +34,10 @@ int *couleurTresor(Monde *myWorld, Fourmi *fourmi) {
 Instruction demandeInstructionFourmiliere(Monde *myWorld, Fourmi *listeFourmi) {
     Instruction instruction;
     int instructiontemp;
-    int productionPossible;
+    int productionPossible = 0;
 
     do {
-        printf("Donnez une instruction pour la fourmiliere à la case %d, %d.\n",
+        printf("\nDonnez une instruction pour la fourmiliere à la case [%d, %d].\n",
                 chercheAbscisse(myWorld, listeFourmi->position),
                 chercheOrdonnee(myWorld, listeFourmi->position));
 
@@ -39,14 +47,14 @@ Instruction demandeInstructionFourmiliere(Monde *myWorld, Fourmi *listeFourmi) {
         if(!instructiontemp) productionPossible = demandeProduction(myWorld, listeFourmi);
 
         if (!instructiontemp && !productionPossible){
-            printf("Ressources insuffisantes\n");
+            printf("Ressources insuffisantes.\n");
             continue;
         }
 
         if (instructiontemp < 0 || instructiontemp > 2)
             printf("Vous m'expliquez ? 0 à 2, ce n'est pas si dur ?\n");
 
-    } while (instructiontemp < 0 || instructiontemp > 2);
+    } while (instructiontemp < 0 || instructiontemp > 2 || (!instructiontemp && !productionPossible));
 
     instruction = (Instruction) instructiontemp;
 
@@ -60,7 +68,7 @@ Instruction demandeInstructionReine(Monde *myWorld, Fourmi *listeFourmi) {
 
     if (*tresor >= COUT_TRANSFORMATION && !chercheFourmiliere(listeFourmi)) {
         do {
-            printf("Donnez une instruction pour la reine à la case %d, %d\n",
+            printf("\nDonnez une instruction pour la reine à la case [%d, %d]\n",
                     chercheAbscisse(myWorld, listeFourmi->position),
                     chercheOrdonnee(myWorld, listeFourmi->position));
             printf("SUICIDE(1), IMMOBILISATION(2), DEPLACEMENT(3), TRANSFORMATION(4)(%d) : ", COUT_TRANSFORMATION);
@@ -73,7 +81,7 @@ Instruction demandeInstructionReine(Monde *myWorld, Fourmi *listeFourmi) {
         } while (instructiontemp < 1 || instructiontemp > 4);
     } else {
         do {
-            printf("Donnez une instruction pour la reine à la case %d, %d\n",
+            printf("\nDonnez une instruction pour la reine à la case [%d, %d]\n",
                     chercheAbscisse(myWorld, listeFourmi->position),
                     chercheOrdonnee(myWorld, listeFourmi->position));
             printf("SUICIDE(1), IMMOBILISATION(2), DEPLACEMENT(3), *transformation impossible* : ");
@@ -95,7 +103,7 @@ Instruction demandeInstructionSoldat(Monde *myWorld, Fourmi *listeFourmi) {
     int instructiontemp;
 
     do {
-        printf("Donnez une instruction pour le soldat à la case %d, %d\n",
+        printf("\nDonnez une instruction pour le soldat à la case [%d, %d]\n",
                 chercheAbscisse(myWorld, listeFourmi->position),
                 chercheOrdonnee(myWorld, listeFourmi->position));
         printf("SUICIDE(1), IMMOBILISATION(2), DEPLACEMENT(3) : ");
@@ -115,7 +123,7 @@ Instruction demandeInstructionOuvriere(Monde *myWorld, Fourmi *listeFourmi) {
     int instructiontemp;
 
     do {
-        printf("Donnez une instruction pour l'ouvriere à la case %d, %d\n",
+        printf("\nDonnez une instruction pour l'ouvriere à la case [%d, %d]\n",
                 chercheAbscisse(myWorld, listeFourmi->position),
                 chercheOrdonnee(myWorld, listeFourmi->position));
         printf("SUICIDE(1), IMMOBILISATION(2), DEPLACEMENT(3) : ");
@@ -136,9 +144,9 @@ int demandeProduction(Monde *myWorld, Fourmi *fourmi) {
     int *tresor = couleurTresor(myWorld, fourmi);
 
     do {
-        printf("Que voulez vous produire ? UNITE(saisie)(temps)(tresor) \n");
-        printf("REINE(0)(%d)(%d),"
-                " SOLDAT(1)(%d)(%d),"
+        printf("Que voulez vous produire ? \nUNITE(saisie)(temps)(tresor) \n");
+        printf(" REINE(0)(%d)(%d),\n"
+                " SOLDAT(1)(%d)(%d),\n"
                 " OUVRIERE(2)(%d)(%d) : ",
                 TEMPS_REINE,
                 COUT_REINE,
@@ -176,6 +184,7 @@ int demandeProduction(Monde *myWorld, Fourmi *fourmi) {
     } while (productiontemp < 0 || productiontemp > 2);
 
     fourmi->production = production;
+    printf("Il reste %d tours avant la production\n", fourmi->tempsProd);
 
     return 1;
 }
@@ -188,10 +197,16 @@ void traiteInstructionActuelle(Monde *myWorld, Fourmi *fourmi) {
     switch (fourmi->instruction) {
 
         case PRODUCTION:
-            if (fourmi->tempsProd > 0)
+            printf("La fourmilliere sur la case [%d, %d] est en train de produire ! \n",
+                    chercheAbscisse(myWorld, fourmi->position),
+                    chercheOrdonnee(myWorld, fourmi->position));
+            if (fourmi->tempsProd > 0){
                 fourmi->tempsProd--;
+                printf("Le temps de production restant est de %d tours.\n", fourmi->tempsProd);
+            }
 
             if (fourmi->tempsProd == 0) {
+
                 caselibre = chercheLibre(fourmi->position, myWorld);
                 creationFourmi(couleur, fourmi->production, fourmi->origine, myWorld, caselibre);
                 fourmi->instruction = AUCUNE;
@@ -209,12 +224,20 @@ void traiteInstructionActuelle(Monde *myWorld, Fourmi *fourmi) {
 
         case DEPLACEMENT:
             if (fourmi->position == fourmi->destination) {
+                printf("La fourmi à la case [%d, %d] est arrivée à destination.\n",
+                        chercheAbscisse(myWorld, fourmi->position),
+                        chercheOrdonnee(myWorld, fourmi->position));
                 fourmi->instruction = AUCUNE;
             } else {
                 deplacementFourmi(myWorld, fourmi,
                         chercheAbscisse(myWorld, fourmi->destination),
                         chercheOrdonnee(myWorld, fourmi->destination));
             }
+            break;
+
+        case TRANSFORMATION:
+            transformeFourmi(fourmi, myWorld);
+            fourmi->instruction = AUCUNE;
             break;
 
         default:
@@ -252,8 +275,7 @@ void traiteInstruction(Monde *myWorld, Fourmi *fourmi) {
         case TRANSFORMATION:
             if (couleur == ROUGE) myWorld->tresorRouge -= COUT_TRANSFORMATION;
             if (couleur == NOIR) myWorld->tresorNoire -= COUT_TRANSFORMATION;
-            transformeFourmi(fourmi, myWorld);
-            fourmi->instruction = AUCUNE;
+            printf("La reine se transformera au prochain tour.\n");
             break;
 
         case PRODUCTION:
@@ -287,7 +309,7 @@ Instruction demandeInstruction(Monde *myWorld, Fourmi *fourmi) {
             break;
 
         default:
-            printf("ERREUR : Type de fourmi inconnu");
+            printf("ERREUR : Type de fourmi inconnu.\n");
             instruction = AUCUNE;
             break;
     }
@@ -304,6 +326,7 @@ void tour(Monde *myWorld, Fourmi *joueur, Fourmi *joueurAdverse) {
     listeFourmiliere = joueur;
     listeFourmiliereAdverse = joueurAdverse;
 
+    printf("\n < Tour courant de l'adversaire >\n");
     while (listeFourmiliereAdverse != NULL) {
         listeFourmiAdverse = listeFourmiliereAdverse;
 
@@ -317,6 +340,7 @@ void tour(Monde *myWorld, Fourmi *joueur, Fourmi *joueurAdverse) {
 
     affichePlateauSDL(myWorld);
 
+    printf("\n < Votre tour >\n");
     while (listeFourmiliere != NULL) {
         listeFourmi = listeFourmiliere;
 
@@ -328,7 +352,6 @@ void tour(Monde *myWorld, Fourmi *joueur, Fourmi *joueurAdverse) {
 
             if (listeFourmi->instruction == AUCUNE) {
                 listeFourmi->instruction = demandeInstruction(myWorld, listeFourmi);
-                printf("vous avez entré inst = %d", (int) listeFourmi->instruction);
                 traiteInstruction(myWorld, listeFourmi);
             }
 
@@ -339,5 +362,5 @@ void tour(Monde *myWorld, Fourmi *joueur, Fourmi *joueurAdverse) {
         }
         listeFourmiliere = listeFourmiliere->fourmiliereSuiv;
     }
-    printf("Tour terminé !");
+    printf("\n < Tour terminé ! >\n\n");
 }

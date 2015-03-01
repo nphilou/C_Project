@@ -13,7 +13,6 @@
 
 int main(int argc, char *argv[]) {
 
-
     //Creation monde
     Monde *myWorld = creationMonde();
     affichePlateau(myWorld->plateau);
@@ -57,17 +56,20 @@ int main(int argc, char *argv[]) {
     //int premierJoueur = (int) ROUGE;
     int i = 1;
     while (i) {
-        printf("((((((((((((((((TOUR ROUGE))))))))))))))))\n");
+        printf("((((((((((((((((TOUR ROUGE))))))))))))))))\n\n");
         tour(myWorld, myWorld->rouge, myWorld->noire);
-        printf("((((((((((((((((TOUR NOIR))))))))))))))))\n");
+        affichePlateauSDL(myWorld);
+
+        printf("((((((((((((((((TOUR NOIR))))))))))))))))\n\n");
         tour(myWorld, myWorld->noire, myWorld->rouge);
-        printf("Quitter ? OUI(0), NON(1)");
-        scanf("%d", &i);
+        affichePlateauSDL(myWorld);
+
+        printf("Quitter ? OUI(0), NON(1)\n");
+        lireEntier(&i);
     }
     //sauvegarde(myWorld, premierJoueur);
 
     TTF_Quit();
-    videPlateau();
     SDL_Quit();
 
     return 0;
