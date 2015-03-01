@@ -97,6 +97,10 @@ void creationFourmiliere(Couleur couleur, Monde *myWorld, int indice) {
         case NOIR:
             temp = myWorld->noire;
             break;
+
+        default:
+            temp = NULL;
+            break;
     }
 
     while (temp->fourmiliereSuiv != NULL) {
@@ -122,9 +126,6 @@ void transformeFourmi(Fourmi *fourmi, Monde *myWorld) {
 
     supprimeAgent(fourmi, myWorld);
     creationFourmiliere(couleur, myWorld, indice);
-    printf("TRANSFORMATION / position origine :%d\n", myWorld->plateau->cases[indice].fourmi->origine->position);
-
-
 }
 
 
@@ -135,7 +136,6 @@ void supprimeAgent(Fourmi *fourmi, Monde *myWorld) {
 
     int indice = fourmi->position;
 
-    printf("indice fourmi a supprimer = %d, son type:%d\n", fourmi->position, fourmi -> type);
     if (temp->suivant != NULL) {
         temp->suivant->precedant = temp->precedant;
     }
@@ -189,8 +189,6 @@ void supprimeFourmiliere(Fourmi *fourmi, Monde *myWorld) {
         supprimeAgent(temp->suivant, myWorld);
         affichePlateau(myWorld->plateau);
     }
-    printf("indice fourmiliere fin = %d\n", temp->position);
-    printf("fourmi case 24 = %d\n", (int) myWorld->plateau->cases[24].fourmi->type);
     supprimeFourmiliereFin(temp, myWorld);
 
 }
@@ -201,7 +199,6 @@ void supprimeFourmiliereFin(Fourmi *fourmi, Monde *myWorld) {
     temp = fourmi;
 
     int indice = fourmi->position;
-    printf("supprime fourmiliere position = %d\n", indice);
     if (temp->fourmiliereSuiv != NULL) {
         temp->fourmiliereSuiv->fourmilierePrec = temp->fourmilierePrec;
     }
@@ -224,9 +221,7 @@ void changeCouleur(Monde *myWorld, Fourmi *fourmi, Fourmi *ennemie) {
     }
 
     supprimeAgent(fourmi, myWorld);
-    //printf("position ennemie origine :%d\n", ennemie -> origine -> position); 
     creationFourmi(couleur, OUVRIERE, ennemie->origine, myWorld, indice);
-    //rintf("position de la fourmi prec :%d\n", myWorld -> plateau -> cases[indice].fourmi -> precedant-> position); 
 
 }
 
@@ -267,14 +262,6 @@ Monde *creationMonde() {
 
     //Creation plateau
     int cotePlateau = COTE;
-    printf("Taille du plateau ? ");
-    //scanf("%d", &cotePlateau);
-
-    //Test valeur saisie >1
-    if (cotePlateau <= 1) {
-        printf("Bah bravo MORRAY !\n");
-        exit(1);
-    }
 
     Plateau *plateau = calloc((size_t) pow(cotePlateau, 2), sizeof(Case));
 
@@ -311,33 +298,3 @@ Monde *creationMonde() {
 
     return myWorld;
 }
-
-//A CONTINUER TRANQUILLEMENT 
-/*
-void afficheMonde(Monde *myWorld, Fourmi *origine){
-    Fourmi *listeFourmiliere = origine;
-    
-    while (listeFourmiliere != NULL) {
-        listeFourmi = listeFourmiliere;
-        while (listeFourmi != NULL) {
-            switch(listeFourmi->type){
-                case(FOURMILIERE):
-                        printf("type = FOURMILIERE, ");
-                        break;
-
-                    case(REINE):
-                        instruction = demandeInstructionReine(myWorld, listeFourmi);
-                        break;
-
-                    case(SOLDAT):
-                        instruction = demandeInstructionSoldat(myWorld, listeFourmi);
-                        break;
-
-                    case(OUVRIERE):
-                        instruction = demandeInstructionOuvriere(myWorld, listeFourmi);
-                    
-            }
-        }
-    }
-}
-*/

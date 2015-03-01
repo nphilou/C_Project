@@ -89,7 +89,6 @@ void affichePlateauSDL(Monde *myWorld) {
             SDL_BlitSurface(caseplateau, NULL, ecran, &position);
 
             if (myWorld->plateau->cases[map(largeur, hauteur, cote)].fourmi == NULL) {
-                printf("la case %d, %d est vide\n", largeur, hauteur);
                 SDL_BlitSurface(vide, NULL, ecran, &position);
                 continue;
             }
