@@ -36,7 +36,7 @@ Instruction demandeInstructionFourmiliere(Monde *myWorld, Fourmi *listeFourmi) {
         printf("PRODUCTION(0), SUICIDE(1), IMMOBILISATION (2): ");
         lireEntier(&instructiontemp);
 
-        productionPossible = demandeProduction(myWorld, listeFourmi);
+        if(!instructiontemp) productionPossible = demandeProduction(myWorld, listeFourmi);
 
         if (!instructiontemp && !productionPossible)
             printf("Ressources insuffisantes\n");
