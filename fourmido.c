@@ -11,8 +11,8 @@
 int main(int argc, char *argv[]) {
 
 
-    Monde *myWorld = creationMonde();
-
+   // Monde *myWorld = creationMonde();
+ /*
     int indice1 = map(2, 2, myWorld->plateau->cote);
     int indice2 = map(2, 2, myWorld->plateau->cote);
     int indice3 = map(2, 2, myWorld->plateau->cote);
@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
     creationFourmi(ROUGE, SOLDAT, myWorld->rouge, myWorld, indice2);
     creationFourmi(ROUGE, OUVRIERE, myWorld->rouge, myWorld, indice3);
     creationFourmi(NOIR, SOLDAT, myWorld->noire, myWorld, indice4);
-
+*/
 
    //affichePlateau(myWorld->plateau);
 
@@ -45,12 +45,13 @@ int main(int argc, char *argv[]) {
     deplacementFourmi(myWorld, myWorld -> plateau -> cases[12].fourmi, 2,3);
     printf("fourmi de la case: %d\n", myWorld -> plateau -> cases[12].fourmi-> type);
     printf("fourmi -> suivante: %d\n", myWorld -> plateau -> cases[12].fourmi->voisinPrec-> type);
-    affichePlateau(myWorld->plateau);
     */
+    //affichePlateau(myWorld->plateau);
+
     //printf("type fourmi:%d\n", myWorld -> plateau -> cases[24].fourmi -> type);
 
 
-    //int premierJoueur = (int) ROUGE;
+   // int premierJoueur = (int) ROUGE;
     /*int i = 1;
     while(i){
         printf("((((((((((((((((TOUR ROUGE))))))))))))))))\n");
@@ -63,6 +64,8 @@ int main(int argc, char *argv[]) {
     }*/
 
     //sauvegarde(myWorld, premierJoueur);
+    chargement ();
+    //affichePlateau(myWorld->plateau);
 
     return 0;
 }

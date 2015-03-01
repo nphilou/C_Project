@@ -1,36 +1,39 @@
-
-
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "structures.h"
 #include "instructions.h"
 #include "jeu.h"
+#define TMAX 256
+#include <math.h>
+#include "config.h"
+#include "init.h"
+#include "plateau.h"
 
 void sauvegarde (Monde* myWorld, int joueur){
 
     FILE *file = fopen ("derniere_sauvegarde.txt", "w+");
 
     Fourmi *tempFourmiliere;
-    Fourmi * tempAgent;
+    Fourmi * tempFourmi;
 
     fprintf (file, "%d %d\n",myWorld -> tresorRouge, myWorld -> tresorNoire);
+
     tempFourmiliere = myWorld -> rouge;
-    printf("type fourmi:%d", myWorld -> rouge -> type);
     if (tempFourmiliere -> fourmiliereSuiv != NULL){
         while (tempFourmiliere != NULL){
-            fprintf (file, "%d %d %d\n", tempFourmiliere-> position, tempFourmiliere->instruction, tempFourmiliere-> couleur);
-            tempAgent = tempFourmiliere -> suivant;
-            while ( tempAgent != NULL){
-                fprintf (file, "%d %d %d %d %d\n", tempAgent -> origine->position, tempAgent -> type, tempAgent -> couleur, tempAgent -> position, tempAgent-> instruction);
-                tempAgent = tempAgent -> suivant;
+            tempFourmi = tempFourmiliere ;
+            while ( tempFourmi != NULL){
+                fprintf (file, "%d %d %d %d %d\n", tempFourmi -> type, tempFourmi -> origine->position, tempFourmi -> couleur, tempFourmi -> position, tempFourmi-> instruction);
+                tempFourmi = tempFourmi -> suivant;
             }
             tempFourmiliere = tempFourmiliere -> fourmiliereSuiv;
         }
     } else {
-        tempAgent = tempFourmiliere -> suivant;
-        while ( tempAgent != NULL){
-            fprintf (file, "%d %d %d %d %d\n", tempAgent -> origine->position, tempAgent -> type, tempAgent -> couleur, tempAgent -> position, tempAgent-> instruction);
-            tempAgent = tempAgent -> suivant;
+        tempFourmi = tempFourmiliere;
+        while ( tempFourmi != NULL){
+            fprintf (file, "%d %d %d %d %d\n", tempFourmi -> type,tempFourmi -> origine->position,  tempFourmi -> couleur, tempFourmi -> position, tempFourmi-> instruction);
+            tempFourmi = tempFourmi-> suivant;
         }
     }
 
@@ -38,19 +41,19 @@ void sauvegarde (Monde* myWorld, int joueur){
     tempFourmiliere = myWorld -> noire;
     if (tempFourmiliere -> fourmiliereSuiv != NULL){
         while (tempFourmiliere != NULL){
-            fprintf (file, "%d %d %d\n", tempFourmiliere-> position, tempFourmiliere->instruction, tempFourmiliere-> couleur);
-            tempAgent = tempFourmiliere -> suivant;
-            while ( tempAgent -> suivant != NULL){
-                fprintf (file, "%d %d %d %d %d\n", tempAgent -> origine->position, tempAgent -> type, tempAgent -> couleur, tempAgent -> position, tempAgent-> instruction);
-                //tempAgent = tempAgent -> suivant;
+            tempFourmi = tempFourmiliere;
+            while ( tempFourmi != NULL){
+                fprintf (file, "%d %d %d %d %d\n", tempFourmi -> type,tempFourmi -> origine->position,  tempFourmi -> couleur, tempFourmi -> position, tempFourmi-> instruction);
+                tempFourmi = tempFourmi -> suivant;
             }
             tempFourmiliere = tempFourmiliere -> fourmiliereSuiv;
         }
     } else {
-        tempAgent = tempFourmiliere->suivant;
-        while (tempAgent->suivant != NULL) {
-            fprintf(file, "%d %d %d %d %d\n", tempAgent->origine->position, tempAgent->type, tempAgent->couleur, tempAgent->position, tempAgent->instruction);
-            //tempAgent = tempAgent -> suivant;
+        fprintf (file, "%d %d %d\n", tempFourmiliere-> position, tempFourmiliere->instruction, tempFourmiliere-> couleur);
+        tempFourmi = tempFourmiliere->suivant;
+        while (tempFourmi != NULL) {
+            fprintf(file, "%d %d %d %d %d\n",tempFourmi->type, tempFourmi->origine->position,  tempFourmi->couleur, tempFourmi->position, tempFourmi->instruction);
+            tempFourmi = tempFourmi -> suivant;
         }
     }
     // a qui le tour ...
@@ -58,12 +61,16 @@ void sauvegarde (Monde* myWorld, int joueur){
 }
 
 
-/*
-void chargement (Monde*myWorld){
 
-    //couleur equipe/tresor
-    //origine/type/couleur/position/instruction
+void chargement (){
+
+    //myWorld -> tresorRouge, myWorld -> tresorNoire
+    //ROUGE
+    //tempFourmiliere-> position, tempFourmiliere->instruction, tempFourmiliere-> couleur
+    //tempAgent -> origine -> position, tempAgent -> type, tempAgent -> couleur, tempAgent -> position, tempAgent-> instruction
     //joueur tour !
+
+    // meme chose pour equipe NOIRE
 
     FILE * file = fopen("derniere_sauvegarde.txt", "r");
 
@@ -72,19 +79,89 @@ void chargement (Monde*myWorld){
         exit(EXIT_FAILURE);
     }
 
-    int element;
-    do {
-        element = fgetc (file);
+    int i=0,compt;
+    int * tab;
 
-
-
-    } while ( element != EOF);
-
+    tab= recupereEntier(file, &compt);
     fclose (file);
+
+    Monde *myWorld = chargementMonde(tab, compt);
+    affichePlateau(myWorld->plateau);
 
 }
 
+int * recupereEntier (FILE*file, int *compt){
+    char temp[15];
+    char * p;
+    int tempTab [TMAX];
+    int * tabEntier;
+    int i;
+    *compt=0;
 
+    while (fgets(temp, 15, file)){
+
+        p= temp;
+        while (*p) {
+            if (isdigit(*p)) {
+                tempTab[(*compt)++] = atoi(p);
+                while (isdigit(*p)) p++;
+            } else {
+                p++;
+            }
+        }
+    }
+
+    tabEntier = malloc(*compt * sizeof(int));
+    for (i = 0; i < *compt; i++) {
+        tabEntier[i] = tempTab[i];
+    }
+
+    return tabEntier;
+}
+
+
+Monde * chargementMonde( char * tab, int compt) {
+    //Creation Monde
+    Monde *myWorld = calloc(1, sizeof(Monde));
+
+    //Creation plateau
+    int cotePlateau = COTE;
+
+    Plateau *plateau = calloc((size_t) pow(cotePlateau, 2), sizeof(Case));
+
+
+    plateau->nombrecases = (int) pow(cotePlateau, 2); //A RENOMMER PAR TAILLE
+    plateau->cote = cotePlateau;
+    printf("plateau->nombrecases = %d \n", plateau->nombrecases);
+
+    //raccourcis
+    int cote = plateau->cote;
+    int taille = plateau->nombrecases;
+
+    myWorld->plateau = plateau;
+/*
+    //Creation fourmilieres rouge et noire
+    myWorld->noire = initialisation(NOIR, plateau);
+    myWorld->rouge = initialisation(ROUGE, plateau);
+
+    //Creation all
+    creationFourmi(ROUGE, REINE, myWorld->rouge, myWorld, 1);
+    creationFourmi(NOIR, REINE, myWorld->noire, myWorld, taille - 2);
+    creationFourmi(ROUGE, OUVRIERE, myWorld->rouge, myWorld, cote);
+    creationFourmi(NOIR, OUVRIERE, myWorld->noire, myWorld, taille - cote - 1);
+*/
+
+            myWorld->tresorRouge = tab[0];
+            myWorld->tresorNoire = tab[1];
+
+
+
+
+
+    return myWorld;
+}
+
+/*
 void jeu (Monde * myWorld){
 
     //
