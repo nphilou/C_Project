@@ -9,7 +9,7 @@
 #include "config.h"
 #include "init.h"
 #include "plateau.h"
-/*
+
 void sauvegarde (Monde* myWorld, int joueur){
 
     FILE *file = fopen ("derniere_sauvegarde.txt", "w+");
@@ -59,13 +59,15 @@ void sauvegarde (Monde* myWorld, int joueur){
     // a qui le tour ...
     fprintf (file, "%d\n", joueur);
 }
-*/
 
 
+/*
 void chargement (){
 
     //myWorld -> tresorRouge, myWorld -> tresorNoire
-    // tempAgent -> type, tempAgent -> origine -> position, tempAgent -> couleur, tempAgent -> position, tempAgent-> instruction
+    //ROUGE
+    //tempFourmiliere-> position, tempFourmiliere->instruction, tempFourmiliere-> couleur
+    //tempAgent -> origine -> position, tempAgent -> type, tempAgent -> couleur, tempAgent -> position, tempAgent-> instruction
     //joueur tour !
 
     // meme chose pour equipe NOIRE
@@ -83,12 +85,8 @@ void chargement (){
     tab= recupereEntier(file, &compt);
     fclose (file);
 
-    for (i = 0; i < compt; i++) {
-        printf("%d\n", tab[i]);
-    }
-    /*
     Monde *myWorld = chargementMonde(tab, compt);
-    affichePlateau(myWorld->plateau);*/
+    affichePlateau(myWorld->plateau);
 
 }
 
@@ -121,7 +119,7 @@ int * recupereEntier (FILE*file, int *compt){
     return tabEntier;
 }
 
-/*
+
 Monde * chargementMonde( char * tab, int compt) {
     //Creation Monde
     Monde *myWorld = calloc(1, sizeof(Monde));
@@ -143,20 +141,7 @@ Monde * chargementMonde( char * tab, int compt) {
     myWorld->plateau = plateau;
 
 
-            myWorld->tresorRouge = tab[0];
-            myWorld->tresorNoire = tab[1];
-    int k=2, l=0;
-    while (tab[k] != '\0'){
-        for(l; l<5; l++){
-            if (tab[k]==0)
-        }
-    }
-
-
-
-    return myWorld;
-}*/
-
+    */
 /*
     //Creation fourmilieres rouge et noire
     myWorld->noire = initialisation(NOIR, plateau);
@@ -168,7 +153,16 @@ Monde * chargementMonde( char * tab, int compt) {
     creationFourmi(ROUGE, OUVRIERE, myWorld->rouge, myWorld, cote);
     creationFourmi(NOIR, OUVRIERE, myWorld->noire, myWorld, taille - cote - 1);
 */
+/*
+            myWorld->tresorRouge = tab[0];
+            myWorld->tresorNoire = tab[1];
 
+
+
+
+
+    return myWorld;
+}*/
 
 /*
 void jeu (Monde * myWorld){

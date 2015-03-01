@@ -27,20 +27,6 @@ static SDL_Surface *ecran = NULL,
 
 static TTF_Font *police = NULL;
 
-void pause() {
-    int continuer = 1;
-    SDL_Event event;
-
-    while (continuer) {
-        SDL_WaitEvent(&event);
-        switch (event.type) {
-            case SDL_QUIT:
-                continuer = 0;
-            default:
-                break;
-        }
-    }
-}
 
 void initPlateau() {
     ecran = SDL_SetVideoMode(LARGEUR_FENETRE, HAUTEUR_FENETRE, 32, SDL_HWSURFACE);
@@ -153,6 +139,7 @@ void affichePlateauSDL(Monde *myWorld) {
 
     SDL_Flip(ecran);
 }
+
 /*
 void videPlateau() {
     TTF_CloseFont(police);
