@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
     }
 */
 
-    //int premierJoueur = (int) ROUGE;
+    int premierJoueur = (int) ROUGE;
     int i = 1;
     while (i) {
         printf("((((((((((((((((TOUR ROUGE))))))))))))))))\n\n");
@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
         printf("Quitter ? OUI(0), NON(1)\n");
         lireEntier(&i);
     }
-    //sauvegarde(myWorld, premierJoueur);
+    sauvegarde(myWorld, premierJoueur);
 
     TTF_Quit();
     SDL_Quit();

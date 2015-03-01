@@ -47,9 +47,12 @@ CMakeFiles/C_Project.dir/instructions.c.o
  /home/philippe/C_Project/plateau.h
  /home/philippe/C_Project/structures.h
 CMakeFiles/C_Project.dir/jeu.c.o
+ /home/philippe/C_Project/config.h
+ /home/philippe/C_Project/init.h
  /home/philippe/C_Project/instructions.h
  /home/philippe/C_Project/jeu.c
  /home/philippe/C_Project/jeu.h
+ /home/philippe/C_Project/plateau.h
  /home/philippe/C_Project/structures.h
 CMakeFiles/C_Project.dir/plateau.c.o
  /home/philippe/C_Project/plateau.c

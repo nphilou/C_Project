@@ -46,9 +46,12 @@ CMakeFiles/C_Project.dir/instructions.c.o: instructions.h
 CMakeFiles/C_Project.dir/instructions.c.o: plateau.h
 CMakeFiles/C_Project.dir/instructions.c.o: structures.h
 
+CMakeFiles/C_Project.dir/jeu.c.o: config.h
+CMakeFiles/C_Project.dir/jeu.c.o: init.h
 CMakeFiles/C_Project.dir/jeu.c.o: instructions.h
 CMakeFiles/C_Project.dir/jeu.c.o: jeu.c
 CMakeFiles/C_Project.dir/jeu.c.o: jeu.h
+CMakeFiles/C_Project.dir/jeu.c.o: plateau.h
 CMakeFiles/C_Project.dir/jeu.c.o: structures.h
 
 CMakeFiles/C_Project.dir/plateau.c.o: plateau.c

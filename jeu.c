@@ -61,7 +61,7 @@ void sauvegarde (Monde* myWorld, int joueur){
 }
 
 
-
+/*
 void chargement (){
 
     //myWorld -> tresorRouge, myWorld -> tresorNoire
@@ -139,6 +139,9 @@ Monde * chargementMonde( char * tab, int compt) {
     int taille = plateau->nombrecases;
 
     myWorld->plateau = plateau;
+
+
+    */
 /*
     //Creation fourmilieres rouge et noire
     myWorld->noire = initialisation(NOIR, plateau);
@@ -150,7 +153,7 @@ Monde * chargementMonde( char * tab, int compt) {
     creationFourmi(ROUGE, OUVRIERE, myWorld->rouge, myWorld, cote);
     creationFourmi(NOIR, OUVRIERE, myWorld->noire, myWorld, taille - cote - 1);
 */
-
+/*
             myWorld->tresorRouge = tab[0];
             myWorld->tresorNoire = tab[1];
 
@@ -159,7 +162,7 @@ Monde * chargementMonde( char * tab, int compt) {
 
 
     return myWorld;
-}
+}*/
 
 /*
 void jeu (Monde * myWorld){
