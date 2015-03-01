@@ -83,7 +83,6 @@ void chargement (){
         fscanf(ligne, "%d %d %d %d %d", &tab[0], &tab[1], &tab[2], &tab[3], &tab[4]);
     }
 
-
     printf("mon fichier : %d %d %d %d %d", tab[0], tab[1], tab[2], tab[3], tab[4]);
 
     fclose (file);
