@@ -53,7 +53,8 @@ int main(int argc, char *argv[]) {
 
     }
 */
-    int premierJoueur = (int) ROUGE;
+
+    //int premierJoueur = (int) ROUGE;
     int i = 1;
     while (i) {
         printf("((((((((((((((((TOUR ROUGE))))))))))))))))\n");
@@ -63,7 +64,7 @@ int main(int argc, char *argv[]) {
         printf("Quitter ? OUI(0), NON(1)");
         scanf("%d", &i);
     }
-    sauvegarde(myWorld, premierJoueur);
+    //sauvegarde(myWorld, premierJoueur);
 
     TTF_Quit();
     videPlateau();

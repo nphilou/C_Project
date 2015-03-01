@@ -10,30 +10,53 @@ void sauvegarde (Monde* myWorld, int joueur){
 
     FILE *file = fopen ("derniere_sauvegarde.txt", "w+");
 
-    Fourmi *temp;
+    Fourmi *tempFourmiliere;
+    Fourmi * tempAgent;
 
-    temp = myWorld -> rouge;
-    fprintf (file, "%d %d\n", temp-> couleur, myWorld -> tresorRouge);
-    while (temp -> fourmiliereSuiv!= NULL){
-            while ( temp -> suivant != NULL){
-                fprintf (file, "%d %d %d %d %d\n", temp -> origine->position, temp -> type, temp -> couleur, temp -> position, temp-> instruction);
-                temp = temp -> suivant;
+    fprintf (file, "%d %d\n",myWorld -> tresorRouge, myWorld -> tresorNoire);
+    tempFourmiliere = myWorld -> rouge;
+    printf("type fourmi:%d", myWorld -> rouge -> type);
+    if (tempFourmiliere -> fourmiliereSuiv != NULL){
+        while (tempFourmiliere != NULL){
+            fprintf (file, "%d %d %d\n", tempFourmiliere-> position, tempFourmiliere->instruction, tempFourmiliere-> couleur);
+            tempAgent = tempFourmiliere -> suivant;
+            while ( tempAgent != NULL){
+                fprintf (file, "%d %d %d %d %d\n", tempAgent -> origine->position, tempAgent -> type, tempAgent -> couleur, tempAgent -> position, tempAgent-> instruction);
+                tempAgent = tempAgent -> suivant;
             }
-        temp = temp -> fourmiliereSuiv;
+            tempFourmiliere = tempFourmiliere -> fourmiliereSuiv;
+        }
+    } else {
+        tempAgent = tempFourmiliere -> suivant;
+        while ( tempAgent != NULL){
+            fprintf (file, "%d %d %d %d %d\n", tempAgent -> origine->position, tempAgent -> type, tempAgent -> couleur, tempAgent -> position, tempAgent-> instruction);
+            tempAgent = tempAgent -> suivant;
+        }
     }
 
-    temp = myWorld -> noire;
-    fprintf (file, "%d %d\n", temp-> couleur, myWorld -> tresorNoire);
-     while (temp -> fourmiliereSuiv!= NULL){
-            while ( temp -> suivant != NULL){
-                fprintf (file, "%d %d %d %d %d\n", temp -> origine->position, temp -> type, temp -> couleur, temp -> position, temp-> instruction);
-                temp = temp -> suivant;
+
+    tempFourmiliere = myWorld -> noire;
+    if (tempFourmiliere -> fourmiliereSuiv != NULL){
+        while (tempFourmiliere != NULL){
+            fprintf (file, "%d %d %d\n", tempFourmiliere-> position, tempFourmiliere->instruction, tempFourmiliere-> couleur);
+            tempAgent = tempFourmiliere -> suivant;
+            while ( tempAgent -> suivant != NULL){
+                fprintf (file, "%d %d %d %d %d\n", tempAgent -> origine->position, tempAgent -> type, tempAgent -> couleur, tempAgent -> position, tempAgent-> instruction);
+                //tempAgent = tempAgent -> suivant;
             }
-        temp = temp -> fourmiliereSuiv;
+            tempFourmiliere = tempFourmiliere -> fourmiliereSuiv;
+        }
+    } else {
+        tempAgent = tempFourmiliere->suivant;
+        while (tempAgent->suivant != NULL) {
+            fprintf(file, "%d %d %d %d %d\n", tempAgent->origine->position, tempAgent->type, tempAgent->couleur, tempAgent->position, tempAgent->instruction);
+            //tempAgent = tempAgent -> suivant;
+        }
     }
     // a qui le tour ...
     fprintf (file, "%d\n", joueur);
 }
+
 
 /*
 void chargement (Monde*myWorld){
