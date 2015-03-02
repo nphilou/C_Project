@@ -164,10 +164,10 @@ void jeu() {
         while (i) {
             printf("((((((((((((((((((   TOUR  ROUGE   ))))))))))))))))))))\n");
             tour(monde, monde->rouge, monde->noire);
-            afficherGagnant(monde);
+
             printf("(((((((((((((((((((   TOUR  NOIR   ))))))))))))))))))\n");
             tour(monde, monde->noire, monde->rouge);
-            afficherGagnant(monde);
+
             printf("Quitter ? OUI(0), NON(1)");
             scanf("%d", &i);
         }
@@ -185,7 +185,7 @@ void jeu() {
         while (i) {
             printf("((((((((((((((((((   TOUR  ROUGE   ))))))))))))))))))))\n");
             tour(monde, monde->rouge, monde->noire);
-            //afficherGagnant(monde);
+
             if (monde->rouge == NULL && monde->noire != NULL) {
                 printf("**********  JOUEUR NOIR A GAGNEEE  **********\n");
                 break;
@@ -193,11 +193,14 @@ void jeu() {
                 printf("**********  JOUEUR ROUGE A GAGNEEE  ************\n");
                 break;
             } else if (monde->rouge == NULL && monde->noire == NULL) {
-                printf("*******MATCH NUL PAS DE GAGNANT ********\n");
+                printf("*******  MATCH NUL PAS DE GAGNANT ********\n");
                 break;
             }
+
+
             printf("(((((((((((((((((((   TOUR  NOIR   ))))))))))))))))))\n");
             tour(monde, monde->noire, monde->rouge);
+
             if (monde->rouge == NULL && monde->noire != NULL) {
                 printf("**********  JOUEUR NOIR A GAGNEEE  **********\n");
                 break;
@@ -205,22 +208,22 @@ void jeu() {
                 printf("**********  JOUEUR ROUGE A GAGNEEE  ************\n");
                 break;
             } else if (monde->rouge == NULL && monde->noire == NULL) {
-                printf("*******MATCH NUL PAS DE GAGNANT ********\n");
+                printf("*******  MATCH NUL PAS DE GAGNANT ********\n");
                 break;
             }
-            //afficherGagnant(monde);
+
             printf("Quitter ? OUI(0), NON(1)");
             scanf("%d", &i);
         }
-        do{
+        if (monde->rouge != NULL && monde->noire != NULL) {
             printf("Voulez vous sauvegarder la partie ? OUI(0) NON(1)");
             scanf("%d", &l);
-        }while (l != 0 || l != 1);
-        if (l){
-            sauvegarde(monde);
-            videMemoire(monde);
-        }else {
-            videMemoire(monde);
+            if (l) {
+                sauvegarde(monde);
+                videMemoire(monde);
+            } else {
+                videMemoire(monde);
+            }
         }
     }
 }
