@@ -3,7 +3,7 @@
 
 void sauvegarde(Monde *monde);
 
-Monde* chargement();
+Monde *chargement();
 
 void jeu();
 

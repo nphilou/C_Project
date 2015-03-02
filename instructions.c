@@ -66,7 +66,7 @@ Instruction demandeInstructionReine(Monde *monde, Fourmi *listeFourmi) {
     int instructiontemp;
     int *tresor = couleurTresor(monde, listeFourmi);
 
-    if (*tresor >= COUT_TRANSFORMATION && !chercheFourmiliere(listeFourmi)) {
+    if (*tresor >= COUT_TRANSFORMATION && monde->plateau->cases[listeFourmi->position].fourmi->type != FOURMILIERE) {
         do {
             printf("\nDonnez une instruction pour la reine à la case [%d, %d]\n",
                     chercheAbscisse(monde, listeFourmi->position),
