@@ -6,24 +6,24 @@
 
 void lireEntier(int *entier);
 
-int *couleurTresor(Monde *myWorld, Fourmi *fourmi);
+int *couleurTresor(Monde *monde, Fourmi *fourmi);
 
-Instruction demandeInstructionFourmiliere(Monde *myWorld, Fourmi *listeFourmi);
+Instruction demandeInstructionFourmiliere(Monde *monde, Fourmi *listeFourmi);
 
-Instruction demandeInstructionReine(Monde *myWorld, Fourmi *listeFourmi);
+Instruction demandeInstructionReine(Monde *monde, Fourmi *listeFourmi);
 
-Instruction demandeInstructionSoldat(Monde *myWorld, Fourmi *listeFourmi);
+Instruction demandeInstructionSoldat(Monde *monde, Fourmi *listeFourmi);
 
-Instruction demandeInstructionOuvriere(Monde *myWorld, Fourmi *listeFourmi);
+Instruction demandeInstructionOuvriere(Monde *monde, Fourmi *listeFourmi);
 
-int demandeProduction(Monde *myWorld, Fourmi *fourmi);
+int demandeProduction(Monde *monde, Fourmi *fourmiliere);
 
-void traiteInstructionActuelle(Monde *myWorld, Fourmi *fourmi);
+void traiteInstructionActuelle(Monde *monde, Fourmi *fourmi);
 
-void traiteInstruction(Monde *myWorld, Fourmi *fourmi);
+void traiteInstruction(Monde *monde, Fourmi *fourmi);
 
-Instruction demandeInstruction(Monde *myWorld, Fourmi *fourmi);
+Instruction demandeInstruction(Monde *monde, Fourmi *fourmi);
 
-void tour(Monde *myWorld, Fourmi *joueur, Fourmi *joueurAdverse);
+void tour(Monde *monde, Fourmi *joueur, Fourmi *joueurAdverse);
 
 #endif

@@ -5,7 +5,7 @@
 #define LARGEUR_FENETRE 1000
 #define HAUTEUR_FENETRE 600
 
-void affichePlateauSDL(Monde *myWorld);
+void affichePlateauSDL(Monde *monde);
 
 void initPlateau();
 

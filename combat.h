@@ -1,9 +1,9 @@
 #ifndef DEF_COMBAT
 #define DEF_COMBAT
 
-int combatFourmi(Monde *myWorld, Fourmi *attaque, Fourmi *defense);
+int combatFourmi(Monde *monde, Fourmi *attaque, Fourmi *defense);
 
-void supprimeFourmi(Monde *myWorld, Fourmi *aSupprimer, Fourmi *gagnante);
+void supprimeFourmi(Monde *monde, Fourmi *aSupprimer, Fourmi *gagnante);
 
 #endif
 

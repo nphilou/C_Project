@@ -1,17 +1,16 @@
 #ifndef DEF_JEU
 #define DEF_JEU
 
-void sauvegarde(Monde *myWorld, int joueur);
+void sauvegarde(Monde *monde);
 
-void chargement();
+Monde* chargement();
 
 void jeu();
 
-void afficherGagnant(Monde *myWorld);
+void afficherGagnant(Monde *monde);
 
-//Monde *chargementMonde(int tresor[], int type[], int origine[], int couleur[], int position[], int instruction[]);
+Monde *chargementMonde(int compt, int tresor[], int type[], int origine[], int couleur[], int position[], int instruction[]);
 
-void videMemoire(Monde *myWorld);
-//int * recupereEntier (FILE*file, int compt);
+void videMemoire(Monde *monde);
 
 #endif

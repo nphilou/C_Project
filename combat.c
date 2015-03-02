@@ -7,7 +7,7 @@
 #include "combat.h"
 #include "init.h"
 
-int combatFourmi(Monde *myWorld, Fourmi *attaque, Fourmi *defense) {
+int combatFourmi(Monde *monde, Fourmi *attaque, Fourmi *defense) {
 
     int scoreFourmi = 0;
     //int indice = defense->position;
@@ -15,13 +15,14 @@ int combatFourmi(Monde *myWorld, Fourmi *attaque, Fourmi *defense) {
     if (attaque->type == SOLDAT && defense->type != SOLDAT) {
         srand((unsigned int) time(NULL));
         scoreFourmi = rand() % 100;
+        printf("score:%d \n", scoreFourmi);
         if (scoreFourmi >= FORCE_AGENT_VS_SOLDAT) {
             printf(" vous avez remporté le combat\n");
-            supprimeFourmi(myWorld, defense, attaque);
+            supprimeFourmi(monde, defense, attaque);
             return 1;
         } else {
             printf("vous avez perdu le combat\n");
-            supprimeAgent(attaque, myWorld);
+            supprimeAgent(monde, attaque);
             return 0;
         }
     }
@@ -29,13 +30,14 @@ int combatFourmi(Monde *myWorld, Fourmi *attaque, Fourmi *defense) {
     if (attaque->type != SOLDAT && defense->type == SOLDAT) {
         srand((unsigned int) time(NULL));
         scoreFourmi = rand() % 100;
+        printf("score:%d \n", scoreFourmi);
         if (scoreFourmi <= FORCE_AGENT_VS_SOLDAT) {
             printf(" vous avez remporté le combat\n");
-            supprimeAgent(defense, myWorld);
+            supprimeAgent(monde, defense);
             return 1;
         } else {
             printf("vous avez perdu le combat\n");
-            supprimeFourmi(myWorld, attaque, defense);
+            supprimeFourmi(monde, attaque, defense);
             return 0;
         }
     }
@@ -47,13 +49,14 @@ int combatFourmi(Monde *myWorld, Fourmi *attaque, Fourmi *defense) {
 
         do {
             scoreFourmi = rand() % 100;
+            printf("score combat:%d \n", scoreFourmi);
             if (scoreFourmi > 50) {
                 printf(" vous avez remporté le combat\n");
-                supprimeFourmi(myWorld, defense, attaque);
+                supprimeFourmi(monde, defense, attaque);
                 return 1;
             } else if (scoreFourmi < 50) {
                 printf("vous avez perdu le combat\n");
-                supprimeFourmi(myWorld, attaque, defense);
+                supprimeFourmi(monde, attaque, defense);
                 return 0;
             }
         } while (scoreFourmi == 50);
@@ -61,14 +64,14 @@ int combatFourmi(Monde *myWorld, Fourmi *attaque, Fourmi *defense) {
     return -1;
 }
 
-void supprimeFourmi(Monde *myWorld, Fourmi *aSupprimer, Fourmi *gagnante) {
+void supprimeFourmi(Monde *monde, Fourmi *aSupprimer, Fourmi *gagnante) {
 
     int type = aSupprimer->type;
 
     if (type == FOURMILIERE) {
         printf("je dois supprimer la fourmiliere\n");
-        priseFourmiliere(aSupprimer, myWorld, gagnante);
+        priseFourmiliere(monde, aSupprimer, gagnante);
     } else {
-        supprimeAgent(aSupprimer, myWorld);
+        supprimeAgent(monde, aSupprimer);
     }
 }

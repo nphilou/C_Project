@@ -3,23 +3,23 @@
 
 Fourmi *initialisation(Couleur couleur, Plateau *plateau);
 
-void creationFourmi(Couleur couleur, TypeFourmi typefourmi, Fourmi *origine, Monde *myWorld, int indice);
+void creationFourmi(Monde *monde, Fourmi *origine, Couleur couleur, TypeFourmi typefourmi, int indice, int instruction);
 
-void creationFourmiliere(Couleur couleur, Monde *myWorld, int indice);
+void creationFourmiliere(Monde *monde, Couleur couleur, int indice, int instruction);
 
-void transformeFourmi(Fourmi *fourmi, Monde *myWorld);
+void transformeFourmi(Monde *monde, Fourmi *reine);
 
-void suicideFourmi(Fourmi *fourmi, Monde *myWorld);
+void suicideFourmi(Monde *monde, Fourmi *fourmi);
 
-void supprimeAgent(Fourmi *fourmi, Monde *myWorld);
+void supprimeAgent(Monde *monde, Fourmi *fourmi);
 
-void priseFourmiliere(Fourmi *fourmi, Monde *myWorld, Fourmi *ennemie);
+void priseFourmiliere(Monde *monde, Fourmi *fourmiliere, Fourmi *ennemie);
 
-void supprimeFourmiliereFin(Fourmi *fourmi, Monde *myWorld);
+void supprimeFourmiliereFin(Monde *monde, Fourmi *fourmiliere);
 
-void supprimeFourmiliere(Fourmi *fourmi, Monde *myWorld);
+void supprimeFourmiliere(Monde *monde, Fourmi *fourmiliere);
 
-void changeCouleur(Monde *myWorld, Fourmi *fourmi, Fourmi *ennemie);
+void changeCouleur(Monde *monde, Fourmi *fourmi, Fourmi *ennemie);
 
 int chercheFourmiliere(Fourmi *fourmi);
 

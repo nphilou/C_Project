@@ -12,7 +12,7 @@
 int main(int argc, char *argv[]) {
 
     //Creation monde
-    Monde *myWorld = creationMonde();
+    //Monde *monde = creationMonde();
 
     //Initialisation SDL et SDL_ttf
     SDL_Init(SDL_INIT_VIDEO);
@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
     //Creation fenetre
     SDL_WM_SetCaption("Fourmido", NULL);
 
-    affichePlateauSDL(myWorld);
+    //affichePlateauSDL(monde);
 
 
 /*
@@ -47,27 +47,31 @@ int main(int argc, char *argv[]) {
 
     }
 */
-
-    int premierJoueur = (int) ROUGE;
+    /*
     int i = 1;
     while (i) {
         printf("((((((((((((((((TOUR ROUGE))))))))))))))))\n\n");
-        tour(myWorld, myWorld->rouge, myWorld->noire);
-        affichePlateauSDL(myWorld);
+        tour(monde, monde->rouge, monde->noire);
+        affichePlateauSDL(monde);
 
         printf("((((((((((((((((TOUR NOIR))))))))))))))))\n\n");
-        tour(myWorld, myWorld->noire, myWorld->rouge);
-        affichePlateauSDL(myWorld);
+        tour(monde, monde->noire, monde->rouge);
+        affichePlateauSDL(monde);
 
         printf("Quitter ? OUI(0), NON(1)\n");
         lireEntier(&i);
     }
-    sauvegarde(myWorld, premierJoueur);
-    chargement();
-    //videMemoire(myWorld);
+    sauvegarde(monde);
+    */
+    jeu();
 
     TTF_Quit();
     SDL_Quit();
 
+/*
+    videMemoire(monde);
+    chargement();
+    videMemoire(monde);
+*/
     return 0;
 }

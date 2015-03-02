@@ -50,7 +50,7 @@ void initPlateau() {
     police = TTF_OpenFont("fonts/minecraftia.ttf", 30);
 }
 
-void affichePlateauSDL(Monde *myWorld) {
+void affichePlateauSDL(Monde *monde) {
 
     //On veut declarer les images une seule fois
     static int initialisation = 0;
@@ -78,7 +78,7 @@ void affichePlateauSDL(Monde *myWorld) {
 
     //Variables pour l'affichage 2D
     int largeur, hauteur, couleur;
-    int cote = myWorld->plateau->cote;
+    int cote = monde->plateau->cote;
 
     for (hauteur = 0; hauteur < cote; hauteur++) {
         for (largeur = 0; largeur < cote; largeur++) {
@@ -88,13 +88,13 @@ void affichePlateauSDL(Monde *myWorld) {
 
             SDL_BlitSurface(caseplateau, NULL, ecran, &position);
 
-            if (myWorld->plateau->cases[map(largeur, hauteur, cote)].fourmi == NULL) {
+            if (monde->plateau->cases[map(largeur, hauteur, cote)].fourmi == NULL) {
                 SDL_BlitSurface(vide, NULL, ecran, &position);
                 continue;
             }
 
-            couleur = (int) myWorld->plateau->cases[map(largeur, hauteur, cote)].fourmi->couleur;
-            switch (myWorld->plateau->cases[map(largeur, hauteur, cote)].fourmi->type) {
+            couleur = (int) monde->plateau->cases[map(largeur, hauteur, cote)].fourmi->couleur;
+            switch (monde->plateau->cases[map(largeur, hauteur, cote)].fourmi->type) {
 
                 case FOURMILIERE:
                     if (!couleur) SDL_BlitSurface(fourmiliereR, NULL, ecran, &position);
@@ -128,14 +128,14 @@ void affichePlateauSDL(Monde *myWorld) {
     }
 
     //Chaine tresorNoir
-    sprintf(tresorNoir, "Tresor : %d", myWorld->tresorNoire);
+    sprintf(tresorNoir, "Tresor : %d", monde->tresorNoire);
     texteNoir = TTF_RenderText_Blended(police, tresorNoir, couleurNoire);
     position.x = 600;
     position.y = 120;
     SDL_BlitSurface(texteNoir, NULL, ecran, &position);
 
     //Chaine tresorRouge
-    sprintf(tresorRouge, "Tresor : %d", myWorld->tresorRouge);
+    sprintf(tresorRouge, "Tresor : %d", monde->tresorRouge);
     texteRouge = TTF_RenderText_Blended(police, tresorRouge, couleurRouge);
     position.x = 600;
     position.y = 60;
