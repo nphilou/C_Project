@@ -44,9 +44,9 @@ Instruction demandeInstructionFourmiliere(Monde *myWorld, Fourmi *listeFourmi) {
         printf("PRODUCTION(0), SUICIDE(1), IMMOBILISATION (2): ");
         lireEntier(&instructiontemp);
 
-        if(!instructiontemp) productionPossible = demandeProduction(myWorld, listeFourmi);
+        if (!instructiontemp) productionPossible = demandeProduction(myWorld, listeFourmi);
 
-        if (!instructiontemp && !productionPossible){
+        if (!instructiontemp && !productionPossible) {
             printf("Ressources insuffisantes.\n");
             continue;
         }
@@ -200,7 +200,7 @@ void traiteInstructionActuelle(Monde *myWorld, Fourmi *fourmi) {
             printf("La fourmilliere sur la case [%d, %d] est en train de produire ! \n",
                     chercheAbscisse(myWorld, fourmi->position),
                     chercheOrdonnee(myWorld, fourmi->position));
-            if (fourmi->tempsProd > 0){
+            if (fourmi->tempsProd > 0) {
                 fourmi->tempsProd--;
                 printf("Le temps de production restant est de %d tours.\n", fourmi->tempsProd);
             }

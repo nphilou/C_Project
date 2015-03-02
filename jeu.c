@@ -4,64 +4,65 @@
 #include "structures.h"
 #include "instructions.h"
 #include "jeu.h"
+
 #define TMAX 256
+
 #include <math.h>
 #include "config.h"
 #include "init.h"
 #include "plateau.h"
 
-void sauvegarde (Monde* myWorld, int joueur){
+void sauvegarde(Monde *myWorld, int joueur) {
 
-    FILE *file = fopen ("derniere_sauvegarde.txt", "w+");
+    FILE *file = fopen("derniere_sauvegarde.txt", "w+");
 
     Fourmi *tempFourmiliere;
-    Fourmi * tempFourmi;
+    Fourmi *tempFourmi;
 
-    fprintf (file, "%d %d\n",myWorld -> tresorRouge, myWorld -> tresorNoire);
+    fprintf(file, "%d %d\n", myWorld->tresorRouge, myWorld->tresorNoire);
 
-    tempFourmiliere = myWorld -> rouge;
-    if (tempFourmiliere -> fourmiliereSuiv != NULL){
-        while (tempFourmiliere != NULL){
-            tempFourmi = tempFourmiliere ;
-            while ( tempFourmi != NULL){
-                fprintf (file, "%d %d %d %d %d\n", tempFourmi -> type, tempFourmi -> origine->position, tempFourmi -> couleur, tempFourmi -> position, tempFourmi-> instruction);
-                tempFourmi = tempFourmi -> suivant;
+    tempFourmiliere = myWorld->rouge;
+    if (tempFourmiliere->fourmiliereSuiv != NULL) {
+        while (tempFourmiliere != NULL) {
+            tempFourmi = tempFourmiliere;
+            while (tempFourmi != NULL) {
+                fprintf(file, "%d %d %d %d %d\n", tempFourmi->type, tempFourmi->origine->position, tempFourmi->couleur, tempFourmi->position, tempFourmi->instruction);
+                tempFourmi = tempFourmi->suivant;
             }
-            tempFourmiliere = tempFourmiliere -> fourmiliereSuiv;
+            tempFourmiliere = tempFourmiliere->fourmiliereSuiv;
         }
     } else {
         tempFourmi = tempFourmiliere;
-        while ( tempFourmi != NULL){
-            fprintf (file, "%d %d %d %d %d\n", tempFourmi -> type,tempFourmi -> origine->position,  tempFourmi -> couleur, tempFourmi -> position, tempFourmi-> instruction);
-            tempFourmi = tempFourmi-> suivant;
+        while (tempFourmi != NULL) {
+            fprintf(file, "%d %d %d %d %d\n", tempFourmi->type, tempFourmi->origine->position, tempFourmi->couleur, tempFourmi->position, tempFourmi->instruction);
+            tempFourmi = tempFourmi->suivant;
         }
     }
 
 
-    tempFourmiliere = myWorld -> noire;
-    if (tempFourmiliere -> fourmiliereSuiv != NULL){
-        while (tempFourmiliere != NULL){
+    tempFourmiliere = myWorld->noire;
+    if (tempFourmiliere->fourmiliereSuiv != NULL) {
+        while (tempFourmiliere != NULL) {
             tempFourmi = tempFourmiliere;
-            while ( tempFourmi != NULL){
-                fprintf (file, "%d %d %d %d %d\n", tempFourmi -> type,tempFourmi -> origine->position,  tempFourmi -> couleur, tempFourmi -> position, tempFourmi-> instruction);
-                tempFourmi = tempFourmi -> suivant;
+            while (tempFourmi != NULL) {
+                fprintf(file, "%d %d %d %d %d\n", tempFourmi->type, tempFourmi->origine->position, tempFourmi->couleur, tempFourmi->position, tempFourmi->instruction);
+                tempFourmi = tempFourmi->suivant;
             }
-            tempFourmiliere = tempFourmiliere -> fourmiliereSuiv;
+            tempFourmiliere = tempFourmiliere->fourmiliereSuiv;
         }
     } else {
         tempFourmi = tempFourmiliere;
-        while ( tempFourmi != NULL){
-            fprintf (file, "%d %d %d %d %d\n", tempFourmi -> type,tempFourmi -> origine->position,  tempFourmi -> couleur, tempFourmi -> position, tempFourmi-> instruction);
-            tempFourmi = tempFourmi-> suivant;
+        while (tempFourmi != NULL) {
+            fprintf(file, "%d %d %d %d %d\n", tempFourmi->type, tempFourmi->origine->position, tempFourmi->couleur, tempFourmi->position, tempFourmi->instruction);
+            tempFourmi = tempFourmi->suivant;
         }
     }
     // a qui le tour ...
-    fprintf (file, "%d\n", joueur);
+    fprintf(file, "%d\n", joueur);
 }
 
 
-
-Monde * chargement (){
+Monde *chargement() {
 
     //myWorld -> tresorRouge, myWorld -> tresorNoire
     //ROUGE
@@ -69,34 +70,34 @@ Monde * chargement (){
     //joueur tour !
 
 
-    FILE * file = fopen("derniere_sauvegarde.txt", "r");
+    FILE *file = fopen("derniere_sauvegarde.txt", "r");
 
-    if(file==NULL){
+    if (file == NULL) {
         printf("error");
         exit(EXIT_FAILURE);
     }
 
-    int i=0;
-    int tresor[2]={0};
-    int type[TMAX]={0};
-    int origine[TMAX]={0};
-    int couleur [TMAX]={0};
-    int position [TMAX]={0};
-    int instruction [TMAX]={0};
-    char chaine[TMAX]={0};
+    int i = 0;
+    int tresor[2] = {0};
+    int type[TMAX] = {0};
+    int origine[TMAX] = {0};
+    int couleur[TMAX] = {0};
+    int position[TMAX] = {0};
+    int instruction[TMAX] = {0};
+    char chaine[TMAX] = {0};
 
     fscanf(file, "%d %d", &tresor[0], &tresor[1]);
 
-    while(fgets(chaine, TMAX, file) )!= NULL){
+    while (fgets(chaine, TMAX, file))!= NULL){
         fscanf(file, "%d %d %d %d %d", &type[i], &origine[i], &couleur[i], &position[i], &instruction[i]);
         i++;
     }
-    printf("mon tresor est: %d, %d\n", tresor[0],tresor[1]);
+    printf("mon tresor est: %d, %d\n", tresor[0], tresor[1]);
     printf("mon fichier : %d %d %d %d %d\n", type[0], origine[0], couleur[0], position[0], instruction[0]);
 
-    fclose (file);
+    fclose(file);
 
-    Monde *myWorld = chargementMonde(tresor, type, origine, couleur, position , instruction);
+    Monde *myWorld = chargementMonde(tresor, type, origine, couleur, position, instruction);
     affichePlateau(myWorld->plateau);
 
     return myWorld;
@@ -174,24 +175,24 @@ Monde * chargementMonde( char * tab, int compt) {
 }*/
 
 
-void jeu (){
-    int h=1, i = 1;
-    int premierJoueur=0;  // 0 =rouge , 1=noir
+void jeu() {
+    int h = 1, i = 1;
+    int premierJoueur = 0;  // 0 =rouge , 1=noir
 
-    do{
+    do {
         printf("Voulez vous charger votre ancienne partie ? OUI(0) NON (1)");
         scanf("%d", &h);
-    }while (h!=0 || h!=1);
+    } while (h != 0 || h != 1);
 
-    if (h==0){
-        Monde *myWorld=  chargement();
+    if (h == 0) {
+        Monde *myWorld = chargement();
         while (i) {
             printf("((((((((((((((((((   TOUR  ROUGE   ))))))))))))))))))))\n");
             tour(myWorld, myWorld->rouge, myWorld->noire);
             afficherGagnant(myWorld);
             printf("(((((((((((((((((((   TOUR  NOIR   ))))))))))))))))))\n");
             tour(myWorld, myWorld->noire, myWorld->rouge);
-            afficherGagnant (myWorld);
+            afficherGagnant(myWorld);
             printf("Quitter ? OUI(0), NON(1)");
             scanf("%d", &i);
         }
@@ -199,14 +200,14 @@ void jeu (){
         videMemoire(myWorld);
     }
     else {
-        Monde* myWorld = creationMonde();
+        Monde *myWorld = creationMonde();
         while (i) {
             printf("((((((((((((((((((   TOUR  ROUGE   ))))))))))))))))))))\n");
             tour(myWorld, myWorld->rouge, myWorld->noire);
             afficherGagnant(myWorld);
             printf("(((((((((((((((((((   TOUR  NOIR   ))))))))))))))))))\n");
             tour(myWorld, myWorld->noire, myWorld->rouge);
-            afficherGagnant (myWorld);
+            afficherGagnant(myWorld);
             printf("Quitter ? OUI(0), NON(1)");
             scanf("%d", &i);
         }
@@ -216,33 +217,33 @@ void jeu (){
 
 }
 
-void afficherGagnant (Monde*myWorld) {
-    if(myWorld -> rouge == NULL && myWorld -> noire != NULL){
+void afficherGagnant(Monde *myWorld) {
+    if (myWorld->rouge == NULL && myWorld->noire != NULL) {
         printf("**********  JOUEUR NOIR A GAGNEEE  **********\n");
-    } else if ( myWorld -> noire == NULL && myWorld -> rouge !=NULL){
+    } else if (myWorld->noire == NULL && myWorld->rouge != NULL) {
         printf("**********  JOUEUR ROUGE A GAGNEEE  ************\n");
-    } else if (myWorld -> rouge ==NULL && myWorld -> noire == NULL){
+    } else if (myWorld->rouge == NULL && myWorld->noire == NULL) {
         printf("*******MATCH NUL PAS DE GAGNANT ********\n");
     }
 }
 
 // SCORE
 
-void videMemoire (Monde* myWorld){
+void videMemoire(Monde *myWorld) {
 
-    Fourmi*tmpFourmiliere;
-    tmpFourmiliere = myWorld -> rouge;
+    Fourmi *tmpFourmiliere;
+    tmpFourmiliere = myWorld->rouge;
 
-    if (tmpFourmiliere -> fourmiliereSuiv !=NULL){
-        while (tmpFourmiliere -> fourmiliereSuiv != NULL){
-            supprimeFourmiliere(tmpFourmiliere-> fourmiliereSuiv, myWorld);
+    if (tmpFourmiliere->fourmiliereSuiv != NULL) {
+        while (tmpFourmiliere->fourmiliereSuiv != NULL) {
+            supprimeFourmiliere(tmpFourmiliere->fourmiliereSuiv, myWorld);
         }
-        supprimeFourmiliere(tmpFourmiliere,myWorld);
+        supprimeFourmiliere(tmpFourmiliere, myWorld);
     } else {
         supprimeFourmiliere(tmpFourmiliere, myWorld);
     }
 
-    free(myWorld-> plateau);
+    free(myWorld->plateau);
     free(myWorld);
 }
 

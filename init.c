@@ -142,16 +142,16 @@ void supprimeAgent(Fourmi *fourmi, Monde *myWorld) {
     temp->precedant->suivant = temp->suivant;
 
 
-    if(temp -> voisinSuiv != NULL && temp -> voisinPrec != NULL) {
-        temp -> voisinSuiv -> voisinPrec = temp -> voisinPrec;
-        temp -> voisinPrec -> voisinSuiv = temp -> voisinSuiv;
-        myWorld->plateau->cases[indice].fourmi = temp -> voisinSuiv;
-    } else if (temp -> voisinSuiv !=NULL && temp -> voisinPrec == NULL){
-        temp -> voisinSuiv ->voisinPrec = NULL;
-        myWorld->plateau->cases[indice].fourmi = temp -> voisinSuiv;
-    } else if (temp -> voisinSuiv ==NULL && temp -> voisinPrec != NULL){
-        temp -> voisinPrec -> voisinSuiv = NULL;
-        myWorld->plateau->cases[indice].fourmi = temp -> voisinPrec;
+    if (temp->voisinSuiv != NULL && temp->voisinPrec != NULL) {
+        temp->voisinSuiv->voisinPrec = temp->voisinPrec;
+        temp->voisinPrec->voisinSuiv = temp->voisinSuiv;
+        myWorld->plateau->cases[indice].fourmi = temp->voisinSuiv;
+    } else if (temp->voisinSuiv != NULL && temp->voisinPrec == NULL) {
+        temp->voisinSuiv->voisinPrec = NULL;
+        myWorld->plateau->cases[indice].fourmi = temp->voisinSuiv;
+    } else if (temp->voisinSuiv == NULL && temp->voisinPrec != NULL) {
+        temp->voisinPrec->voisinSuiv = NULL;
+        myWorld->plateau->cases[indice].fourmi = temp->voisinPrec;
     } else {
         myWorld->plateau->cases[indice].fourmi = NULL;
     }
@@ -206,12 +206,12 @@ void supprimeFourmiliereFin(Fourmi *fourmi, Monde *myWorld) {
         temp->fourmilierePrec->fourmiliereSuiv = temp->fourmiliereSuiv;
     }
 
-    if ((temp == myWorld -> rouge || temp == myWorld -> noire) && temp -> fourmiliereSuiv != NULL){
-       if (temp -> couleur ==ROUGE){
-           myWorld -> rouge = temp -> fourmiliereSuiv;
-       } else {
-           myWorld -> noire = temp -> fourmiliereSuiv;
-       }
+    if ((temp == myWorld->rouge || temp == myWorld->noire) && temp->fourmiliereSuiv != NULL) {
+        if (temp->couleur == ROUGE) {
+            myWorld->rouge = temp->fourmiliereSuiv;
+        } else {
+            myWorld->noire = temp->fourmiliereSuiv;
+        }
     }
 
     myWorld->plateau->cases[indice].fourmi = NULL;

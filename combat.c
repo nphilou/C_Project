@@ -41,7 +41,7 @@ int combatFourmi(Monde *myWorld, Fourmi *attaque, Fourmi *defense) {
     }
 
 
-    if ((attaque->type != SOLDAT && defense->type != SOLDAT) || (attaque->type == SOLDAT && defense -> type == SOLDAT)) {
+    if ((attaque->type != SOLDAT && defense->type != SOLDAT) || (attaque->type == SOLDAT && defense->type == SOLDAT)) {
 
         srand((unsigned int) time(NULL));
 

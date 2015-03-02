@@ -83,8 +83,8 @@ void affichePlateauSDL(Monde *myWorld) {
     for (hauteur = 0; hauteur < cote; hauteur++) {
         for (largeur = 0; largeur < cote; largeur++) {
 
-            position.x = largeur * TAILLE_CASE +20;
-            position.y = hauteur * TAILLE_CASE +20;
+            position.x = largeur * TAILLE_CASE + 20;
+            position.y = hauteur * TAILLE_CASE + 20;
 
             SDL_BlitSurface(caseplateau, NULL, ecran, &position);
 
@@ -98,22 +98,26 @@ void affichePlateauSDL(Monde *myWorld) {
 
                 case FOURMILIERE:
                     if (!couleur) SDL_BlitSurface(fourmiliereR, NULL, ecran, &position);
-                    else SDL_BlitSurface(fourmiliereN, NULL, ecran, &position);
+                    else
+                        SDL_BlitSurface(fourmiliereN, NULL, ecran, &position);
                     break;
 
                 case SOLDAT:
                     if (!couleur) SDL_BlitSurface(soldatR, NULL, ecran, &position);
-                    else SDL_BlitSurface(soldatN, NULL, ecran, &position);
+                    else
+                        SDL_BlitSurface(soldatN, NULL, ecran, &position);
                     break;
 
                 case OUVRIERE:
                     if (!couleur) SDL_BlitSurface(ouvriereR, NULL, ecran, &position);
-                    else SDL_BlitSurface(ouvriereN, NULL, ecran, &position);
+                    else
+                        SDL_BlitSurface(ouvriereN, NULL, ecran, &position);
                     break;
 
                 case REINE:
                     if (!couleur) SDL_BlitSurface(reineR, NULL, ecran, &position);
-                    else SDL_BlitSurface(reineN, NULL, ecran, &position);
+                    else
+                        SDL_BlitSurface(reineN, NULL, ecran, &position);
                     break;
 
                 default:

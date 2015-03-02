@@ -32,7 +32,7 @@ void deplacementEst(Monde *myWorld, Fourmi *fourmi, int ordonnee) {
     int resCombat;
 
     int caseInitiale = fourmi->position;
-   // modifVoisin(myWorld, fourmi, caseInitiale);
+    // modifVoisin(myWorld, fourmi, caseInitiale);
 
     if (yF > ordonnee) {
         indice = map(xF + 1, yF - 1, cote);
@@ -49,8 +49,8 @@ void deplacementEst(Monde *myWorld, Fourmi *fourmi, int ordonnee) {
             ajoutFourmi(myWorld, fourmi, indice);
             affichePlateauSDL(myWorld);
         } else {
-            resCombat= combatCase(myWorld, fourmi, indice);
-            if (resCombat == 1){
+            resCombat = combatCase(myWorld, fourmi, indice);
+            if (resCombat == 1) {
                 affichePlateauSDL(myWorld);
                 modifVoisin(myWorld, fourmi, caseInitiale);
                 affichePlateauSDL(myWorld);
@@ -95,9 +95,9 @@ void deplacementOuest(Monde *myWorld, Fourmi *fourmi, int ordonnee) {
             ajoutFourmi(myWorld, fourmi, indice);
             affichePlateauSDL(myWorld);
         } else {
-            resCombat= combatCase(myWorld, fourmi, indice);
+            resCombat = combatCase(myWorld, fourmi, indice);
             affichePlateauSDL(myWorld);
-            if (resCombat == 1){
+            if (resCombat == 1) {
                 modifVoisin(myWorld, fourmi, caseInitiale);
                 affichePlateauSDL(myWorld);
             }
@@ -141,8 +141,8 @@ void deplacementSud(Monde *myWorld, Fourmi *fourmi, int abscisse) {
             ajoutFourmi(myWorld, fourmi, indice);
             affichePlateauSDL(myWorld);
         } else {
-            resCombat= combatCase(myWorld, fourmi, indice);
-            if (resCombat == 1){
+            resCombat = combatCase(myWorld, fourmi, indice);
+            if (resCombat == 1) {
                 modifVoisin(myWorld, fourmi, caseInitiale);
             }
         }
@@ -180,8 +180,8 @@ void deplacementNord(Monde *myWorld, Fourmi *fourmi, int abscisse) {
             ajoutFourmi(myWorld, fourmi, indice);
             affichePlateauSDL(myWorld);
         } else {
-            resCombat= combatCase(myWorld, fourmi, indice);
-            if (resCombat == 1){
+            resCombat = combatCase(myWorld, fourmi, indice);
+            if (resCombat == 1) {
                 modifVoisin(myWorld, fourmi, caseInitiale);
                 affichePlateauSDL(myWorld);
             }
@@ -281,7 +281,7 @@ void modifVoisin(Monde *myWorld, Fourmi *fourmi, int caseInitiale) {
         myWorld->plateau->cases[caseInitiale].fourmi = NULL;
     }
 
-    fourmi -> voisinPrec = NULL;
-    fourmi -> voisinSuiv =NULL;
+    fourmi->voisinPrec = NULL;
+    fourmi->voisinSuiv = NULL;
 
 }
