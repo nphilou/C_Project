@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include "structures.h"
 #include "instructions.h"
 #include "jeu.h"
@@ -88,7 +87,7 @@ Monde *chargement() {
 
     fscanf(file, "%d %d", &tresor[0], &tresor[1]);
 
-    while (fgets(chaine, TMAX, file))!= NULL){
+    while (fgets(chaine, TMAX, file)!= NULL){
         fscanf(file, "%d %d %d %d %d", &type[i], &origine[i], &couleur[i], &position[i], &instruction[i]);
         i++;
     }
