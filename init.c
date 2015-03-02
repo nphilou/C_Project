@@ -20,11 +20,13 @@ Fourmi *initialisation(Couleur couleur, Plateau *plateau) {
     fourmi->origine = fourmi;
 
     if (couleur == ROUGE) fourmi->position = 0;
-    if (couleur == NOIR) fourmi->position = plateau->nombrecases - 1;
+    if (couleur == NOIR) fourmi->position = plateau->nombrecases-1;
 
     plateau->cases[fourmi->position].fourmi = fourmi;
+
     fourmi->precedant = NULL;
     fourmi->suivant = NULL;
+
     fourmi->fourmilierePrec = NULL;
     fourmi->fourmiliereSuiv = NULL;
     fourmi->voisinPrec = NULL;
@@ -304,7 +306,7 @@ Monde *creationMonde() {
     //Creation plateau
     int cotePlateau = COTE;
 
-    Plateau *plateau = calloc((size_t) pow(cotePlateau, 2), sizeof(Case));
+    Plateau *plateau = calloc((size_t) pow(cotePlateau, 2)+1, sizeof(Case));
 
 
     plateau->nombrecases = (int) pow(cotePlateau, 2); //A RENOMMER PAR TAILLE
@@ -326,13 +328,6 @@ Monde *creationMonde() {
     creationFourmi(myWorld, myWorld->noire, NOIR, REINE, taille - 2, AUCUNE);
     creationFourmi(myWorld, myWorld->rouge, ROUGE, OUVRIERE, cote, AUCUNE);
     creationFourmi(myWorld, myWorld->noire, NOIR, OUVRIERE, taille - cote - 1, AUCUNE);
-
-    /*myWorld->noire->suivant = initialReine(NOIR, plateau, myWorld->noire);
-    myWorld->rouge->suivant = initialReine(ROUGE, plateau, myWorld->rouge);
-    
-    Creation ouvrieres
-    myWorld->noire->suivant->suivant = initialOuvriere(NOIR, plateau, myWorld->noire->suivant);
-    myWorld->rouge->suivant->suivant = initialOuvriere(ROUGE, plateau, myWorld->rouge->suivant);*/
 
     myWorld->tresorNoire = TRESOR;
     myWorld->tresorRouge = TRESOR;

@@ -7,6 +7,8 @@
 #define TMAX 256
 
 #include <math.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_ttf.h>
 #include "config.h"
 #include "init.h"
 #include "plateau.h"
@@ -218,7 +220,9 @@ void jeu() {
             printf("vide memoire\n");
             videMemoire(monde);
         }
+
     }
+
 }
 
 
@@ -271,4 +275,5 @@ void videMemoire(Monde *monde) {
 
     free(monde->plateau);
     free(monde);
+
 }

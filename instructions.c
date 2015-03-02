@@ -391,6 +391,18 @@ void tour(Monde *monde, Fourmi *joueur, Fourmi *joueurAdverse) {
 
             listeFourmi = listeFourmi->suivant;
         }
+        if (couleurjoueur == ROUGE) {
+            if (monde->rouge == NULL){
+                break;
+            }
+        }
+
+        if (couleurjoueur == NOIR) {
+            if (monde->noire == NULL) {
+                break;
+            }
+        }
+
         if(stop)break;
 
         listeFourmiliere = listeFourmiliere->fourmiliereSuiv;
