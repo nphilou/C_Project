@@ -5,6 +5,7 @@ void sauvegarde(Monde *monde);
 
 Monde *chargement();
 
+int afficherGagnant(Monde *monde);
 void jeu();
 
 Monde *chargementMonde(int compt, int tresor[], int type[], int origine[], int couleur[], int position[], int instruction[]);

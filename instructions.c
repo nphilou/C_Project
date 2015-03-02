@@ -352,6 +352,20 @@ void tour(Monde *monde, Fourmi *joueur, Fourmi *joueurAdverse) {
 
             traiteInstructionActuelle(monde, listeFourmi);
 
+            if (couleurjoueur == ROUGE) {
+                if (monde->rouge == NULL){
+                    stop = 1;
+                    break;
+                }
+            }
+
+            if (couleurjoueur == NOIR) {
+                if (monde->noire == NULL) {
+                    stop = 1;
+                    break;
+                }
+            }
+
             affichePlateauSDL(monde);
 
             if (listeFourmi->instruction == AUCUNE) {

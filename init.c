@@ -185,21 +185,7 @@ void supprimeAgent(Monde *monde, Fourmi *fourmi) {
             monde->plateau->cases[indice].fourmi = NULL;
         }
     }
-/*
-    if (temp->voisinSuiv != NULL && temp->voisinPrec != NULL) {
-        temp->voisinSuiv->voisinPrec = temp->voisinPrec;
-        temp->voisinPrec->voisinSuiv = temp->voisinSuiv;
-        monde->plateau->cases[indice].fourmi = temp->voisinSuiv;
-    } else if (temp->voisinSuiv != NULL && temp->voisinPrec == NULL) {
-        temp->voisinSuiv->voisinPrec = NULL;
-        monde->plateau->cases[indice].fourmi = temp->voisinSuiv;
-    } else if (temp->voisinSuiv == NULL && temp->voisinPrec != NULL) {
-        temp->voisinPrec->voisinSuiv = NULL;
-        monde->plateau->cases[indice].fourmi = temp->voisinPrec;
-    } else {
-        monde->plateau->cases[indice].fourmi = NULL;
-    }
-*/
+
     free(temp);
 }
 
@@ -231,7 +217,6 @@ void supprimeFourmiliere(Monde *monde, Fourmi *fourmiliere) {
         supprimeAgent(monde, temp->suivant);
     }
     supprimeFourmiliereFin(monde, temp);
-    affichePlateau(monde->plateau);
 }
 
 void supprimeFourmiliereFin(Monde *monde, Fourmi *fourmiliere) {

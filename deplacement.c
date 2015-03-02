@@ -248,9 +248,11 @@ int combatCase(Monde *monde, Fourmi *fourmi, int indice) {
             printf("combat voisin\n");
             combat = combatFourmi(monde, fourmi, temp->voisinSuiv);
         }
-        if (combat)combat = combatFourmi(monde, fourmi, temp);
+        if (combat==1){
+            printf("combat ultime contre la fourmiliere\n");
+            combat = combatFourmi(monde, fourmi, temp);
+        }
         if (combat == 1) {
-            printf("remporte le combat\n");
             monde->plateau->cases[indice].fourmi = fourmi;
             fourmi->position = indice;
         } else {
