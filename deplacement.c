@@ -243,19 +243,34 @@ int combatCase(Monde *myWorld, Fourmi *fourmi, int indice) {
     temp = myWorld->plateau->cases[indice].fourmi;
     int combat = 1;
 
-    while ((temp != NULL) && (combat == 1)) {
-        printf("combat voisin\n");
-        printf("type de la fourmi:%d\n", temp->type);
-        combat = combatFourmi(myWorld, fourmi, temp);
-        printf("combat=%d\n", combat);
-        temp = temp->voisinSuiv;
-    }
-    if (combat == 1) {
-        printf("remporte le combat\n");
-        myWorld->plateau->cases[indice].fourmi = fourmi;
-        fourmi->position = indice;
-    } else {
-        printf("vous avez perdu le combat, pas de chance\n");
+    if (temp-> type == FOURMILIERE){
+        while ((temp -> voisinSuiv != NULL) && (combat == 1)) {
+            printf("combat voisin\n");
+            combat = combatFourmi(myWorld, fourmi, temp-> voisinSuiv);
+        }
+        if (combat)combat = combatFourmi(myWorld, fourmi, temp);
+        if (combat == 1) {
+            printf("remporte le combat\n");
+            myWorld->plateau->cases[indice].fourmi = fourmi;
+            fourmi->position = indice;
+        } else {
+            printf("*** vous avez perdu le combat ***\n");
+        }
+
+    }else {
+
+        while ((temp != NULL) && (combat == 1)) {
+            printf("combat voisin\n");
+            combat = combatFourmi(myWorld, fourmi, temp);
+            temp = temp->voisinSuiv;
+        }
+        if (combat == 1) {
+            printf("remporte le combat\n");
+            myWorld->plateau->cases[indice].fourmi = fourmi;
+            fourmi->position = indice;
+        } else {
+            printf("*** vous avez perdu le combat ***\n");
+        }
     }
     return combat;
 }

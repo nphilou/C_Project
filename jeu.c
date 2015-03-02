@@ -61,10 +61,9 @@ void sauvegarde(Monde *myWorld, int joueur) {
 }
 
 
-Monde *chargement() {
+void chargement() {
 
     //myWorld -> tresorRouge, myWorld -> tresorNoire
-    //ROUGE
     //tempAgent -> type,tempAgent -> origine -> position,  tempAgent -> couleur, tempAgent -> position, tempAgent-> instruction
     //joueur tour !
 
@@ -75,7 +74,14 @@ Monde *chargement() {
         printf("error");
         exit(EXIT_FAILURE);
     }
+    char *caractere = NULL;
+        do {
+            caractere = (int) fgets(caractere, TMAX, file);
+            printf("%d", (int) caractere);
+        } while (caractere != NULL);
 
+
+    /*
     int i = 0;
     int tresor[2] = {0};
     int type[TMAX] = {0};
@@ -83,23 +89,30 @@ Monde *chargement() {
     int couleur[TMAX] = {0};
     int position[TMAX] = {0};
     int instruction[TMAX] = {0};
-    char chaine[TMAX] = {0};
+    char chaine[TMAX];
 
     fscanf(file, "%d %d", &tresor[0], &tresor[1]);
 
     while (fgets(chaine, TMAX, file)!= NULL){
-        fscanf(file, "%d %d %d %d %d", &type[i], &origine[i], &couleur[i], &position[i], &instruction[i]);
+        printf("%s", chaine);
+        sscanf(chaine, "%d %d %d %d %d", &type[i], &origine[i], &couleur[i], &position[i], &instruction[i]);
         i++;
     }
-    printf("mon tresor est: %d, %d\n", tresor[0], tresor[1]);
-    printf("mon fichier : %d %d %d %d %d\n", type[0], origine[0], couleur[0], position[0], instruction[0]);
+    //printf("mon tresor est: %d, %d\n", tresor[0], tresor[1]);
+    //printf("mon fichier : %d %d %d %d %d\n", type[0], origine[0], couleur[0], position[0], instruction[0]);
 
     fclose(file);
 
-    Monde *myWorld = chargementMonde(tresor, type, origine, couleur, position, instruction);
-    affichePlateau(myWorld->plateau);
+    //Monde *myWorld = chargementMonde(tresor, type, origine, couleur, position, instruction);
+    //affichePlateau(myWorld->plateau);
 
-    return myWorld;
+*/
+    //return myWorld;
+   /* int * compt;
+    int tab[TMAX];
+    tab = recupereEntier(file, compt);
+*/
+
 }
 /*
 int * recupereEntier (FILE*file, int *compt){
@@ -173,7 +186,7 @@ Monde * chargementMonde( char * tab, int compt) {
     return myWorld;
 }*/
 
-
+/*
 void jeu() {
     int h = 1, i = 1;
     int premierJoueur = 0;  // 0 =rouge , 1=noir
@@ -215,6 +228,7 @@ void jeu() {
     }
 
 }
+*/
 
 void afficherGagnant(Monde *myWorld) {
     if (myWorld->rouge == NULL && myWorld->noire != NULL) {
