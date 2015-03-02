@@ -3,7 +3,7 @@
 
     Fourmi *initialisation(Couleur couleur, Plateau *plateau);
     void creationFourmi(Couleur couleur, TypeFourmi typefourmi, Fourmi *origine, Monde *myWorld, int indice);
-    //void creationFourmiliere(Couleur couleur, Monde * myWorld , int indice);
+    void creationFourmiliere(Couleur couleur, Monde * myWorld , int indice);
     void transformeFourmi(Fourmi *fourmi, Monde *myWorld);
     void suicideFourmi(Fourmi *fourmi, Monde *myWorld);
     void supprimeAgent(Fourmi *fourmi, Monde *myWorld);

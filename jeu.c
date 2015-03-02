@@ -61,7 +61,7 @@ void sauvegarde (Monde* myWorld, int joueur){
 
 
 
-void chargement (){
+Monde * chargement (){
 
     //myWorld -> tresorRouge, myWorld -> tresorNoire
     //ROUGE
@@ -76,20 +76,30 @@ void chargement (){
         exit(EXIT_FAILURE);
     }
 
-    int tab[15] = {0};
-    char ligne[TMAX] = "";
+    int i=0;
+    int tresor[2]={0};
+    int type[TMAX]={0};
+    int origine[TMAX]={0};
+    int couleur [TMAX]={0};
+    int position [TMAX]={0};
+    int instruction [TMAX]={0};
+    char chaine[TMAX]={0};
 
-    while(fgets(ligne, TMAX, file)!= NULL){
-        fscanf(ligne, "%d %d %d %d %d", &tab[0], &tab[1], &tab[2], &tab[3], &tab[4]);
+    fscanf(file, "%d %d", &tresor[0], &tresor[1]);
+
+    while(fgets(chaine, TMAX, file) )!= NULL){
+        fscanf(file, "%d %d %d %d %d", &type[i], &origine[i], &couleur[i], &position[i], &instruction[i]);
+        i++;
     }
-
-    printf("mon fichier : %d %d %d %d %d", tab[0], tab[1], tab[2], tab[3], tab[4]);
+    printf("mon tresor est: %d, %d\n", tresor[0],tresor[1]);
+    printf("mon fichier : %d %d %d %d %d\n", type[0], origine[0], couleur[0], position[0], instruction[0]);
 
     fclose (file);
-/*
-    Monde *myWorld = chargementMonde(tab, compt);
+
+    Monde *myWorld = chargementMonde(tresor, type, origine, couleur, position , instruction);
     affichePlateau(myWorld->plateau);
-*/
+
+    return myWorld;
 }
 /*
 int * recupereEntier (FILE*file, int *compt){
@@ -156,38 +166,83 @@ Monde * chargementMonde( char * tab, int compt) {
     creationFourmi(NOIR, OUVRIERE, myWorld->noire, myWorld, taille - cote - 1);
 */
 /*
-            myWorld->tresorRouge = tab[0];
+            myWorld->tresorRouge = tresor[0];
             myWorld->tresorNoire = tab[1];
-
-
-
 
 
     return myWorld;
 }*/
 
-/*
-void jeu (Monde * myWorld){
 
-    //
+void jeu (){
+    int h=1, i = 1;
+    int premierJoueur=0;  // 0 =rouge , 1=noir
 
-    int i = 1;
-    int joueur; //0 =rouge , 1=noir
-    while (i) {
-        printf("((((((((((((((((TOUR ROUGE))))))))))))))))\n");
-        joueur=0;
-        tour(myWorld, myWorld->rouge, myWorld->noire);
-        printf("((((((((((((((((TOUR NOIR))))))))))))))))\n");
-        joueur=1;
-        tour(myWorld, myWorld->noire, myWorld->rouge);
-        printf("Quitter ? OUI(0), NON(1)");
-        scanf("%d", &i);
+    do{
+        printf("Voulez vous charger votre ancienne partie ? OUI(0) NON (1)");
+        scanf("%d", &h);
+    }while (h!=0 || h!=1);
+
+    if (h==0){
+        Monde *myWorld=  chargement();
+        while (i) {
+            printf("((((((((((((((((((   TOUR  ROUGE   ))))))))))))))))))))\n");
+            tour(myWorld, myWorld->rouge, myWorld->noire);
+            afficherGagnant(myWorld);
+            printf("(((((((((((((((((((   TOUR  NOIR   ))))))))))))))))))\n");
+            tour(myWorld, myWorld->noire, myWorld->rouge);
+            afficherGagnant (myWorld);
+            printf("Quitter ? OUI(0), NON(1)");
+            scanf("%d", &i);
+        }
+        sauvegarde(myWorld, premierJoueur);
+        videMemoire(myWorld);
     }
-    sauvegarde(myWorld, joueur);
+    else {
+        Monde* myWorld = creationMonde();
+        while (i) {
+            printf("((((((((((((((((((   TOUR  ROUGE   ))))))))))))))))))))\n");
+            tour(myWorld, myWorld->rouge, myWorld->noire);
+            afficherGagnant(myWorld);
+            printf("(((((((((((((((((((   TOUR  NOIR   ))))))))))))))))))\n");
+            tour(myWorld, myWorld->noire, myWorld->rouge);
+            afficherGagnant (myWorld);
+            printf("Quitter ? OUI(0), NON(1)");
+            scanf("%d", &i);
+        }
+        sauvegarde(myWorld, premierJoueur);
+        videMemoire(myWorld);
+    }
 
 }
 
-void afficherGagnant () {} // SCORE
+void afficherGagnant (Monde*myWorld) {
+    if(myWorld -> rouge == NULL && myWorld -> noire != NULL){
+        printf("**********  JOUEUR NOIR A GAGNEEE  **********\n");
+    } else if ( myWorld -> noire == NULL && myWorld -> rouge !=NULL){
+        printf("**********  JOUEUR ROUGE A GAGNEEE  ************\n");
+    } else if (myWorld -> rouge ==NULL && myWorld -> noire == NULL){
+        printf("*******MATCH NUL PAS DE GAGNANT ********\n");
+    }
+}
 
-void videMemoire (){}
-*/
+// SCORE
+
+void videMemoire (Monde* myWorld){
+
+    Fourmi*tmpFourmiliere;
+    tmpFourmiliere = myWorld -> rouge;
+
+    if (tmpFourmiliere -> fourmiliereSuiv !=NULL){
+        while (tmpFourmiliere -> fourmiliereSuiv != NULL){
+            supprimeFourmiliere(tmpFourmiliere-> fourmiliereSuiv, myWorld);
+        }
+        supprimeFourmiliere(tmpFourmiliere,myWorld);
+    } else {
+        supprimeFourmiliere(tmpFourmiliere, myWorld);
+    }
+
+    free(myWorld-> plateau);
+    free(myWorld);
+}
+

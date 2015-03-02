@@ -206,7 +206,17 @@ void supprimeFourmiliereFin(Fourmi *fourmi, Monde *myWorld) {
         temp->fourmilierePrec->fourmiliereSuiv = temp->fourmiliereSuiv;
     }
 
+    if ((temp == myWorld -> rouge || temp == myWorld -> noire) && temp -> fourmiliereSuiv != NULL){
+       if (temp -> couleur ==ROUGE){
+           myWorld -> rouge = temp -> fourmiliereSuiv;
+       } else {
+           myWorld -> noire = temp -> fourmiliereSuiv;
+       }
+    }
+
     myWorld->plateau->cases[indice].fourmi = NULL;
+
+
 }
 
 void changeCouleur(Monde *myWorld, Fourmi *fourmi, Fourmi *ennemie) {
