@@ -326,6 +326,8 @@ void tour(Monde *monde, Fourmi *joueur, Fourmi *joueurAdverse) {
     listeFourmiliere = joueur;
     listeFourmiliereAdverse = joueurAdverse;
 
+    Couleur couleurjoueur = joueur->couleur;
+
     printf("\n < Tour courant de l'adversaire >\n");
     while (listeFourmiliereAdverse != NULL) {
         listeFourmiAdverse = listeFourmiliereAdverse;
@@ -339,6 +341,8 @@ void tour(Monde *monde, Fourmi *joueur, Fourmi *joueurAdverse) {
     }
 
     affichePlateauSDL(monde);
+
+    int stop = 0;
 
     printf("\n < Votre tour >\n");
     while (listeFourmiliere != NULL) {
@@ -357,9 +361,24 @@ void tour(Monde *monde, Fourmi *joueur, Fourmi *joueurAdverse) {
 
             affichePlateauSDL(monde);
 
-            if (listeFourmi->type == FOURMILIERE && listeFourmi->instruction == SUICIDE) break;
+            if (couleurjoueur == ROUGE) {
+                if (monde->rouge == NULL){
+                    stop = 1;
+                    break;
+                }
+            }
+
+            if (couleurjoueur == NOIR) {
+                if (monde->noire == NULL) {
+                    stop = 1;
+                    break;
+                }
+            }
+
             listeFourmi = listeFourmi->suivant;
         }
+        if(stop)break;
+
         listeFourmiliere = listeFourmiliere->fourmiliereSuiv;
     }
     printf("\n < Tour terminé ! >\n\n");
