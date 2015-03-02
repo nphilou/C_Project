@@ -27,8 +27,8 @@ Fourmi *initialisation(Couleur couleur, Plateau *plateau) {
     fourmi->suivant = NULL;
     fourmi->fourmilierePrec = NULL;
     fourmi->fourmiliereSuiv = NULL;
-    fourmi -> voisinPrec =NULL;
-    fourmi -> voisinSuiv =NULL;
+    fourmi->voisinPrec = NULL;
+    fourmi->voisinSuiv = NULL;
     fourmi->tempsProd = 0;
 
     return fourmi;
@@ -45,7 +45,7 @@ void creationFourmi(Monde *monde, Fourmi *origine, Couleur couleur, TypeFourmi t
 
     fourmi->couleur = couleur;
     fourmi->type = typefourmi;
-    fourmi->instruction = (Instruction)instruction;
+    fourmi->instruction = (Instruction) instruction;
     fourmi->position = indice;
     fourmi->origine = origine;
 
@@ -79,7 +79,7 @@ void creationFourmiliere(Monde *monde, Couleur couleur, int indice, int instruct
 
     Fourmi *fourmi = calloc(1, sizeof(Fourmi));
     Fourmi *temp;
-    Fourmi* tempVoisin;
+    Fourmi *tempVoisin;
 
     if (fourmi == NULL) {
         exit(EXIT_FAILURE);
@@ -88,7 +88,7 @@ void creationFourmiliere(Monde *monde, Couleur couleur, int indice, int instruct
     fourmi->couleur = couleur;
     fourmi->position = indice;
     fourmi->type = FOURMILIERE;
-    fourmi->instruction = (Instruction)instruction;
+    fourmi->instruction = (Instruction) instruction;
     fourmi->origine = fourmi;
 
     switch (couleur) {
@@ -105,18 +105,18 @@ void creationFourmiliere(Monde *monde, Couleur couleur, int indice, int instruct
             break;
     }
 
-    if(temp == NULL){
+    if (temp == NULL) {
 
-        if (couleur== NOIR){
-            monde -> noire = fourmi;
+        if (couleur == NOIR) {
+            monde->noire = fourmi;
         } else {
-            monde -> rouge = fourmi;
+            monde->rouge = fourmi;
         }
-        monde -> plateau->cases[indice].fourmi = fourmi;
-        fourmi -> voisinSuiv =NULL;
-        fourmi -> voisinPrec = NULL;
-        fourmi -> fourmiliereSuiv =NULL;
-        fourmi -> fourmilierePrec=NULL;
+        monde->plateau->cases[indice].fourmi = fourmi;
+        fourmi->voisinSuiv = NULL;
+        fourmi->voisinPrec = NULL;
+        fourmi->fourmiliereSuiv = NULL;
+        fourmi->fourmilierePrec = NULL;
     } else {
 
 
@@ -171,18 +171,18 @@ void supprimeAgent(Monde *monde, Fourmi *fourmi) {
     temp->precedant->suivant = temp->suivant;
 
 
-    if (temp->voisinSuiv!= NULL) {
+    if (temp->voisinSuiv != NULL) {
         temp->voisinSuiv->voisinPrec = temp->voisinPrec;
     }
-    if (temp->voisinPrec!= NULL) {
+    if (temp->voisinPrec != NULL) {
         temp->voisinPrec->voisinSuiv = temp->voisinSuiv;
     }
 
-    if(monde->plateau->cases[indice].fourmi==temp){
-        if(temp -> voisinSuiv != NULL ){
-            monde->plateau->cases[indice].fourmi= temp -> voisinSuiv;
+    if (monde->plateau->cases[indice].fourmi == temp) {
+        if (temp->voisinSuiv != NULL) {
+            monde->plateau->cases[indice].fourmi = temp->voisinSuiv;
         } else {
-            monde->plateau->cases[indice].fourmi= NULL;
+            monde->plateau->cases[indice].fourmi = NULL;
         }
     }
 /*
@@ -234,7 +234,7 @@ void supprimeFourmiliere(Monde *monde, Fourmi *fourmiliere) {
     affichePlateau(monde->plateau);
 }
 
-void supprimeFourmiliereFin(Monde *monde, Fourmi *fourmiliere)  {
+void supprimeFourmiliereFin(Monde *monde, Fourmi *fourmiliere) {
 
     Fourmi *temp;
     temp = fourmiliere;
@@ -254,11 +254,11 @@ void supprimeFourmiliereFin(Monde *monde, Fourmi *fourmiliere)  {
         } else {
             monde->noire = temp->fourmiliereSuiv;
         }
-    } else if((temp == monde-> rouge || temp == monde -> noire) && temp -> fourmiliereSuiv == NULL){
-        if(temp == monde-> rouge){
-            monde->rouge= NULL;
+    } else if ((temp == monde->rouge || temp == monde->noire) && temp->fourmiliereSuiv == NULL) {
+        if (temp == monde->rouge) {
+            monde->rouge = NULL;
         } else {
-            monde -> noire = NULL;
+            monde->noire = NULL;
         }
     }
 

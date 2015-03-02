@@ -61,7 +61,7 @@ void sauvegarde(Monde *monde) {
 }
 
 
-Monde* chargement() {
+Monde *chargement() {
 
     //myWorld -> tresorRouge, myWorld -> tresorNoire
     //tempAgent -> type,tempAgent -> origine -> position,  tempAgent -> couleur, tempAgent -> position, tempAgent-> instruction
@@ -84,12 +84,12 @@ Monde* chargement() {
     int position[TMAX];
     int instruction[TMAX];
     char chaine[TMAX];
-    int compt=0;
+    int compt = 0;
 
     fscanf(file, "%d %d", &tresor[0], &tresor[1]);
     printf("mon tresor est: %d, %d\n", tresor[0], tresor[1]);
 
-    while ( fgets(chaine, TMAX, file)) {
+    while (fgets(chaine, TMAX, file)) {
         compt++;
         printf("%s", chaine);
         sscanf(chaine, "%d %d %d %d %d", &type[i], &origine[i], &couleur[i], &position[i], &instruction[i]);
@@ -102,7 +102,7 @@ Monde* chargement() {
 
     fclose(file);
 
-    Monde * monde = chargementMonde(compt, tresor, type, origine, couleur, position, instruction);
+    Monde *monde = chargementMonde(compt, tresor, type, origine, couleur, position, instruction);
 
     affichePlateauSDL(monde);
     return monde;
@@ -110,13 +110,13 @@ Monde* chargement() {
 }
 
 
-Monde * chargementMonde(int compt, int tresor[], int type[], int origine[], int couleur[], int position[], int instruction[]) {
+Monde *chargementMonde(int compt, int tresor[], int type[], int origine[], int couleur[], int position[], int instruction[]) {
     //Creation Monde
     Monde *monde = calloc(1, sizeof(Monde));
 
     //Creation plateau
     int cotePlateau = COTE;
-    int i=2;    // commence le tableau à l'indice 1
+    int i = 2;    // commence le tableau à l'indice 1
 
     Plateau *plateau = calloc((size_t) pow(cotePlateau, 2), sizeof(Case));
 
@@ -134,12 +134,12 @@ Monde * chargementMonde(int compt, int tresor[], int type[], int origine[], int 
     creationFourmiliere(monde, (Couleur) couleur[1], position[1], instruction[1]);
 
     printf("compt : %d\n", compt);
-    while(i<=compt-1){
-        if(type[i]==3) {
+    while (i <= compt - 1) {
+        if (type[i] == 3) {
             creationFourmiliere(monde, (Couleur) couleur[i], position[i], instruction[i]);
         } else {
             printf("creation agent\n");
-            creationFourmi(monde, monde->plateau->cases[origine[i]].fourmi , (Couleur) couleur[i], (TypeFourmi) type[i], position[i], instruction[i]);
+            creationFourmi(monde, monde->plateau->cases[origine[i]].fourmi, (Couleur) couleur[i], (TypeFourmi) type[i], position[i], instruction[i]);
             printf("boubou2\n");
         }
         i++;
@@ -156,8 +156,8 @@ Monde * chargementMonde(int compt, int tresor[], int type[], int origine[], int 
 void jeu() {
     int h, i = 1, l;
 
-        printf("Voulez vous charger votre ancienne partie ? OUI(0) NON (1)");
-        scanf("%d", &h);
+    printf("Voulez vous charger votre ancienne partie ? OUI(0) NON (1)");
+    scanf("%d", &h);
 
     if (h == 0) {
         Monde *monde = chargement();
@@ -171,12 +171,12 @@ void jeu() {
             printf("Quitter ? OUI(0), NON(1)");
             scanf("%d", &i);
         }
-            printf("Voulez vous sauvegarder la partie ? OUI(0) NON(1)");
-            scanf("%d", &l);
-        if (l){
+        printf("Voulez vous sauvegarder la partie ? OUI(0) NON(1)");
+        scanf("%d", &l);
+        if (l) {
             sauvegarde(monde);
             videMemoire(monde);
-        }else {
+        } else {
             videMemoire(monde);
         }
     }
@@ -212,14 +212,14 @@ void jeu() {
             printf("Quitter ? OUI(0), NON(1)");
             scanf("%d", &i);
         }
-        do{
+        do {
             printf("Voulez vous sauvegarder la partie ? OUI(0) NON(1)");
             scanf("%d", &l);
-        }while (l != 0 || l != 1);
-        if (l){
+        } while (l != 0 || l != 1);
+        if (l) {
             sauvegarde(monde);
             videMemoire(monde);
-        }else {
+        } else {
             videMemoire(monde);
         }
     }
