@@ -111,7 +111,7 @@ Monde *chargementMonde(int compt, int tresor[], int type[], int origine[], int c
     int i = 2;
 
     //Creation plateau
-    Plateau *plateau = calloc((size_t) pow(cotePlateau, 2), sizeof(Case));
+    Plateau *plateau = calloc((size_t) pow(cotePlateau, 2)+1, sizeof(Case));
 
     plateau->nombrecases = (int) pow(cotePlateau, 2);
     plateau->cote = cotePlateau;
