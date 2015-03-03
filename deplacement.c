@@ -32,7 +32,6 @@ void deplacementEst(Monde *monde, Fourmi *fourmi, int ordonnee) {
     int resCombat;
 
     int caseInitiale = fourmi->position;
-    // modifVoisin(myWorld, fourmi, caseInitiale);
 
     if (yF > ordonnee) {
         indice = map(xF + 1, yF - 1, cote);
@@ -245,7 +244,6 @@ int combatCase(Monde *monde, Fourmi *fourmi, int indice) {
 
     if (temp->type == FOURMILIERE) {
         while ((temp->voisinSuiv != NULL) && (combat == 1)) {
-            printf("combat voisin\n");
             combat = combatFourmi(monde, fourmi, temp->voisinSuiv);
         }
         if (combat==1){
@@ -262,12 +260,10 @@ int combatCase(Monde *monde, Fourmi *fourmi, int indice) {
     } else {
 
         while ((temp != NULL) && (combat == 1)) {
-            printf("combat voisin\n");
             combat = combatFourmi(monde, fourmi, temp);
             temp = temp->voisinSuiv;
         }
         if (combat == 1) {
-            printf("remporte le combat\n");
             monde->plateau->cases[indice].fourmi = fourmi;
             fourmi->position = indice;
         } else {

@@ -131,7 +131,6 @@ void creationFourmiliere(Monde *monde, Couleur couleur, int indice, int instruct
         fourmi->fourmiliereSuiv = NULL;
 
         if (!estLibre(monde, indice)) {
-            printf("case occupee -> voisin\n");
 
             tempVoisin = monde->plateau->cases[indice].fourmi;
             tempVoisin->voisinPrec = fourmi;
@@ -205,7 +204,6 @@ void priseFourmiliere(Monde *monde, Fourmi *fourmiliere, Fourmi *ennemie) {
         }
     }
     supprimeFourmiliereFin(monde, temp);
-    affichePlateau(monde->plateau);
 
 }
 
@@ -249,7 +247,7 @@ void supprimeFourmiliereFin(Monde *monde, Fourmi *fourmiliere) {
         }
     }
 
-    free(temp);
+    //free(temp);
     monde->plateau->cases[indice].fourmi = NULL;
 
 }
@@ -311,7 +309,6 @@ Monde *creationMonde() {
 
     plateau->nombrecases = (int) pow(cotePlateau, 2); //A RENOMMER PAR TAILLE
     plateau->cote = cotePlateau;
-    printf("plateau->nombrecases = %d \n", plateau->nombrecases);
 
     //raccourcis
     int cote = plateau->cote;

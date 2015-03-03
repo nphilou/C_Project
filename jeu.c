@@ -85,18 +85,12 @@ Monde *chargement() {
     int compt = 0;
 
     fscanf(file, "%d %d", &tresor[0], &tresor[1]);
-    printf("mon tresor est: %d, %d\n", tresor[0], tresor[1]);
 
     while (fgets(chaine, TMAX, file)) {
         compt++;
-        printf("%s", chaine);
         sscanf(chaine, "%d %d %d %d %d", &type[i], &origine[i], &couleur[i], &position[i], &instruction[i]);
         i++;
     }
-
-    printf("mon fichier : %d %d %d %d %d\n", type[1], origine[1], couleur[1], position[1], instruction[1]);
-    printf("mon fichier : %d %d %d %d %d\n", type[2], origine[2], couleur[2], position[2], instruction[2]);
-
 
     fclose(file);
 
