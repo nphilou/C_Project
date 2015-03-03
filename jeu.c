@@ -211,7 +211,6 @@ void jeu() {
                 videMemoire(monde);
             }
         } else {
-            printf("vide memoire\n");
             videMemoire(monde);
         }
 
@@ -243,7 +242,6 @@ void videMemoire(Monde *monde) {
 
 
     if (monde ->rouge !=NULL) {
-        printf("sup equipe rouge\n");
         tmpFourmiRouge = monde->rouge;
         if (tmpFourmiRouge->fourmiliereSuiv != NULL) {
             while (tmpFourmiRouge->fourmiliereSuiv != NULL) {
