@@ -10,6 +10,7 @@
 #include "instructions.h"
 #include "deplacement.h"
 
+
 void lireEntier(int *entier) {
     char saisie[255] = "";
     char *positionEntree = NULL;

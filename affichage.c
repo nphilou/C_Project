@@ -116,8 +116,10 @@ void affichePlateauSDL(Monde *monde) {
 
                 case REINE:
                     if (!couleur) SDL_BlitSurface(reineR, NULL, ecran, &position);
-                    else
+                    else {
                         SDL_BlitSurface(reineN, NULL, ecran, &position);
+                        printf("test = %d\n", monde->plateau->cases[map(largeur, hauteur, cote)].fourmi->position);
+                    }
                     break;
 
                 default:
