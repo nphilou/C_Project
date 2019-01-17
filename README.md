@@ -10,5 +10,3 @@ Cadre du projet: DEMI2E (Licence 2, parcours informatique), Université Paris-Da
 - CMake
 
 Responsables : [Emmanuel LAZARD](https://twitter.com/emmanuellazard) & [Florian Sikora](http://www.lamsade.dauphine.fr/~sikora/)
-
-Note : Veuillez ne pas tenir compte des messages de commit :D
